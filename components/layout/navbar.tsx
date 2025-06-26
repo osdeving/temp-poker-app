@@ -22,13 +22,16 @@ export default function Navbar({ onCreateTournament }: NavbarProps) {
     if (!auth.user) return null;
 
     return (
-        <nav className="border-b nav-glass">
+        <nav className="border-b border-gray-800 bg-gradient-to-r from-gray-900 to-black backdrop-blur-lg">
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-6">
-                    <h1 className="text-2xl font-bold gold-accent bg-clip-text text-transparent">
-                        PokerPro
+                    <h1 className="text-2xl font-bold text-neon-pink">
+                        🃏 PokerPro
                     </h1>
-                    <Button variant="ghost" className="flex items-center gap-2">
+                    <Button
+                        variant="ghost"
+                        className="flex items-center gap-2 text-neon-cyan hover:glow-cyan"
+                    >
                         <Trophy className="h-4 w-4" />
                         Tournaments
                     </Button>
@@ -38,9 +41,9 @@ export default function Navbar({ onCreateTournament }: NavbarProps) {
                     {onCreateTournament && (
                         <Button
                             onClick={onCreateTournament}
-                            className="flex items-center gap-2"
+                            className="neon-button"
                         >
-                            <Plus className="h-4 w-4" />
+                            <Plus className="h-4 w-4 mr-2" />
                             Create Tournament
                         </Button>
                     )}

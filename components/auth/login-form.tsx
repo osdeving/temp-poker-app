@@ -42,13 +42,13 @@ export default function LoginForm() {
     ] as const;
 
     return (
-        <div className="min-h-screen flex items-center justify-center poker-felt">
-            <Card className="w-full max-w-md mx-4">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900">
+            <Card className="w-full max-w-md mx-4 poker-card glow-pink">
                 <CardHeader className="text-center">
-                    <CardTitle className="text-3xl font-bold gold-accent bg-clip-text text-transparent">
-                        PokerPro
+                    <CardTitle className="text-4xl font-bold text-neon-pink mb-2">
+                        🃏 PokerPro
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-gray-300">
                         Sign in to manage and join poker tournaments
                     </CardDescription>
                 </CardHeader>
@@ -57,7 +57,7 @@ export default function LoginForm() {
                         <Button
                             key={name}
                             variant="outline"
-                            className="w-full h-12"
+                            className="w-full h-12 neon-button border-0 text-black font-semibold"
                             onClick={() => handleLogin(name)}
                             disabled={auth.isLoading}
                         >
@@ -74,7 +74,7 @@ export default function LoginForm() {
                     {process.env.NODE_ENV === "development" && (
                         <Button
                             variant="destructive"
-                            className="w-full h-12 bg-orange-600 hover:bg-orange-700"
+                            className="w-full h-12 bg-gradient-to-r from-orange-500 to-red-500 glow-red border-0 text-white font-semibold"
                             onClick={handleDevLogin}
                             disabled={auth.isLoading}
                         >
@@ -83,7 +83,7 @@ export default function LoginForm() {
                     )}
 
                     {auth.error && (
-                        <div className="text-sm text-destructive text-center">
+                        <div className="text-sm text-neon-red text-center">
                             {auth.error}
                         </div>
                     )}

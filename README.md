@@ -123,6 +123,60 @@ npm run dev
 -   Navegação por tabs
 -   Quick navigation com setas
 
+## 🚀 Deploy Options
+
+### Option 1: Vercel (Recomendado - Grátis)
+
+**Passo a passo:**
+
+1. **Instalar Vercel CLI:**
+
+```bash
+npm install -g vercel
+```
+
+2. **Fazer deploy:**
+
+```bash
+vercel --prod
+```
+
+3. **Configurar domínio customizado (opcional):**
+
+-   Acesse [vercel.com](https://vercel.com)
+-   Configure seu domínio personalizado
+
+**Vantagens:**
+
+-   ✅ Deploy automático do GitHub
+-   ✅ Suporte completo ao Next.js
+-   ✅ HTTPS gratuito
+-   ✅ CDN global
+-   ✅ Domínio `.vercel.app` grátis
+
+### Option 2: Netlify
+
+1. **Instalar Netlify CLI:**
+
+```bash
+npm install -g netlify-cli
+```
+
+2. **Build e deploy:**
+
+```bash
+npm run build
+netlify deploy --prod --dir=.next
+```
+
+### Option 3: GitHub Pages ❌
+
+**Não recomendado para este projeto** devido a:
+
+-   Páginas dinâmicas `[id]`
+-   Client-side routing
+-   localStorage dependencies
+
 ---
 
 **O PokerPro representa um sistema completo e profissional para gerenciamento de torneios de poker, combinando funcionalidade avançada com design moderno e experiência de usuário excepcional.** 🎉

@@ -4,77 +4,192 @@
 
 @layer base {
     :root {
-        --background: 200 20% 98%;
-        --foreground: 200 50% 3%;
-        --card: 0 0% 100%;
-        --card-foreground: 200 50% 3%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 200 50% 3%;
-        --primary: 142 76% 36%;
-        --primary-foreground: 355 25% 95%;
-        --secondary: 200 10% 91%;
-        --secondary-foreground: 200 50% 9%;
-        --muted: 176 13% 93%;
-        --muted-foreground: 200 10% 40%;
-        --accent: 176 13% 93%;
-        --accent-foreground: 200 50% 9%;
-        --destructive: 0 84% 60%;
+        /* Neon Dark Theme */
+        --background: 240 20% 5%;
+        --foreground: 0 0% 98%;
+        --card: 240 15% 8%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 15% 8%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 315 100% 50%; /* Neon Pink */
+        --primary-foreground: 0 0% 0%;
+        --secondary: 195 100% 50%; /* Neon Cyan */
+        --secondary-foreground: 0 0% 0%;
+        --muted: 240 10% 15%;
+        --muted-foreground: 240 5% 65%;
+        --accent: 120 100% 50%; /* Neon Green */
+        --accent-foreground: 0 0% 0%;
+        --destructive: 0 100% 50%; /* Neon Red */
         --destructive-foreground: 0 0% 98%;
-        --border: 200 20% 82%;
-        --input: 200 20% 82%;
-        --ring: 142 76% 36%;
-        --chart-1: 142 76% 36%;
-        --chart-2: 47 100% 50%;
-        --chart-3: 0 84% 60%;
-        --chart-4: 210 40% 80%;
-        --chart-5: 27 87% 67%;
-        --radius: 0.75rem;
+        --border: 240 20% 20%;
+        --input: 240 20% 12%;
+        --ring: 315 100% 50%;
+        --chart-1: 315 100% 50%;
+        --chart-2: 195 100% 50%;
+        --chart-3: 0 100% 50%;
+        --chart-4: 120 100% 50%;
+        --chart-5: 60 100% 50%;
+        --radius: 1rem;
     }
 
-    .dark {
-        --background: 120 20% 8%;
-        --foreground: 60 9% 98%;
-        --card: 120 20% 10%;
-        --card-foreground: 60 9% 98%;
-        --popover: 120 20% 10%;
-        --popover-foreground: 60 9% 98%;
-        --primary: 47 100% 50%;
-        --primary-foreground: 355 25% 95%;
-        --secondary: 120 15% 15%;
-        --secondary-foreground: 60 9% 98%;
-        --muted: 120 15% 15%;
-        --muted-foreground: 120 10% 50%;
-        --accent: 120 15% 15%;
-        --accent-foreground: 60 9% 98%;
-        --destructive: 0 84% 60%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 120 15% 15%;
-        --input: 120 15% 15%;
-        --ring: 47 100% 50%;
-    }
-}
-
-@layer base {
     * {
         @apply border-border;
     }
+
     body {
-        @apply bg-background text-foreground;
+        @apply bg-gradient-to-br from-gray-900 via-black to-gray-900 text-foreground min-h-screen;
+        background-attachment: fixed;
+    }
+
+    html {
+        scroll-behavior: smooth;
     }
 }
 
-/* Poker Theme Classes */
-.poker-felt {
+/* Neon Glow Effects */
+@layer utilities {
+    .glow-pink {
+        box-shadow: 0 0 20px rgba(255, 20, 147, 0.5),
+            0 0 40px rgba(255, 20, 147, 0.3);
+    }
+
+    .glow-cyan {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5),
+            0 0 40px rgba(0, 255, 255, 0.3);
+    }
+
+    .glow-green {
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), 0 0 40px rgba(0, 255, 0, 0.3);
+    }
+
+    .glow-red {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.5), 0 0 40px rgba(255, 0, 0, 0.3);
+    }
+
+    .text-neon-pink {
+        color: #ff1493;
+        text-shadow: 0 0 10px rgba(255, 20, 147, 0.8);
+    }
+
+    .text-neon-cyan {
+        color: #00ffff;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    }
+
+    .text-neon-green {
+        color: #00ff00;
+        text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+    }
+
+    .text-neon-red {
+        color: #ff0000;
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+    }
+
+    .neon-border {
+        border: 2px solid transparent;
+        background: linear-gradient(45deg, #ff1493, #00ffff, #00ff00);
+        background-clip: border-box;
+        border-radius: 1rem;
+    }
+
+    .neon-card {
+        background: linear-gradient(
+            135deg,
+            rgba(255, 20, 147, 0.1),
+            rgba(0, 255, 255, 0.1)
+        );
+        border: 1px solid rgba(255, 20, 147, 0.3);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+
+    .neon-card:hover {
+        border-color: rgba(0, 255, 255, 0.5);
+        box-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
+    }
+
+    .neon-button {
+        background: linear-gradient(45deg, #ff1493, #00ffff);
+        box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+    .neon-button:hover {
+        box-shadow: 0 0 30px rgba(255, 20, 147, 0.8),
+            0 0 60px rgba(0, 255, 255, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .neon-input {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .neon-input:focus {
+        border-color: rgba(0, 255, 255, 0.8);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        outline: none;
+    }
+
+    .glass-morphism {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .neon-text-shadow {
+        text-shadow: 0 0 10px currentColor;
+    }
+
+    .neon-glow-hover:hover {
+        filter: drop-shadow(0 0 10px currentColor);
+    }
+}
+
+/* Poker-specific neon styles */
+.poker-card {
     background: linear-gradient(
         135deg,
-        #1a4b3a 0%,
-        #2d6b4a 25%,
-        #1a5b3a 50%,
-        #2d7b4a 75%,
-        #1a4b3a 100%
+        rgba(30, 30, 30, 0.9),
+        rgba(60, 60, 60, 0.9)
     );
-    background-size: 400% 400%;
-    animation: poker-felt-animation 20s ease infinite;
+    border: 1px solid rgba(255, 20, 147, 0.3);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.tournament-status-upcoming {
+    background: linear-gradient(
+        45deg,
+        rgba(0, 255, 0, 0.2),
+        rgba(0, 255, 255, 0.2)
+    );
+    border: 1px solid rgba(0, 255, 0, 0.5);
+    color: #00ff00;
+}
+
+.tournament-status-running {
+    background: linear-gradient(
+        45deg,
+        rgba(255, 20, 147, 0.2),
+        rgba(255, 0, 0, 0.2)
+    );
+    border: 1px solid rgba(255, 20, 147, 0.5);
+    color: #ff1493;
+}
+
+.tournament-status-finished {
+    background: linear-gradient(
+        45deg,
+        rgba(128, 128, 128, 0.2),
+        rgba(64, 64, 64, 0.2)
+    );
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    color: #888888;
 }
 
 @keyframes poker-felt-animation {

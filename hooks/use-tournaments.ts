@@ -1,15 +1,57 @@
 "use client";
 
-import { Player, Tournament } from "@/lib/tournament";
+import { Player, Tournament, defaultBlindStructure } from "@/lib/tournament";
 import { useEffect, useState } from "react";
-import { useAutoSave } from "./use-auto-save";
+
+// Mock tournaments for testing
+const createMockTournaments = (): Tournament[] => {
+    const now = new Date();
+    const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+
+    return [
+        {
+            id: "mock-tournament-1",
+            name: "Sunday Night Special",
+            description: "Torneio semanal de domingo com buy-in baixo",
+            buyIn: 50,
+            startTime: tomorrow,
+            maxPlayers: 100,
+            blindLevels: defaultBlindStructure,
+            status: "upcoming" as const,
+            createdBy: "dev-user-123", // Match actual user ID
+            registeredPlayers: ["dev-user-123", "player2"],
+            players: [],
+            currentLevel: 0,
+            timeRemaining: 1200,
+            prizePool: 100,
+            startingChips: 10000,
+        },
+        {
+            id: "mock-tournament-2",
+            name: "Friday Freezeout",
+            description: "Torneio freezeout sem recompra",
+            buyIn: 100,
+            startTime: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000),
+            maxPlayers: 50,
+            blindLevels: defaultBlindStructure,
+            status: "upcoming" as const,
+            createdBy: "dev-user-123", // Match actual user ID
+            registeredPlayers: ["dev-user-123"],
+            players: [],
+            currentLevel: 0,
+            timeRemaining: 1200,
+            prizePool: 100,
+            startingChips: 10000,
+        },
+    ];
+};
 
 export const useTournaments = () => {
     const [tournaments, setTournaments] = useState<Tournament[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Auto-save tournaments
-    useAutoSave(tournaments, "temp-poker-app-tournaments-v2", 30000);
+    // Auto-save tournaments - DISABLED for debug
+    // useAutoSave(tournaments, "temp-poker-app-tournaments-v2", 30000);
 
     useEffect(() => {
         // Limpar localStorage antigo para evitar conflitos
@@ -36,6 +78,23 @@ export const useTournaments = () => {
                 parsedTournaments.map((t: any) => ({ id: t.id, name: t.name }))
             );
             setTournaments(parsedTournaments);
+        } else {
+            // Use mock tournaments when localStorage is empty
+            console.log(
+                "🔍 DEBUG: No stored data found, using mock tournaments"
+            );
+            const mockTournaments = createMockTournaments();
+            console.log(
+                "🔍 DEBUG: Mock tournaments created:",
+                mockTournaments.map((t) => ({ id: t.id, name: t.name }))
+            );
+            setTournaments(mockTournaments);
+
+            // Optionally save mock data to localStorage for persistence
+            localStorage.setItem(
+                "temp-poker-app-tournaments-v2",
+                JSON.stringify(mockTournaments)
+            );
         }
         setIsLoading(false);
         console.log("🔍 DEBUG useTournaments: loading finished");
@@ -46,10 +105,25 @@ export const useTournaments = () => {
             "🔍 DEBUG saveTournaments: Saving tournaments:",
             newTournaments.map((t) => ({ id: t.id, name: t.name }))
         );
-        localStorage.setItem(
-            "temp-poker-app-tournaments-v2",
-            JSON.stringify(newTournaments)
+        console.log(
+            "🔍 DEBUG saveTournaments: Total tournaments to save:",
+            newTournaments.length
         );
+
+        const dataToSave = JSON.stringify(newTournaments);
+        console.log("🔍 DEBUG saveTournaments: JSON size:", dataToSave.length);
+
+        localStorage.setItem("temp-poker-app-tournaments-v2", dataToSave);
+
+        // Verify it was saved
+        const verifyStored = localStorage.getItem(
+            "temp-poker-app-tournaments-v2"
+        );
+        console.log(
+            "🔍 DEBUG saveTournaments: Verification - stored size:",
+            verifyStored ? verifyStored.length : 0
+        );
+
         setTournaments(newTournaments);
         console.log(
             "🔍 DEBUG saveTournaments: State updated with tournaments count:",

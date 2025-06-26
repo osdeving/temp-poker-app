@@ -47,7 +47,10 @@ export const defaultBlindStructure: BlindLevel[] = [
     { level: 10, smallBlind: 600, bigBlind: 1200, duration: 20 },
 ];
 
-export const formatChips = (amount: number): string => {
+export const formatChips = (amount: number | undefined | null): string => {
+    if (amount === undefined || amount === null || isNaN(amount)) {
+        return "0";
+    }
     if (amount >= 1000000) {
         return `${(amount / 1000000).toFixed(1)}M`;
     }

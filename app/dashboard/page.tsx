@@ -3,6 +3,7 @@
 import Navbar from "@/components/layout/navbar";
 import CreateTournamentForm from "@/components/tournament/create-tournament-form";
 import TournamentCard from "@/components/tournament/tournament-card";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Dialog,
@@ -75,6 +76,12 @@ export default function Dashboard() {
         router.push(`/tournament/${tournamentId}`);
     };
 
+    // Debug function to clear localStorage
+    const handleClearStorage = () => {
+        localStorage.clear();
+        window.location.reload();
+    };
+
     const myTournaments = tournaments.filter(
         (t) =>
             t.registeredPlayers.includes(auth.user!.id) ||
@@ -97,15 +104,26 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
             <Navbar onCreateTournament={() => setShowCreateForm(true)} />
 
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold mb-2">
-                        Welcome back, {auth.user.name}!
-                    </h1>
-                    <p className="text-muted-foreground">
+                    <div className="flex justify-between items-center mb-2">
+                        <h1 className="text-4xl font-bold text-neon-cyan">
+                            Welcome back, {auth.user.name}! 🎲
+                        </h1>
+                        {/* DEBUG: Temporary button to test mock tournaments */}
+                        <Button
+                            onClick={handleClearStorage}
+                            variant="destructive"
+                            size="sm"
+                            className="glow-red"
+                        >
+                            🗑️ Clear Storage (Debug)
+                        </Button>
+                    </div>
+                    <p className="text-gray-300 text-lg">
                         Manage your tournaments and join exciting poker
                         competitions.
                     </p>
@@ -113,29 +131,29 @@ export default function Dashboard() {
 
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                    <Card className="poker-card">
+                    <Card className="poker-card glow-pink">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">
+                            <CardTitle className="text-sm font-medium text-gray-300">
                                 Total Tournaments
                             </CardTitle>
-                            <Trophy className="h-4 w-4 text-yellow-600" />
+                            <Trophy className="h-4 w-4 text-neon-pink" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold gold-accent">
+                            <div className="text-2xl font-bold text-neon-pink">
                                 {stats.totalTournaments}
                             </div>
                         </CardContent>
                     </Card>
 
-                    <Card className="poker-card">
+                    <Card className="poker-card glow-cyan">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">
+                            <CardTitle className="text-sm font-medium text-gray-300">
                                 My Tournaments
                             </CardTitle>
-                            <Users className="h-4 w-4 text-green-600" />
+                            <Users className="h-4 w-4 text-neon-cyan" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-green-600">
+                            <div className="text-2xl font-bold text-neon-cyan">
                                 {stats.myTournaments}
                             </div>
                         </CardContent>

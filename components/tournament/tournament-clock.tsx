@@ -153,34 +153,37 @@ export default function TournamentClock({
     return (
         <div className="space-y-6">
             {/* Main Clock Display */}
-            <Card className="bg-black text-white">
+            <Card className="neon-card bg-gradient-to-br from-red-900/80 via-black/80 to-red-900/80 border-pink-500/30 text-white">
                 <CardHeader className="text-center pb-2">
-                    <CardTitle className="text-sm text-gray-400">
+                    <CardTitle className="text-sm text-gray-400 uppercase tracking-wider">
                         LEVEL {currentBlindLevel.level}
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
-                    <div className="text-6xl font-bold clock-display mb-4 text-green-400">
+                    <div className="text-5xl sm:text-6xl font-bold clock-display mb-4 text-neon-cyan">
                         {formatTime(timeRemaining)}
                     </div>
-                    <div className="text-2xl mb-4">
-                        <span className="text-yellow-400">
+                    <div className="text-xl sm:text-2xl mb-4">
+                        <span className="text-neon-green font-bold">
                             {formatChips(currentBlindLevel.smallBlind)}
                         </span>
                         <span className="text-white mx-2">/</span>
-                        <span className="text-yellow-400">
+                        <span className="text-neon-green font-bold">
                             {formatChips(currentBlindLevel.bigBlind)}
                         </span>
                         {currentBlindLevel.ante && (
                             <>
                                 <span className="text-white mx-2">•</span>
                                 <span className="text-gray-400">
-                                    Ante: {formatChips(currentBlindLevel.ante)}
+                                    Ante:{" "}
+                                    <span className="text-yellow-400">
+                                        {formatChips(currentBlindLevel.ante)}
+                                    </span>
                                 </span>
                             </>
                         )}
                     </div>
-                    <Badge variant="outline" className="text-lg px-4 py-1">
+                    <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg px-4 py-1 font-semibold glow-pink">
                         {tournament.registeredPlayers.length} Players
                     </Badge>
                 </CardContent>
@@ -188,9 +191,9 @@ export default function TournamentClock({
 
             {/* Tournament Controls */}
             {isDirector && (
-                <Card>
+                <Card className="neon-card bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50 border-cyan-500/30">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
+                        <CardTitle className="flex items-center gap-2 text-neon-cyan">
                             <Clock className="h-5 w-5" />
                             Tournament Controls
                         </CardTitle>
@@ -199,8 +202,11 @@ export default function TournamentClock({
                         <div className="flex gap-2">
                             <Button
                                 onClick={handlePlayPause}
-                                variant={isRunning ? "destructive" : "default"}
-                                className="flex-1"
+                                className={`flex-1 font-semibold ${
+                                    isRunning
+                                        ? "bg-gradient-to-r from-red-500 to-pink-500 hover:glow-red text-white"
+                                        : "neon-button bg-gradient-to-r from-green-500 to-cyan-500 hover:glow-green text-black"
+                                }`}
                             >
                                 {isRunning ? (
                                     <Pause className="h-4 w-4 mr-2" />
@@ -216,6 +222,7 @@ export default function TournamentClock({
                                     currentLevel >=
                                     tournament.blindLevels.length - 1
                                 }
+                                className="border-purple-500/50 text-purple-400 hover:bg-purple-500/20 hover:text-purple-300 hover:border-purple-400 disabled:opacity-50"
                             >
                                 <SkipForward className="h-4 w-4 mr-2" />
                                 Next Level
@@ -226,9 +233,9 @@ export default function TournamentClock({
             )}
 
             {/* Blind Structure */}
-            <Card>
+            <Card className="neon-card bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50 border-pink-500/30">
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
+                    <CardTitle className="flex items-center gap-2 text-neon-pink">
                         <TrendingUp className="h-5 w-5" />
                         Blind Structure
                     </CardTitle>
@@ -238,24 +245,36 @@ export default function TournamentClock({
                         {tournament.blindLevels.map((level, index) => (
                             <div
                                 key={level.level}
-                                className={`flex justify-between items-center p-2 rounded ${
+                                className={`flex justify-between items-center p-2 rounded transition-all duration-200 ${
                                     index === currentLevel
-                                        ? "bg-primary text-primary-foreground"
+                                        ? "bg-gradient-to-r from-pink-500/30 to-cyan-500/30 border border-pink-400/50 text-white glow-pink"
                                         : index < currentLevel
-                                        ? "bg-muted text-muted-foreground"
-                                        : ""
+                                        ? "bg-gray-800/50 text-gray-500"
+                                        : "bg-gray-900/30 text-gray-300 hover:bg-gray-800/30"
                                 }`}
                             >
                                 <span className="font-medium">
                                     Level {level.level}
                                 </span>
-                                <span>
+                                <span
+                                    className={
+                                        index === currentLevel
+                                            ? "text-neon-green font-semibold"
+                                            : ""
+                                    }
+                                >
                                     {formatChips(level.smallBlind)} /{" "}
                                     {formatChips(level.bigBlind)}
                                     {level.ante &&
                                         ` (${formatChips(level.ante)})`}
                                 </span>
-                                <span className="text-sm">
+                                <span
+                                    className={`text-sm ${
+                                        index === currentLevel
+                                            ? "text-neon-cyan"
+                                            : ""
+                                    }`}
+                                >
                                     {level.duration}min
                                 </span>
                             </div>
@@ -266,22 +285,37 @@ export default function TournamentClock({
 
             {/* Next Level Preview */}
             {nextBlindLevel && (
-                <Card>
+                <Card className="neon-card bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50 border-cyan-500/30">
                     <CardHeader>
-                        <CardTitle className="text-sm text-muted-foreground">
+                        <CardTitle className="text-sm text-gray-400 uppercase tracking-wider">
                             Next Level
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="text-lg">
-                            <span className="font-semibold">
+                            <span className="font-semibold text-neon-cyan">
                                 Level {nextBlindLevel.level}:
                             </span>
-                            <span className="ml-2">
-                                {formatChips(nextBlindLevel.smallBlind)} /{" "}
-                                {formatChips(nextBlindLevel.bigBlind)}
+                            <span className="ml-2 text-white">
+                                <span className="text-neon-green">
+                                    {formatChips(nextBlindLevel.smallBlind)}
+                                </span>{" "}
+                                /{" "}
+                                <span className="text-neon-green">
+                                    {formatChips(nextBlindLevel.bigBlind)}
+                                </span>
                                 {nextBlindLevel.ante &&
-                                    ` (${formatChips(nextBlindLevel.ante)})`}
+                                    nextBlindLevel.ante > 0 && (
+                                        <>
+                                            {" ("}
+                                            <span className="text-yellow-400">
+                                                {formatChips(
+                                                    nextBlindLevel.ante
+                                                )}
+                                            </span>
+                                            {")"}
+                                        </>
+                                    )}
                             </span>
                         </div>
                     </CardContent>
