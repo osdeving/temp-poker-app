@@ -1,0 +1,80 @@
+'use client';
+
+import { useState, useEffect, createContext, useContext } from 'react';
+import { User, AuthState, socialLogin, logout } from '@/lib/auth';
+
+const AuthContext = createContext<{
+  auth: AuthState;
+  login: (provider: 'google' | 'facebook' | 'github') => Promise<void>;
+  logout: () => Promise<void>;
+}>({
+  auth: { user: null, isLoading: false, error: null },
+  login: async () => {},
+  logout: async () => {},
+});
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [auth, setAuth] = useState<AuthState>({
+    user: null,
+    isLoading: false,
+    error: null,
+  });
+
+  useEffect(() => {
+    // Check for stored user session
+    const storedUser = localStorage.getItem('poker-user');
+    if (storedUser) {
+      setAuth({ user: JSON.parse(storedUser), isLoading: false, error: null });
+    }
+  }, []);
+
+  const login = async (provider: 'google' | 'facebook' | 'github') => {
+    setAuth(prev => ({ ...prev, isLoading: true, error: null }));
+    try {
+      const user = await socialLogin(provider);
+      localStorage.setItem('poker-user', JSON.stringify(user));
+      setAuth({ user, isLoading: false, error: null });
+    } catch (error) {
+      setAuth(prev => ({ 
+        ...prev, 
+        isLoading: false, 
+        error: 'Login failed. Please try again.' 
+      }));
+    }
+  };
+
+  const handleLogout = async () => {
+    setAuth(prev => ({ ...prev, isLoading: true }));
+    try {
+      await logout();
+      localStorage.removeItem('poker-user');
+      setAuth({ user: null, isLoading: false, error: null });
+    } catch (error) {
+      setAuth(prev => ({ 
+        ...prev, 
+        isLoading: false, 
+        error: 'Logout failed. Please try again.' 
+      }));
+    }
+  };
+
+  const contextValue = {
+    auth,
+    login,
+    logout: handleLogout
+  };
+
+  return (
+    <AuthContext.Provider value={contextValue}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
