@@ -188,7 +188,7 @@ export default function MobileTournamentView({
                 <Button
                     size="sm"
                     variant="outline"
-                    className="bg-white/90 backdrop-blur-sm"
+                    className="neon-card border-neon-cyan/50 bg-gray-900/95 backdrop-blur-sm text-neon-cyan hover:bg-neon-cyan/20 hover:glow-cyan"
                     onClick={() => {
                         const tabs = ["clock", "ranking", "stats"];
                         if (isDirector) tabs.push("controls");
@@ -205,7 +205,7 @@ export default function MobileTournamentView({
                 <Button
                     size="sm"
                     variant="outline"
-                    className="bg-white/90 backdrop-blur-sm"
+                    className="neon-card border-neon-cyan/50 bg-gray-900/95 backdrop-blur-sm text-neon-cyan hover:bg-neon-cyan/20 hover:glow-cyan"
                     onClick={() => {
                         const tabs = ["clock", "ranking", "stats"];
                         if (isDirector) tabs.push("controls");

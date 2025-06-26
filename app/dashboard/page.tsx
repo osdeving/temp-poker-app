@@ -118,7 +118,7 @@ export default function Dashboard() {
                             onClick={handleClearStorage}
                             variant="destructive"
                             size="sm"
-                            className="glow-red"
+                            className="glow-red hidden"
                         >
                             🗑️ Clear Storage (Debug)
                         </Button>
@@ -189,17 +189,30 @@ export default function Dashboard() {
                 </div>
 
                 {/* Tournament Tabs */}
-                <Tabs defaultValue="my-tournaments" className="space-y-4">
-                    <TabsList>
-                        <TabsTrigger value="my-tournaments">
-                            My Tournaments ({myTournaments.length})
-                        </TabsTrigger>
-                        <TabsTrigger value="available">
-                            Available ({availableTournaments.length})
-                        </TabsTrigger>
-                        <TabsTrigger value="all">
-                            All Tournaments ({tournaments.length})
-                        </TabsTrigger>
+                <Tabs defaultValue="all" className="space-y-4">
+                    <TabsList className="w-full">
+                        {/* Mobile: Show only All tab */}
+                        <div className="sm:hidden w-full">
+                            <TabsTrigger value="all" className="w-full">
+                                All ({tournaments.length})
+                            </TabsTrigger>
+                        </div>
+
+                        {/* Desktop: Show all tabs */}
+                        <div className="hidden sm:flex w-full">
+                            <TabsTrigger
+                                value="my-tournaments"
+                                className="flex-1"
+                            >
+                                My Tournaments ({myTournaments.length})
+                            </TabsTrigger>
+                            <TabsTrigger value="available" className="flex-1">
+                                Available ({availableTournaments.length})
+                            </TabsTrigger>
+                            <TabsTrigger value="all" className="flex-1">
+                                All Tournaments ({tournaments.length})
+                            </TabsTrigger>
+                        </div>
                     </TabsList>
 
                     <TabsContent value="my-tournaments" className="space-y-4">
