@@ -11,8 +11,8 @@ import {
     PokerEngine,
 } from "@/lib/poker-engine";
 import { useEffect, useState } from "react";
-import { CommunityCards, PotDisplay } from "./poker-cards";
-import { ActionButtons, PokerTable } from "./poker-table-visual";
+import { EnhancedPokerTable } from "./enhanced-poker-table";
+import { ActionButtons } from "./poker-table-visual";
 
 interface AdvancedPokerGameProps {
     players: { id: string; name: string; chips: number; avatar?: string }[];
@@ -140,30 +140,17 @@ export default function AdvancedPokerGame({
                 </CardHeader>
             </Card>
 
-            {/* Mesa Principal Melhorada */}
+            {/* Mesa Principal Melhorada com Layout Integrado */}
             <Card className="neon-card">
                 <CardContent className="p-6">
-                    {/* Pot Display Melhorado */}
-                    <PotDisplay amount={gameState.pot} className="mb-6" />
-
-                    {/* Cartas Comunitárias Melhoradas */}
-                    <CommunityCards cards={gameState.communityCards} />
-
-                    {gameState.currentBet > 0 && (
-                        <div className="text-center mb-6">
-                            <div className="inline-block bg-neon-pink/20 text-neon-pink px-4 py-2 rounded-lg border border-neon-pink/50">
-                                <span className="font-semibold">
-                                    💰 Aposta atual: ${gameState.currentBet}
-                                </span>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Mesa de Poker Visual Melhorada */}
-                    <PokerTable
+                    {/* Mesa de Poker Visual Melhorada com Pot e Cartas no Centro */}
+                    <EnhancedPokerTable
                         players={gameState.players}
                         activePlayerIndex={gameState.activePlayerIndex}
                         dealerPosition={gameState.dealerPosition}
+                        communityCards={gameState.communityCards}
+                        pot={gameState.pot}
+                        currentBet={gameState.currentBet}
                         className="mb-6"
                     />
                 </CardContent>

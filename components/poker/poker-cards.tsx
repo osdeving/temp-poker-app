@@ -43,23 +43,20 @@ export function PlayingCard({
                 className={`
             ${sizeClasses[size]}
             ${className}
-            bg-gradient-to-br from-blue-800 to-blue-900
-            border-2 border-blue-600
-            rounded-lg
+            playing-card-hidden
             flex items-center justify-center
-            shadow-lg
             relative
             overflow-hidden
         `}
                 style={style}
             >
                 {/* Card back pattern */}
-                <div className="absolute inset-0 opacity-30">
-                    <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-700"></div>
-                    <div className="absolute inset-2 border border-blue-300 rounded"></div>
-                    <div className="absolute inset-4 border border-blue-300 rounded"></div>
+                <div className="absolute inset-0 opacity-80">
+                    <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700"></div>
+                    <div className="absolute inset-1 border border-blue-300 rounded opacity-60"></div>
+                    <div className="absolute inset-2 border border-blue-300 rounded opacity-40"></div>
                 </div>
-                <div className="relative text-blue-200 font-bold">🂠</div>
+                <div className="relative text-white font-bold text-lg">🂠</div>
             </div>
         );
     }
@@ -69,13 +66,8 @@ export function PlayingCard({
             className={`
             ${sizeClasses[size]}
             ${className}
-            bg-white
-            border-2 border-gray-300
-            rounded-lg
+            playing-card
             flex flex-col items-center justify-between
-            shadow-lg hover:shadow-xl
-            transition-all duration-200
-            hover:scale-105
             relative
             p-1
         `}

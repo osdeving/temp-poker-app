@@ -17,17 +17,17 @@ export function PokerTable({
     dealerPosition,
     className = "",
 }: PokerTableProps) {
-    // Distribuir jogadores ao redor da mesa (posições fixas)
+    // Posições dos jogadores mais afastadas da mesa (para fora)
     const tablePositions = [
-        { x: 50, y: 10 }, // Top center
-        { x: 75, y: 25 }, // Top right
-        { x: 85, y: 50 }, // Right
-        { x: 75, y: 75 }, // Bottom right
-        { x: 50, y: 85 }, // Bottom center
-        { x: 25, y: 75 }, // Bottom left
-        { x: 15, y: 50 }, // Left
-        { x: 25, y: 25 }, // Top left
-        { x: 50, y: 35 }, // Center (dealer position if needed)
+        { x: 50, y: 2 }, // Top center
+        { x: 82, y: 12 }, // Top right
+        { x: 95, y: 50 }, // Right
+        { x: 82, y: 88 }, // Bottom right
+        { x: 50, y: 98 }, // Bottom center
+        { x: 18, y: 88 }, // Bottom left
+        { x: 5, y: 50 }, // Left
+        { x: 18, y: 12 }, // Top left
+        { x: 50, y: 25 }, // Center-top (para 9º jogador)
     ];
 
     const getPlayerAtPosition = (position: number) => {
@@ -38,17 +38,17 @@ export function PokerTable({
         <div
             className={`relative w-full aspect-[4/3] max-w-4xl mx-auto ${className}`}
         >
-            {/* Mesa de poker (formato oval) */}
-            <div className="absolute inset-8 bg-gradient-to-br from-green-800 to-green-900 rounded-full border-8 border-yellow-600 shadow-2xl">
+            {/* Mesa de poker (formato oval) - Área central para pot e cartas comunitárias */}
+            <div className="absolute inset-12 bg-gradient-to-br from-green-800 to-green-900 rounded-full border-8 border-yellow-600 shadow-2xl">
                 {/* Felt texture */}
                 <div className="absolute inset-4 bg-green-700 rounded-full opacity-50"></div>
                 <div className="absolute inset-6 border-2 border-yellow-500 rounded-full opacity-30"></div>
 
-                {/* Center logo/text */}
+                {/* Área central reservada para pot e cartas comunitárias */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-yellow-400 text-center opacity-20 select-none">
-                        <div className="text-4xl font-bold">♠♥♦♣</div>
-                        <div className="text-lg">POKER</div>
+                    <div className="text-yellow-400 text-center opacity-10 select-none">
+                        <div className="text-2xl font-bold">♠♥♦♣</div>
+                        <div className="text-sm">POKER TABLE</div>
                     </div>
                 </div>
             </div>
