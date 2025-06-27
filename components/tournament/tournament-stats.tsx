@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { NeonText, UltraGlassCard } from "@/components/ui/neon";
+import { NeonText, GlassCard } from "@/components/ui/glass";
 import { formatChips, formatTime, Tournament } from "@/lib/tournament";
 import {
     Award,
@@ -56,7 +56,7 @@ export default function TournamentStats({ tournament }: TournamentStatsProps) {
             : 0;
 
     return (
-        <UltraGlassCard variant="crystal" className="space-y-6">
+        <GlassCard variant="crystal" className="space-y-6">
             <div className="space-y-6">
                 <NeonText className="text-xl font-bold flex items-center gap-2">
                     <BarChart3 className="h-5 w-5" />
@@ -277,6 +277,6 @@ export default function TournamentStats({ tournament }: TournamentStatsProps) {
                     </div>
                 </div>
             </div>
-        </UltraGlassCard>
+        </GlassCard>
     );
 }

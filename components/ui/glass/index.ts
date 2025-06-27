@@ -27,7 +27,7 @@ export {
     ParticleField,
 } from "./effects-components";
 export { GlassCard } from "./glass-card";
-export { NeonButton, NeonText } from "./neon-effects";
+export { NeonButton, NeonInput, NeonText } from "./neon-effects";
 export type {
     BaseGlassProps,
     BlurIntensity,

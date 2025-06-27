@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
+import { NeonButton, NeonText, GlassCard } from "@/components/ui/glass";
 import { formatChips, Tournament } from "@/lib/tournament";
 import { Minus, TrendingDown, TrendingUp, Trophy, X } from "lucide-react";
 
@@ -20,7 +20,7 @@ export default function TournamentRanking({
 }: TournamentRankingProps) {
     if (!tournament.players || tournament.players.length === 0) {
         return (
-            <UltraGlassCard variant="crystal" className="text-center py-8">
+            <GlassCard variant="crystal" className="text-center py-8">
                 <NeonText className="text-xl font-bold flex items-center justify-center gap-2 mb-4">
                     <Trophy className="h-5 w-5" />
                     Tournament Ranking
@@ -28,7 +28,7 @@ export default function TournamentRanking({
                 <p className="text-sm text-muted-foreground">
                     No players registered yet
                 </p>
-            </UltraGlassCard>
+            </GlassCard>
         );
     }
 
@@ -68,7 +68,7 @@ export default function TournamentRanking({
     };
 
     return (
-        <UltraGlassCard variant="crystal" className="space-y-4">
+        <GlassCard variant="crystal" className="space-y-4">
             <NeonText className="text-xl font-bold flex items-center gap-2">
                 <Trophy className="h-5 w-5" />
                 Tournament Ranking
@@ -226,6 +226,6 @@ export default function TournamentRanking({
                     </div>
                 </div>
             </div>
-        </UltraGlassCard>
+        </GlassCard>
     );
 }

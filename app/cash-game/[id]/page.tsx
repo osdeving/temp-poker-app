@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "@/components/layout/navbar";
-import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
+import { NeonButton, NeonText, GlassCard } from "@/components/ui/glass";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -21,7 +21,7 @@ export default function CashGamePage() {
                     Voltar ao Lobby
                 </NeonButton>
 
-                <UltraGlassCard variant="emerald" className="text-center py-12">
+                <GlassCard variant="emerald" className="text-center py-12">
                     <NeonText className="text-3xl font-bold mb-4">
                         🃏 Mesa de Poker Premium
                     </NeonText>
@@ -31,7 +31,7 @@ export default function CashGamePage() {
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                        <UltraGlassCard variant="crystal">
+                        <GlassCard variant="crystal">
                             <div className="p-6 text-center">
                                 <div className="text-4xl mb-3">🎰</div>
                                 <NeonText className="text-lg font-bold mb-2">
@@ -41,9 +41,9 @@ export default function CashGamePage() {
                                     Mesa com neon, glass e shimmer effects
                                 </p>
                             </div>
-                        </UltraGlassCard>
+                        </GlassCard>
 
-                        <UltraGlassCard variant="emerald">
+                        <GlassCard variant="emerald">
                             <div className="p-6 text-center">
                                 <div className="text-4xl mb-3">🏆</div>
                                 <NeonText
@@ -56,9 +56,9 @@ export default function CashGamePage() {
                                     Experiência de poker de alta qualidade
                                 </p>
                             </div>
-                        </UltraGlassCard>
+                        </GlassCard>
 
-                        <UltraGlassCard variant="crystal">
+                        <GlassCard variant="crystal">
                             <div className="p-6 text-center">
                                 <div className="text-4xl mb-3">✨</div>
                                 <NeonText
@@ -71,7 +71,7 @@ export default function CashGamePage() {
                                     Interface moderna e responsiva
                                 </p>
                             </div>
-                        </UltraGlassCard>
+                        </GlassCard>
                     </div>
 
                     <div className="mt-12">
@@ -79,7 +79,7 @@ export default function CashGamePage() {
                             🚀 Entrar no Jogo
                         </NeonButton>
                     </div>
-                </UltraGlassCard>
+                </GlassCard>
             </div>
         </div>
     );

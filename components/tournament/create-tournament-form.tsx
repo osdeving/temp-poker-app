@@ -3,9 +3,9 @@
 import { FadeIn } from "@/components/ui/animations";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { GlassCard, NeonText } from "@/components/ui/glass";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { GlassCard, NeonText } from "@/components/ui/neon";
 import {
     Select,
     SelectContent,

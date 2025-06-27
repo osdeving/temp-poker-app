@@ -10,7 +10,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
+import { NeonButton, NeonText, GlassCard } from "@/components/ui/glass";
 import { useNotifications } from "@/hooks/use-notifications";
 import { Tournament } from "@/lib/tournament";
 import {
@@ -244,7 +244,7 @@ Generated on: ${new Date().toLocaleString()}
     }
 
     return (
-        <UltraGlassCard variant="crystal" className="space-y-4">
+        <GlassCard variant="crystal" className="space-y-4">
             <NeonText className="text-xl font-bold flex items-center gap-2">
                 <Settings className="h-5 w-5" />
                 Tournament Controls
@@ -362,6 +362,6 @@ Generated on: ${new Date().toLocaleString()}
                     </div>
                 </div>
             </div>
-        </UltraGlassCard>
+        </GlassCard>
     );
 }

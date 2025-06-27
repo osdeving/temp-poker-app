@@ -10,7 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { NeonButton, NeonText } from "@/components/ui/neon";
+import { NeonButton, NeonText } from "@/components/ui/glass";
 import { useAuth } from "@/hooks/use-auth";
 import {
     Gamepad2,

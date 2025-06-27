@@ -2,7 +2,7 @@
 
 import { FadeIn } from "@/components/ui/animations";
 import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
-import { NeonButton, NeonCard, NeonText } from "@/components/ui/neon";
+import { GlassCard, NeonButton, NeonText } from "@/components/ui/glass";
 import { useAuth } from "@/hooks/use-auth";
 import { Chrome, Facebook, Github, Loader2 } from "lucide-react";
 import { useState } from "react";
@@ -39,7 +39,11 @@ export default function LoginForm() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900">
             <FadeIn>
-                <NeonCard className="w-full max-w-md mx-4">
+                <GlassCard
+                    variant="diamond"
+                    blur="medium"
+                    className="w-full max-w-md mx-4"
+                >
                     <CardHeader className="text-center">
                         <NeonText
                             color="pink"
@@ -87,7 +91,7 @@ export default function LoginForm() {
                             </div>
                         )}
                     </CardContent>
-                </NeonCard>
+                </GlassCard>
             </FadeIn>
         </div>
     );

@@ -10,13 +10,10 @@ import {
 import {
     GlassCard,
     HolographicCard,
-    MirrorCard,
     NeonButton,
-    NeonCard,
     NeonInput,
     NeonText,
-    UltraGlassCard,
-} from "@/components/ui/neon";
+} from "@/components/ui/glass";
 import { PokerCard, PokerChip, PotContainer } from "@/components/ui/poker";
 import {
     ClockDisplay,
@@ -37,7 +34,7 @@ export default function ComponentShowcasePage() {
 
                 {/* Neon Components Section */}
                 <SlideIn direction="left">
-                    <NeonCard className="p-6">
+                    <GlassCard className="p-6">
                         <h2 className="text-2xl font-bold mb-4">
                             <NeonText color="pink">Neon Components</NeonText>
                         </h2>
@@ -68,7 +65,7 @@ export default function ComponentShowcasePage() {
                         <div className="mt-4">
                             <NeonInput placeholder="Enter your name..." />
                         </div>
-                    </NeonCard>
+                    </GlassCard>
                 </SlideIn>
 
                 {/* Status Components Section */}
@@ -110,7 +107,7 @@ export default function ComponentShowcasePage() {
 
                 {/* Poker Components Section */}
                 <SlideIn direction="up" delay={400}>
-                    <NeonCard className="p-6">
+                    <GlassCard className="p-6">
                         <h2 className="text-2xl font-bold mb-4">
                             <NeonText color="green">Poker Components</NeonText>
                         </h2>
@@ -147,7 +144,7 @@ export default function ComponentShowcasePage() {
                         <div className="mt-6">
                             <PotContainer amount={15250} />
                         </div>
-                    </NeonCard>
+                    </GlassCard>
                 </SlideIn>
 
                 {/* Animation Components Section */}
@@ -178,7 +175,7 @@ export default function ComponentShowcasePage() {
 
                 {/* Ranking Example */}
                 <SlideIn direction="left" delay={800}>
-                    <NeonCard className="p-6">
+                    <GlassCard className="p-6">
                         <h2 className="text-2xl font-bold mb-4">
                             <NeonText color="cyan">Ranking Example</NeonText>
                         </h2>
@@ -222,87 +219,87 @@ export default function ComponentShowcasePage() {
                                 </div>
                             </RankingItem>
                         </div>
-                    </NeonCard>
+                    </GlassCard>
                 </SlideIn>
 
                 {/* Mirror Glass Effects Section */}
                 <SlideIn direction="down" delay={150}>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <MirrorCard intensity="light" className="p-6">
+                        <GlassCard variant="crystal" className="p-6">
                             <h3 className="text-lg font-bold text-white mb-2">
                                 <NeonText color="cyan">Light Mirror</NeonText>
                             </h3>
                             <p className="text-gray-300 text-sm">
                                 Subtle glass effect with light reflection
                             </p>
-                        </MirrorCard>
+                        </GlassCard>
 
-                        <MirrorCard intensity="medium" className="p-6">
+                        <GlassCard variant="crystal" className="p-6">
                             <h3 className="text-lg font-bold text-white mb-2">
                                 <NeonText color="pink">Medium Mirror</NeonText>
                             </h3>
                             <p className="text-gray-300 text-sm">
                                 Balanced glass effect with mirror shine
                             </p>
-                        </MirrorCard>
+                        </GlassCard>
 
-                        <MirrorCard intensity="heavy" className="p-6">
+                        <GlassCard variant="crystal" className="p-6">
                             <h3 className="text-lg font-bold text-white mb-2">
                                 <NeonText color="green">Heavy Mirror</NeonText>
                             </h3>
                             <p className="text-gray-300 text-sm">
                                 Intense glass effect with maximum reflection
                             </p>
-                        </MirrorCard>
+                        </GlassCard>
                     </div>
                 </SlideIn>
 
                 {/* Ultra Premium Glass Effects */}
                 <SlideIn direction="up">
-                    <NeonCard className="p-6">
+                    <GlassCard className="p-6">
                         <h2 className="text-2xl font-bold mb-4">
                             <NeonText color="cyan">
                                 Ultra Premium Glass Effects
                             </NeonText>
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <UltraGlassCard variant="crystal" className="p-6">
+                            <GlassCard variant="crystal" className="p-6">
                                 <h3 className="text-lg font-bold text-white mb-2">
                                     <NeonText color="cyan">Crystal</NeonText>
                                 </h3>
                                 <p className="text-gray-300 text-sm">
                                     Pure crystal clarity with white reflections
                                 </p>
-                            </UltraGlassCard>
+                            </GlassCard>
 
-                            <UltraGlassCard variant="diamond" className="p-6">
+                            <GlassCard variant="diamond" className="p-6">
                                 <h3 className="text-lg font-bold text-white mb-2">
                                     <NeonText color="cyan">Diamond</NeonText>
                                 </h3>
                                 <p className="text-gray-300 text-sm">
                                     Blue diamond with cyan sparkle
                                 </p>
-                            </UltraGlassCard>
+                            </GlassCard>
 
-                            <UltraGlassCard variant="sapphire" className="p-6">
+                            <GlassCard variant="sapphire" className="p-6">
                                 <h3 className="text-lg font-bold text-white mb-2">
                                     <NeonText color="cyan">Sapphire</NeonText>
                                 </h3>
                                 <p className="text-gray-300 text-sm">
                                     Deep blue sapphire with royal glow
                                 </p>
-                            </UltraGlassCard>
+                            </GlassCard>
 
-                            <UltraGlassCard variant="emerald" className="p-6">
+                            <GlassCard variant="emerald" className="p-6">
                                 <h3 className="text-lg font-bold text-white mb-2">
                                     <NeonText color="green">Emerald</NeonText>
                                 </h3>
                                 <p className="text-gray-300 text-sm">
                                     Rich emerald with nature's glow
                                 </p>
-                            </UltraGlassCard>
+                            </GlassCard>
                         </div>
-                    </NeonCard>
+                    </GlassCard>
                 </SlideIn>
 
                 {/* Holographic Effects */}

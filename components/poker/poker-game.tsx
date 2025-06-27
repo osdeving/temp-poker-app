@@ -2,7 +2,7 @@
 
 import { FadeIn, HoverGlow, SlideIn } from "@/components/ui/animations";
 import { Badge } from "@/components/ui/badge";
-import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
+import { NeonButton, NeonText, GlassCard } from "@/components/ui/glass";
 import { Tournament } from "@/lib/tournament";
 import { useState } from "react";
 import PokerTable from "./poker-table-premium";
@@ -124,7 +124,7 @@ export default function PokerGame({
     if (activePlayers.length < 2) {
         return (
             <FadeIn>
-                <UltraGlassCard variant="crystal" className="text-center py-12">
+                <GlassCard variant="crystal" className="text-center py-12">
                     <NeonText className="text-2xl font-bold mb-4">
                         🎮 Aguardando Jogadores
                     </NeonText>
@@ -132,7 +132,7 @@ export default function PokerGame({
                         É necessário pelo menos 2 jogadores para começar uma
                         mesa.
                     </p>
-                </UltraGlassCard>
+                </GlassCard>
             </FadeIn>
         );
     }
@@ -140,7 +140,7 @@ export default function PokerGame({
     return (
         <SlideIn className="space-y-6">
             {/* Informações da Mesa */}
-            <UltraGlassCard variant="diamond" className="p-6">
+            <GlassCard variant="diamond" className="p-6">
                 <div className="flex justify-between items-center">
                     <NeonText className="text-2xl font-bold">
                         🎯 Mesa Principal - {tournament.name}
@@ -170,7 +170,7 @@ export default function PokerGame({
                         </div>
                     </div>
                 </div>
-            </UltraGlassCard>
+            </GlassCard>
 
             {/* Mesa de Poker */}
             <HoverGlow>
@@ -187,7 +187,7 @@ export default function PokerGame({
 
             {/* Controles do Diretor */}
             {isDirector && (
-                <UltraGlassCard variant="emerald" className="p-6">
+                <GlassCard variant="emerald" className="p-6">
                     <NeonText className="text-xl font-bold mb-4">
                         🎛️ Controles do Diretor
                     </NeonText>
@@ -222,35 +222,35 @@ export default function PokerGame({
                             -$100 Pot
                         </NeonButton>
                     </div>
-                </UltraGlassCard>
+                </GlassCard>
             )}
 
             {/* Estatísticas da Mesa */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <UltraGlassCard variant="sapphire" className="p-4 text-center">
+                <GlassCard variant="sapphire" className="p-4 text-center">
                     <NeonText className="text-lg font-bold text-neon-cyan">
                         {players.length}
                     </NeonText>
                     <div className="text-gray-400 text-sm">
                         Jogadores na Mesa
                     </div>
-                </UltraGlassCard>
+                </GlassCard>
 
-                <UltraGlassCard variant="crystal" className="p-4 text-center">
+                <GlassCard variant="crystal" className="p-4 text-center">
                     <NeonText className="text-lg font-bold text-neon-green">
                         {communityCards.length}/5
                     </NeonText>
                     <div className="text-gray-400 text-sm">
                         Cartas Comunitárias
                     </div>
-                </UltraGlassCard>
+                </GlassCard>
 
-                <UltraGlassCard variant="diamond" className="p-4 text-center">
+                <GlassCard variant="diamond" className="p-4 text-center">
                     <NeonText className="text-lg font-bold text-neon-pink">
                         ${currentBet}
                     </NeonText>
                     <div className="text-gray-400 text-sm">Aposta Atual</div>
-                </UltraGlassCard>
+                </GlassCard>
             </div>
         </SlideIn>
     );

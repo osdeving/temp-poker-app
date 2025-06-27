@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
+import { NeonButton, NeonText, GlassCard } from "@/components/ui/glass";
 import { useNotifications } from "@/hooks/use-notifications";
 import { Tournament, formatChips, formatTime } from "@/lib/tournament";
 import { Clock, Pause, Play, SkipForward, TrendingUp } from "lucide-react";
@@ -140,7 +140,7 @@ export default function TournamentClock({
     return (
         <div className="space-y-6">
             {/* Main Clock Display */}
-            <UltraGlassCard variant="crystal" className="text-center py-8">
+            <GlassCard variant="crystal" className="text-center py-8">
                 <NeonText className="text-sm uppercase tracking-wider mb-4 opacity-70">
                     LEVEL {currentBlindLevel.level}
                 </NeonText>
@@ -170,11 +170,11 @@ export default function TournamentClock({
                 <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg px-4 py-1 font-semibold glow-pink">
                     {tournament.registeredPlayers.length} Players
                 </Badge>
-            </UltraGlassCard>
+            </GlassCard>
 
             {/* Tournament Controls */}
             {isDirector && (
-                <UltraGlassCard variant="crystal" className="space-y-4">
+                <GlassCard variant="crystal" className="space-y-4">
                     <NeonText className="flex items-center gap-2">
                         <Clock className="h-5 w-5" />
                         Tournament Controls
@@ -228,12 +228,12 @@ export default function TournamentClock({
                                 </NeonButton>
                             )}
                     </div>
-                </UltraGlassCard>
+                </GlassCard>
             )}
 
             {/* Next Level Info */}
             {nextBlindLevel && (
-                <UltraGlassCard variant="diamond" className="space-y-4">
+                <GlassCard variant="diamond" className="space-y-4">
                     <NeonText className="text-sm uppercase tracking-wider opacity-70">
                         NEXT LEVEL ({nextBlindLevel.level})
                     </NeonText>
@@ -251,11 +251,11 @@ export default function TournamentClock({
                             Duration: {nextBlindLevel.duration} minutes
                         </div>
                     </div>
-                </UltraGlassCard>
+                </GlassCard>
             )}
 
             {/* Tournament Progress */}
-            <UltraGlassCard variant="sapphire" className="space-y-4">
+            <GlassCard variant="sapphire" className="space-y-4">
                 <NeonText className="flex items-center gap-2">
                     <TrendingUp className="h-5 w-5" />
                     Tournament Progress
@@ -290,7 +290,7 @@ export default function TournamentClock({
                         </span>
                     </div>
                 </div>
-            </UltraGlassCard>
+            </GlassCard>
         </div>
     );
 }

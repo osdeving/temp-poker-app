@@ -144,3 +144,55 @@ export function NeonButton({
         </button>
     );
 }
+
+// ============================================
+// NEON INPUT COMPONENT
+// ============================================
+
+interface NeonInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    color?: NeonColor;
+    intensity?: "low" | "medium" | "high";
+    glow?: boolean;
+}
+
+export function NeonInput({
+    color = "cyan",
+    intensity = "medium",
+    glow = true,
+    className,
+    ...props
+}: NeonInputProps) {
+    const config = glassConfig.neonColors[color];
+
+    const intensityClasses = {
+        low: "opacity-70",
+        medium: "opacity-90",
+        high: "opacity-100",
+    };
+
+    return (
+        <input
+            className={cn(
+                // Base styles
+                "w-full px-4 py-2 rounded-lg border border-gray-600",
+                "bg-black/40 backdrop-blur-sm",
+                "text-white placeholder-gray-400",
+                "transition-all duration-300",
+                "focus:outline-none focus:ring-2",
+
+                // Neon effects
+                config.text,
+                glow && config.shadow,
+                glow && "hover:shadow-lg focus:shadow-lg",
+                intensityClasses[intensity],
+
+                // Focus effects
+                "focus:border-current focus:border-opacity-80",
+                glow && `focus:${config.shadow}`,
+
+                className
+            )}
+            {...props}
+        />
+    );
+}

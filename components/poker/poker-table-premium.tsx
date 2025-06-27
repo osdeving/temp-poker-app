@@ -6,8 +6,8 @@ import {
     NeonButton,
     NeonInput,
     NeonText,
-    UltraGlassCard,
-} from "@/components/ui/neon";
+    GlassCard,
+} from "@/components/ui/glass";
 import { PokerCard, PokerChip } from "@/components/ui/poker";
 import { Tournament } from "@/lib/tournament";
 import { useState } from "react";
@@ -97,7 +97,7 @@ export default function PokerTable({
                 {/* Centro da mesa - Logo e Pot */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
                     <GlowPulse>
-                        <UltraGlassCard variant="crystal" className="p-4 mb-4">
+                        <GlassCard variant="crystal" className="p-4 mb-4">
                             <NeonText className="text-lg font-bold mb-2">
                                 🏆 {tournament.name}
                             </NeonText>
@@ -119,7 +119,7 @@ export default function PokerTable({
                                     </div>
                                 </div>
                             )}
-                        </UltraGlassCard>
+                        </GlassCard>
                     </GlowPulse>
 
                     {/* Cartas Comunitárias Premium */}
@@ -182,7 +182,7 @@ export default function PokerTable({
                             }}
                         >
                             <HoverGlow>
-                                <UltraGlassCard
+                                <GlassCard
                                     variant={
                                         isActivePlayer ? "emerald" : "crystal"
                                     }
@@ -315,7 +315,7 @@ export default function PokerTable({
                                             {player.action.toUpperCase()}
                                         </Badge>
                                     )}
-                                </UltraGlassCard>
+                                </GlassCard>
                             </HoverGlow>
                         </div>
                     );
@@ -324,7 +324,7 @@ export default function PokerTable({
 
             {/* Controles de Ação do Jogador */}
             {isPlayerTurn && (
-                <UltraGlassCard variant="diamond" className="mt-6 p-6">
+                <GlassCard variant="diamond" className="mt-6 p-6">
                     <NeonText className="text-lg font-bold mb-4 text-center">
                         🎮 Sua Vez - Escolha uma Ação
                     </NeonText>
@@ -375,7 +375,7 @@ export default function PokerTable({
 
                     {/* Input de valor para raise */}
                     <div className="mt-4 flex justify-center">
-                        <UltraGlassCard variant="crystal" className="p-3">
+                        <GlassCard variant="crystal" className="p-3">
                             <div className="flex items-center gap-3">
                                 <NeonText className="text-sm font-semibold">
                                     💰 Raise Amount:
@@ -390,9 +390,9 @@ export default function PokerTable({
                                     placeholder="$"
                                 />
                             </div>
-                        </UltraGlassCard>
+                        </GlassCard>
                     </div>
-                </UltraGlassCard>
+                </GlassCard>
             )}
         </div>
     );

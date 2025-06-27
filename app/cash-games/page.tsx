@@ -10,14 +10,9 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { GlassCard, NeonButton, NeonInput, NeonText } from "@/components/ui/glass";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-    NeonButton,
-    NeonInput,
-    NeonText,
-    UltraGlassCard,
-} from "@/components/ui/neon";
 import {
     Select,
     SelectContent,
@@ -160,7 +155,7 @@ export default function CashGamesPage() {
                                     </NeonButton>
                                 </DialogTrigger>
                                 <DialogContent className="max-w-md">
-                                    <UltraGlassCard
+                                    <GlassCard
                                         variant="crystal"
                                         className="p-6"
                                     >
@@ -369,7 +364,7 @@ export default function CashGamesPage() {
                                                 Create Table
                                             </NeonButton>
                                         </div>
-                                    </UltraGlassCard>
+                                    </GlassCard>
                                 </DialogContent>
                             </Dialog>
                         </div>
@@ -378,7 +373,7 @@ export default function CashGamesPage() {
 
                 {/* Lobby Stats */}
                 <SlideIn className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <UltraGlassCard
+                    <GlassCard
                         variant="diamond"
                         className="p-4 text-center"
                     >
@@ -390,9 +385,9 @@ export default function CashGamesPage() {
                                 {lobby.totalTables}
                             </NeonText>
                         </div>
-                    </UltraGlassCard>
+                    </GlassCard>
 
-                    <UltraGlassCard
+                    <GlassCard
                         variant="emerald"
                         className="p-4 text-center"
                     >
@@ -404,9 +399,9 @@ export default function CashGamesPage() {
                                 {lobby.activePlayers}
                             </NeonText>
                         </div>
-                    </UltraGlassCard>
+                    </GlassCard>
 
-                    <UltraGlassCard
+                    <GlassCard
                         variant="crystal"
                         className="p-4 text-center"
                     >
@@ -418,7 +413,7 @@ export default function CashGamesPage() {
                                 {lobby.availableTables.length}
                             </NeonText>
                         </div>
-                    </UltraGlassCard>
+                    </GlassCard>
                 </SlideIn>
 
                 {/* Available Tables */}
@@ -427,7 +422,7 @@ export default function CashGamesPage() {
                         <NeonText color="cyan">Available Tables</NeonText>
                     </h2>
                     {lobby.availableTables.length === 0 ? (
-                        <UltraGlassCard
+                        <GlassCard
                             variant="sapphire"
                             className="text-center py-8"
                         >
@@ -441,11 +436,11 @@ export default function CashGamesPage() {
                             <NeonButton onClick={() => setShowCreateGame(true)}>
                                 Create First Table
                             </NeonButton>
-                        </UltraGlassCard>
+                        </GlassCard>
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             {lobby.availableTables.map((game) => (
-                                <UltraGlassCard
+                                <GlassCard
                                     key={game.id}
                                     variant="diamond"
                                     className="p-6"
@@ -556,7 +551,7 @@ export default function CashGamesPage() {
                                             Join
                                         </NeonButton>
                                     </div>
-                                </UltraGlassCard>
+                                </GlassCard>
                             ))}
                         </div>
                     )}

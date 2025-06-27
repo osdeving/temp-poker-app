@@ -3,7 +3,7 @@
 import { HoverGlow } from "@/components/ui/animations";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
-import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
+import { GlassCard, NeonButton, NeonText } from "@/components/ui/glass";
 import { StatusBadge } from "@/components/ui/status";
 import { formatChips, Tournament } from "@/lib/tournament";
 import { Calendar, DollarSign, Trophy, Users } from "lucide-react";
@@ -66,7 +66,7 @@ export default function TournamentCard({
 
     return (
         <HoverGlow color="pink">
-            <UltraGlassCard
+            <GlassCard
                 variant={getGlassVariant(tournament.status)}
                 className="h-full border-pink-500/30 hover:border-cyan-400/50"
             >
@@ -177,7 +177,7 @@ export default function TournamentCard({
                         </Button>
                     </div>
                 </CardContent>
-            </UltraGlassCard>
+            </GlassCard>
         </HoverGlow>
     );
 }
