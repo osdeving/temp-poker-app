@@ -1,9 +1,9 @@
 "use client";
 
 import Navbar from "@/components/layout/navbar";
+import { FadeIn, SlideIn } from "@/components/ui/animations";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Dialog,
     DialogContent,
@@ -13,6 +13,12 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+    NeonButton,
+    NeonInput,
+    NeonText,
+    UltraGlassCard,
+} from "@/components/ui/neon";
 import {
     Select,
     SelectContent,
@@ -130,307 +136,355 @@ export default function CashGamesPage() {
 
             <div className="container mx-auto px-4 py-8">
                 {/* Header */}
-                <div className="mb-8">
-                    <div className="flex justify-between items-center mb-4">
-                        <div>
-                            <h1 className="text-4xl font-bold text-neon-cyan">
-                                Cash Games 🎮
-                            </h1>
-                            <p className="text-gray-300 text-lg">
-                                Play poker against friends and players worldwide
-                            </p>
-                        </div>
-                        <Dialog
-                            open={showCreateGame}
-                            onOpenChange={setShowCreateGame}
-                        >
-                            <DialogTrigger asChild>
-                                <Button className="neon-button">
-                                    <Plus className="h-4 w-4 mr-2" />
-                                    Create Table
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent className="neon-card max-w-md">
-                                <DialogHeader>
-                                    <DialogTitle>Create Cash Game</DialogTitle>
-                                </DialogHeader>
-                                <div className="space-y-4">
-                                    <div>
-                                        <Label htmlFor="gameName">
-                                            Table Name
-                                        </Label>
-                                        <Input
-                                            id="gameName"
-                                            value={gameName}
-                                            onChange={(e) =>
-                                                setGameName(e.target.value)
-                                            }
-                                            placeholder="My Poker Table"
-                                            className="neon-input"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <Label htmlFor="gameType">
-                                            Game Type
-                                        </Label>
-                                        <Select
-                                            value={gameType}
-                                            onValueChange={setGameType}
-                                        >
-                                            <SelectTrigger className="neon-input">
-                                                <SelectValue />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {cashGameTypes.map((type) => (
-                                                    <SelectItem
-                                                        key={type.id}
-                                                        value={type.id}
-                                                    >
-                                                        {type.name}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <Label htmlFor="smallBlind">
-                                                Small Blind
-                                            </Label>
-                                            <Input
-                                                id="smallBlind"
-                                                type="number"
-                                                value={smallBlind}
-                                                onChange={(e) =>
-                                                    setSmallBlind(
-                                                        Number(e.target.value)
-                                                    )
-                                                }
-                                                className="neon-input"
-                                            />
-                                        </div>
-                                        <div>
-                                            <Label htmlFor="bigBlind">
-                                                Big Blind
-                                            </Label>
-                                            <Input
-                                                id="bigBlind"
-                                                type="number"
-                                                value={bigBlind}
-                                                onChange={(e) =>
-                                                    setBigBlind(
-                                                        Number(e.target.value)
-                                                    )
-                                                }
-                                                className="neon-input"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <Label htmlFor="minBuyIn">
-                                                Min Buy-in
-                                            </Label>
-                                            <Input
-                                                id="minBuyIn"
-                                                type="number"
-                                                value={minBuyIn}
-                                                onChange={(e) =>
-                                                    setMinBuyIn(
-                                                        Number(e.target.value)
-                                                    )
-                                                }
-                                                className="neon-input"
-                                            />
-                                        </div>
-                                        <div>
-                                            <Label htmlFor="maxBuyIn">
-                                                Max Buy-in
-                                            </Label>
-                                            <Input
-                                                id="maxBuyIn"
-                                                type="number"
-                                                value={maxBuyIn}
-                                                onChange={(e) =>
-                                                    setMaxBuyIn(
-                                                        Number(e.target.value)
-                                                    )
-                                                }
-                                                className="neon-input"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <Label htmlFor="maxPlayers">
-                                            Max Players
-                                        </Label>
-                                        <Select
-                                            value={maxPlayers.toString()}
-                                            onValueChange={(v) =>
-                                                setMaxPlayers(Number(v))
-                                            }
-                                        >
-                                            <SelectTrigger className="neon-input">
-                                                <SelectValue />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {[2, 3, 4, 5, 6, 7, 8, 9].map(
-                                                    (num) => (
-                                                        <SelectItem
-                                                            key={num}
-                                                            value={num.toString()}
-                                                        >
-                                                            {num} Players
-                                                        </SelectItem>
-                                                    )
-                                                )}
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-
-                                    <div className="flex items-center space-x-2">
-                                        <Switch
-                                            id="isPrivate"
-                                            checked={isPrivate}
-                                            onCheckedChange={setIsPrivate}
-                                        />
-                                        <Label htmlFor="isPrivate">
-                                            Private Table
-                                        </Label>
-                                    </div>
-
-                                    {isPrivate && (
-                                        <div>
-                                            <Label htmlFor="password">
-                                                Password
-                                            </Label>
-                                            <Input
-                                                id="password"
-                                                type="password"
-                                                value={password}
-                                                onChange={(e) =>
-                                                    setPassword(e.target.value)
-                                                }
-                                                placeholder="Enter password"
-                                                className="neon-input"
-                                            />
-                                        </div>
-                                    )}
-
-                                    <Button
-                                        onClick={handleCreateGame}
-                                        className="neon-button w-full"
-                                        disabled={!gameName.trim()}
-                                    >
+                <FadeIn>
+                    <div className="mb-8">
+                        <div className="flex justify-between items-center mb-4">
+                            <div>
+                                <h1 className="text-4xl font-bold">
+                                    <NeonText color="cyan">
+                                        Cash Games 🎮
+                                    </NeonText>
+                                </h1>
+                                <p className="text-gray-300 text-lg">
+                                    Play poker against friends and players
+                                    worldwide
+                                </p>
+                            </div>
+                            <Dialog
+                                open={showCreateGame}
+                                onOpenChange={setShowCreateGame}
+                            >
+                                <DialogTrigger asChild>
+                                    <NeonButton>
+                                        <Plus className="h-4 w-4 mr-2" />
                                         Create Table
-                                    </Button>
-                                </div>
-                            </DialogContent>
-                        </Dialog>
+                                    </NeonButton>
+                                </DialogTrigger>
+                                <DialogContent className="max-w-md">
+                                    <UltraGlassCard
+                                        variant="crystal"
+                                        className="p-6"
+                                    >
+                                        <DialogHeader>
+                                            <DialogTitle>
+                                                <NeonText color="cyan">
+                                                    Create Cash Game
+                                                </NeonText>
+                                            </DialogTitle>
+                                        </DialogHeader>
+                                        <div className="space-y-4 mt-4">
+                                            <div>
+                                                <Label htmlFor="gameName">
+                                                    Table Name
+                                                </Label>
+                                                <NeonInput
+                                                    value={gameName}
+                                                    onChange={(e) =>
+                                                        setGameName(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    placeholder="My Poker Table"
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <Label htmlFor="gameType">
+                                                    Game Type
+                                                </Label>
+                                                <Select
+                                                    value={gameType}
+                                                    onValueChange={setGameType}
+                                                >
+                                                    <SelectTrigger className="neon-input">
+                                                        <SelectValue />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        {cashGameTypes.map(
+                                                            (type) => (
+                                                                <SelectItem
+                                                                    key={
+                                                                        type.id
+                                                                    }
+                                                                    value={
+                                                                        type.id
+                                                                    }
+                                                                >
+                                                                    {type.name}
+                                                                </SelectItem>
+                                                            )
+                                                        )}
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <Label htmlFor="smallBlind">
+                                                        Small Blind
+                                                    </Label>
+                                                    <Input
+                                                        id="smallBlind"
+                                                        type="number"
+                                                        value={smallBlind}
+                                                        onChange={(e) =>
+                                                            setSmallBlind(
+                                                                Number(
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            )
+                                                        }
+                                                        className="neon-input"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <Label htmlFor="bigBlind">
+                                                        Big Blind
+                                                    </Label>
+                                                    <Input
+                                                        id="bigBlind"
+                                                        type="number"
+                                                        value={bigBlind}
+                                                        onChange={(e) =>
+                                                            setBigBlind(
+                                                                Number(
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            )
+                                                        }
+                                                        className="neon-input"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <Label htmlFor="minBuyIn">
+                                                        Min Buy-in
+                                                    </Label>
+                                                    <Input
+                                                        id="minBuyIn"
+                                                        type="number"
+                                                        value={minBuyIn}
+                                                        onChange={(e) =>
+                                                            setMinBuyIn(
+                                                                Number(
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            )
+                                                        }
+                                                        className="neon-input"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <Label htmlFor="maxBuyIn">
+                                                        Max Buy-in
+                                                    </Label>
+                                                    <Input
+                                                        id="maxBuyIn"
+                                                        type="number"
+                                                        value={maxBuyIn}
+                                                        onChange={(e) =>
+                                                            setMaxBuyIn(
+                                                                Number(
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            )
+                                                        }
+                                                        className="neon-input"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <Label htmlFor="maxPlayers">
+                                                    Max Players
+                                                </Label>
+                                                <Select
+                                                    value={maxPlayers.toString()}
+                                                    onValueChange={(v) =>
+                                                        setMaxPlayers(Number(v))
+                                                    }
+                                                >
+                                                    <SelectTrigger className="neon-input">
+                                                        <SelectValue />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        {[
+                                                            2, 3, 4, 5, 6, 7, 8,
+                                                            9,
+                                                        ].map((num) => (
+                                                            <SelectItem
+                                                                key={num}
+                                                                value={num.toString()}
+                                                            >
+                                                                {num} Players
+                                                            </SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+
+                                            <div className="flex items-center space-x-2">
+                                                <Switch
+                                                    id="isPrivate"
+                                                    checked={isPrivate}
+                                                    onCheckedChange={
+                                                        setIsPrivate
+                                                    }
+                                                />
+                                                <Label htmlFor="isPrivate">
+                                                    Private Table
+                                                </Label>
+                                            </div>
+
+                                            {isPrivate && (
+                                                <div>
+                                                    <Label htmlFor="password">
+                                                        Password
+                                                    </Label>
+                                                    <Input
+                                                        id="password"
+                                                        type="password"
+                                                        value={password}
+                                                        onChange={(e) =>
+                                                            setPassword(
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        placeholder="Enter password"
+                                                        className="neon-input"
+                                                    />
+                                                </div>
+                                            )}
+
+                                            <NeonButton
+                                                onClick={handleCreateGame}
+                                                className="w-full"
+                                                disabled={!gameName.trim()}
+                                            >
+                                                Create Table
+                                            </NeonButton>
+                                        </div>
+                                    </UltraGlassCard>
+                                </DialogContent>
+                            </Dialog>
+                        </div>
                     </div>
-                </div>
+                </FadeIn>
 
                 {/* Lobby Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <Card className="neon-card glow-cyan">
-                        <CardContent className="p-4 text-center">
-                            <div className="text-sm text-gray-400">
-                                Active Tables
-                            </div>
-                            <div className="text-2xl font-bold text-neon-cyan">
+                <SlideIn className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <UltraGlassCard
+                        variant="diamond"
+                        className="p-4 text-center"
+                    >
+                        <div className="text-sm text-gray-400">
+                            Active Tables
+                        </div>
+                        <div className="text-2xl font-bold">
+                            <NeonText color="cyan">
                                 {lobby.totalTables}
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <Card className="neon-card glow-green">
-                        <CardContent className="p-4 text-center">
-                            <div className="text-sm text-gray-400">
-                                Players Online
-                            </div>
-                            <div className="text-2xl font-bold text-neon-green">
+                            </NeonText>
+                        </div>
+                    </UltraGlassCard>
+
+                    <UltraGlassCard
+                        variant="emerald"
+                        className="p-4 text-center"
+                    >
+                        <div className="text-sm text-gray-400">
+                            Players Online
+                        </div>
+                        <div className="text-2xl font-bold">
+                            <NeonText color="green">
                                 {lobby.activePlayers}
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <Card className="neon-card glow-pink">
-                        <CardContent className="p-4 text-center">
-                            <div className="text-sm text-gray-400">
-                                Available Tables
-                            </div>
-                            <div className="text-2xl font-bold text-neon-pink">
+                            </NeonText>
+                        </div>
+                    </UltraGlassCard>
+
+                    <UltraGlassCard
+                        variant="crystal"
+                        className="p-4 text-center"
+                    >
+                        <div className="text-sm text-gray-400">
+                            Available Tables
+                        </div>
+                        <div className="text-2xl font-bold">
+                            <NeonText color="pink">
                                 {lobby.availableTables.length}
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>
+                            </NeonText>
+                        </div>
+                    </UltraGlassCard>
+                </SlideIn>
 
                 {/* Available Tables */}
-                <div className="space-y-6">
-                    <h2 className="text-2xl font-bold text-white">
-                        Available Tables
+                <SlideIn direction="up" className="space-y-6">
+                    <h2 className="text-2xl font-bold">
+                        <NeonText color="cyan">Available Tables</NeonText>
                     </h2>
                     {lobby.availableTables.length === 0 ? (
-                        <Card className="neon-card">
-                            <CardContent className="text-center py-8">
-                                <Gamepad2 className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                                <h3 className="text-lg font-semibold mb-2">
-                                    No Active Tables
-                                </h3>
-                                <p className="text-muted-foreground mb-4">
-                                    Be the first to create a cash game table!
-                                </p>
-                                <Button
-                                    onClick={() => setShowCreateGame(true)}
-                                    className="neon-button"
-                                >
-                                    Create First Table
-                                </Button>
-                            </CardContent>
-                        </Card>
+                        <UltraGlassCard
+                            variant="sapphire"
+                            className="text-center py-8"
+                        >
+                            <Gamepad2 className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                            <h3 className="text-lg font-semibold mb-2 text-white">
+                                No Active Tables
+                            </h3>
+                            <p className="text-muted-foreground mb-4">
+                                Be the first to create a cash game table!
+                            </p>
+                            <NeonButton onClick={() => setShowCreateGame(true)}>
+                                Create First Table
+                            </NeonButton>
+                        </UltraGlassCard>
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             {lobby.availableTables.map((game) => (
-                                <Card key={game.id} className="neon-card">
-                                    <CardHeader>
-                                        <div className="flex justify-between items-start">
-                                            <div>
-                                                <CardTitle className="flex items-center gap-2">
-                                                    {game.isPrivate ? (
-                                                        <Lock className="h-4 w-4 text-red-400" />
-                                                    ) : (
-                                                        <Unlock className="h-4 w-4 text-green-400" />
-                                                    )}
+                                <UltraGlassCard
+                                    key={game.id}
+                                    variant="diamond"
+                                    className="p-6"
+                                >
+                                    <div className="flex justify-between items-start mb-4">
+                                        <div>
+                                            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                                                {game.isPrivate ? (
+                                                    <Lock className="h-4 w-4 text-red-400" />
+                                                ) : (
+                                                    <Unlock className="h-4 w-4 text-green-400" />
+                                                )}
+                                                <NeonText color="cyan">
                                                     {game.name}
-                                                </CardTitle>
-                                                <p className="text-sm text-gray-400">
-                                                    {
-                                                        cashGameTypes.find(
-                                                            (t) =>
-                                                                t.id ===
-                                                                game.type
-                                                        )?.name
-                                                    }
-                                                </p>
-                                            </div>
-                                            <Badge
-                                                className={
-                                                    game.status === "waiting"
-                                                        ? "bg-yellow-500"
-                                                        : game.status ===
-                                                          "active"
-                                                        ? "bg-green-500"
-                                                        : "bg-gray-500"
+                                                </NeonText>
+                                            </h3>
+                                            <p className="text-sm text-gray-400">
+                                                {
+                                                    cashGameTypes.find(
+                                                        (t) =>
+                                                            t.id === game.type
+                                                    )?.name
                                                 }
-                                            >
-                                                {game.status.toUpperCase()}
-                                            </Badge>
+                                            </p>
                                         </div>
-                                    </CardHeader>
-                                    <CardContent className="space-y-4">
+                                        <Badge
+                                            className={
+                                                game.status === "waiting"
+                                                    ? "bg-yellow-500"
+                                                    : game.status === "active"
+                                                    ? "bg-green-500"
+                                                    : "bg-gray-500"
+                                            }
+                                        >
+                                            {game.status.toUpperCase()}
+                                        </Badge>
+                                    </div>
+                                    <div className="space-y-4">
                                         <div className="grid grid-cols-2 gap-4 text-sm">
                                             <div className="flex items-center gap-2">
                                                 <DollarSign className="h-4 w-4 text-green-400" />
@@ -464,51 +518,51 @@ export default function CashGamesPage() {
                                         </div>
 
                                         <div className="flex gap-2">
-                                            <Input
+                                            <NeonInput
                                                 type="number"
                                                 placeholder={`Buy-in ($${game.minBuyIn}-$${game.maxBuyIn})`}
-                                                value={buyInAmount}
+                                                value={buyInAmount.toString()}
                                                 onChange={(e) =>
                                                     setBuyInAmount(
                                                         Number(e.target.value)
                                                     )
                                                 }
-                                                className="neon-input flex-1"
-                                                min={game.minBuyIn}
-                                                max={game.maxBuyIn}
+                                                className="flex-1"
                                             />
-                                            <Button
-                                                variant="outline"
-                                                onClick={() =>
-                                                    router.push(
-                                                        `/cash-game/${game.id}`
-                                                    )
-                                                }
-                                                className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/20"
-                                            >
-                                                <Eye className="h-4 w-4 mr-1" />
-                                                Ver
-                                            </Button>
-                                            <Button
-                                                onClick={() =>
-                                                    handleJoinGame(game.id)
-                                                }
-                                                className="neon-button"
-                                                disabled={
-                                                    game.currentPlayers >=
-                                                    game.maxPlayers
-                                                }
-                                            >
-                                                <Play className="h-4 w-4 mr-1" />
-                                                Join
-                                            </Button>
                                         </div>
-                                    </CardContent>
-                                </Card>
+                                    </div>
+
+                                    <div className="flex gap-2">
+                                        <Button
+                                            variant="outline"
+                                            onClick={() =>
+                                                router.push(
+                                                    `/cash-game/${game.id}`
+                                                )
+                                            }
+                                            className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/20"
+                                        >
+                                            <Eye className="h-4 w-4 mr-1" />
+                                            Ver
+                                        </Button>
+                                        <NeonButton
+                                            onClick={() =>
+                                                handleJoinGame(game.id)
+                                            }
+                                            disabled={
+                                                game.currentPlayers >=
+                                                game.maxPlayers
+                                            }
+                                        >
+                                            <Play className="h-4 w-4 mr-1" />
+                                            Join
+                                        </NeonButton>
+                                    </div>
+                                </UltraGlassCard>
                             ))}
                         </div>
                     )}
-                </div>
+                </SlideIn>
             </div>
         </div>
     );

@@ -1,8 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
 import { formatChips, Tournament } from "@/lib/tournament";
 import { Minus, TrendingDown, TrendingUp, Trophy, X } from "lucide-react";
 
@@ -21,19 +20,15 @@ export default function TournamentRanking({
 }: TournamentRankingProps) {
     if (!tournament.players || tournament.players.length === 0) {
         return (
-            <Card className="poker-card">
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <Trophy className="h-5 w-5 text-yellow-600" />
-                        Tournament Ranking
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                        No players registered yet
-                    </p>
-                </CardContent>
-            </Card>
+            <UltraGlassCard variant="crystal" className="text-center py-8">
+                <NeonText className="text-xl font-bold flex items-center justify-center gap-2 mb-4">
+                    <Trophy className="h-5 w-5" />
+                    Tournament Ranking
+                </NeonText>
+                <p className="text-sm text-muted-foreground">
+                    No players registered yet
+                </p>
+            </UltraGlassCard>
         );
     }
 
@@ -73,14 +68,12 @@ export default function TournamentRanking({
     };
 
     return (
-        <Card className="poker-card">
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                    <Trophy className="h-5 w-5 text-yellow-600" />
-                    Tournament Ranking
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+        <UltraGlassCard variant="crystal" className="space-y-4">
+            <NeonText className="text-xl font-bold flex items-center gap-2">
+                <Trophy className="h-5 w-5" />
+                Tournament Ranking
+            </NeonText>
+            <div className="space-y-4">
                 {/* Active Players */}
                 {rankedActivePlayers.length > 0 && (
                     <div>
@@ -114,9 +107,9 @@ export default function TournamentRanking({
                                     {isDirector &&
                                         tournament.status === "running" && (
                                             <div className="flex items-center gap-1">
-                                                <Button
+                                                <NeonButton
                                                     size="sm"
-                                                    variant="outline"
+                                                    variant="secondary"
                                                     onClick={() =>
                                                         adjustChips(
                                                             player.id,
@@ -127,10 +120,10 @@ export default function TournamentRanking({
                                                     className="h-6 w-6 p-0"
                                                 >
                                                     <Minus className="h-3 w-3" />
-                                                </Button>
-                                                <Button
+                                                </NeonButton>
+                                                <NeonButton
                                                     size="sm"
-                                                    variant="outline"
+                                                    variant="secondary"
                                                     onClick={() =>
                                                         adjustChips(
                                                             player.id,
@@ -141,10 +134,10 @@ export default function TournamentRanking({
                                                     className="h-6 w-6 p-0"
                                                 >
                                                     +
-                                                </Button>
-                                                <Button
+                                                </NeonButton>
+                                                <NeonButton
                                                     size="sm"
-                                                    variant="destructive"
+                                                    variant="danger"
                                                     onClick={() =>
                                                         onEliminatePlayer?.(
                                                             player.id
@@ -153,7 +146,7 @@ export default function TournamentRanking({
                                                     className="h-6 w-6 p-0 ml-2"
                                                 >
                                                     <X className="h-3 w-3" />
-                                                </Button>
+                                                </NeonButton>
                                             </div>
                                         )}
                                 </div>
@@ -232,7 +225,7 @@ export default function TournamentRanking({
                         </div>
                     </div>
                 </div>
-            </CardContent>
-        </Card>
+            </div>
+        </UltraGlassCard>
     );
 }

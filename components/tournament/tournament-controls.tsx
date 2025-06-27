@@ -2,7 +2,6 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Dialog,
     DialogContent,
@@ -11,6 +10,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
 import { useNotifications } from "@/hooks/use-notifications";
 import { Tournament } from "@/lib/tournament";
 import {
@@ -244,38 +244,36 @@ Generated on: ${new Date().toLocaleString()}
     }
 
     return (
-        <Card className="poker-card">
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                    <Settings className="h-5 w-5 text-gray-600" />
-                    Tournament Controls
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+        <UltraGlassCard variant="crystal" className="space-y-4">
+            <NeonText className="text-xl font-bold flex items-center gap-2">
+                <Settings className="h-5 w-5" />
+                Tournament Controls
+            </NeonText>
+            <div className="space-y-4">
                 {/* Export and Reporting */}
                 <div className="space-y-2">
                     <h4 className="font-medium text-sm text-muted-foreground">
                         Export & Reports
                     </h4>
                     <div className="grid grid-cols-1 gap-2">
-                        <Button
-                            variant="outline"
+                        <NeonButton
+                            variant="secondary"
                             size="sm"
                             onClick={handleExportTournamentData}
                             className="justify-start"
                         >
                             <Download className="h-4 w-4 mr-2" />
                             Export Data (JSON)
-                        </Button>
-                        <Button
-                            variant="outline"
+                        </NeonButton>
+                        <NeonButton
+                            variant="secondary"
                             size="sm"
                             onClick={generateTournamentReport}
                             className="justify-start"
                         >
                             <FileText className="h-4 w-4 mr-2" />
                             Generate Report
-                        </Button>
+                        </NeonButton>
                     </div>
                 </div>
 
@@ -284,15 +282,15 @@ Generated on: ${new Date().toLocaleString()}
                     <h4 className="font-medium text-sm text-muted-foreground">
                         Sharing
                     </h4>
-                    <Button
-                        variant="outline"
+                    <NeonButton
+                        variant="secondary"
                         size="sm"
                         onClick={handleShareTournament}
                         className="w-full justify-start"
                     >
                         <Share2 className="h-4 w-4 mr-2" />
                         Share Tournament
-                    </Button>
+                    </NeonButton>
                 </div>
 
                 {/* Advanced Controls */}
@@ -303,14 +301,14 @@ Generated on: ${new Date().toLocaleString()}
                         </h4>
                         <Dialog>
                             <DialogTrigger asChild>
-                                <Button
-                                    variant="destructive"
+                                <NeonButton
+                                    variant="danger"
                                     size="sm"
                                     className="w-full justify-start"
                                 >
                                     <RotateCcw className="h-4 w-4 mr-2" />
                                     Reset Tournament
-                                </Button>
+                                </NeonButton>
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
@@ -328,13 +326,13 @@ Generated on: ${new Date().toLocaleString()}
                                 </DialogHeader>
                                 <div className="flex gap-2 justify-end">
                                     <Button variant="outline">Cancel</Button>
-                                    <Button
-                                        variant="destructive"
+                                    <NeonButton
+                                        variant="danger"
                                         onClick={handleResetTournament}
                                     >
                                         <RotateCcw className="h-4 w-4 mr-2" />
                                         Reset Tournament
-                                    </Button>
+                                    </NeonButton>
                                 </div>
                             </DialogContent>
                         </Dialog>
@@ -363,7 +361,7 @@ Generated on: ${new Date().toLocaleString()}
                         </Badge>
                     </div>
                 </div>
-            </CardContent>
-        </Card>
+            </div>
+        </UltraGlassCard>
     );
 }
