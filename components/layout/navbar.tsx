@@ -9,6 +9,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { NeonText, NeonButton, GlassCard } from "@/components/ui/neon";
+import { HoverGlow } from "@/components/ui/animations";
 import { useAuth } from "@/hooks/use-auth";
 import {
     Gamepad2,
@@ -35,45 +37,50 @@ export default function Navbar({ onCreateTournament }: NavbarProps) {
         <nav className="border-b border-gray-800 bg-gradient-to-r from-gray-900 to-black backdrop-blur-lg">
             <div className="w-full max-w-screen-2xl mx-auto px-2 sm:px-4 lg:px-6 h-12 sm:h-14 md:h-16 flex items-center justify-between">
                 <div className="flex items-center gap-1 sm:gap-3 md:gap-6 flex-shrink-0 min-w-0">
-                    <h1 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold text-neon-pink flex items-center gap-1 flex-shrink-0">
+                    <h1 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold flex items-center gap-1 flex-shrink-0">
                         🃏
-                        <span className="inline text-xs sm:text-base md:text-lg lg:text-xl">
+                        <NeonText color="pink" className="inline text-xs sm:text-base md:text-lg lg:text-xl">
                             PokerPro
-                        </span>
+                        </NeonText>
                     </h1>
 
                     {/* Tournament Button */}
-                    <Button
-                        variant="ghost"
-                        onClick={() => router.push("/dashboard")}
-                        className="flex items-center gap-1 sm:gap-2 text-neon-cyan hover:glow-cyan p-1 sm:p-2 md:p-3 text-xs sm:text-sm md:text-base"
-                        size="sm"
-                    >
-                        <Trophy className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
-                        <span className="hidden xs:inline sm:inline text-xs sm:text-sm md:text-base">
-                            Tournaments
-                        </span>
-                    </Button>
+                    <HoverGlow color="cyan">
+                        <Button
+                            variant="ghost"
+                            onClick={() => router.push("/dashboard")}
+                            className="flex items-center gap-1 sm:gap-2 text-cyan-400 p-1 sm:p-2 md:p-3 text-xs sm:text-sm md:text-base"
+                            size="sm"
+                        >
+                            <Trophy className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
+                            <span className="hidden xs:inline sm:inline text-xs sm:text-sm md:text-base">
+                                Tournaments
+                            </span>
+                        </Button>
+                    </HoverGlow>
 
                     {/* Cash Games Button */}
-                    <Button
-                        variant="ghost"
-                        onClick={() => router.push("/cash-games")}
-                        className="flex items-center gap-1 sm:gap-2 text-neon-green hover:glow-green p-1 sm:p-2 md:p-3 text-xs sm:text-sm md:text-base"
-                        size="sm"
-                    >
-                        <Gamepad2 className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
-                        <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
-                            Cash Games
-                        </span>
-                    </Button>
+                    <HoverGlow color="green">
+                        <Button
+                            variant="ghost"
+                            onClick={() => router.push("/cash-games")}
+                            className="flex items-center gap-1 sm:gap-2 text-green-400 p-1 sm:p-2 md:p-3 text-xs sm:text-sm md:text-base"
+                            size="sm"
+                        >
+                            <Gamepad2 className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
+                            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
+                                Cash Games
+                            </span>
+                        </Button>
+                    </HoverGlow>
                 </div>
 
                 <div className="flex items-center gap-1 sm:gap-3 md:gap-4 flex-shrink-0">
                     {onCreateTournament && (
-                        <Button
+                        <NeonButton
                             onClick={onCreateTournament}
-                            className="neon-button text-xs sm:text-sm md:text-base px-2 sm:px-3 md:px-4 lg:px-6 py-1 sm:py-2 md:py-3 flex items-center gap-1 sm:gap-2"
+                            size="sm"
+                            className="text-xs sm:text-sm md:text-base px-2 sm:px-3 md:px-4 lg:px-6 py-1 sm:py-2 md:py-3 flex items-center gap-1 sm:gap-2"
                         >
                             <Plus className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
                             <span className="text-xs sm:text-sm md:text-base">
@@ -82,7 +89,7 @@ export default function Navbar({ onCreateTournament }: NavbarProps) {
                             <span className="hidden md:inline text-xs sm:text-sm md:text-base ml-1">
                                 Tournament
                             </span>
-                        </Button>
+                        </NeonButton>
                     )}
 
                     <DropdownMenu>

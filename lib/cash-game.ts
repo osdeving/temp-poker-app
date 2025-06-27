@@ -59,7 +59,7 @@ export const defaultCashGameSettings = {
     bigBlind: 2,
     minBuyIn: 40, // 20x big blind
     maxBuyIn: 200, // 100x big blind
-    maxPlayers: 6,
+    maxPlayers: 8,
 };
 
 export const cashGameTypes = [
@@ -67,13 +67,13 @@ export const cashGameTypes = [
         id: "texas-holdem",
         name: "Texas Hold'em",
         description: "Most popular poker variant",
-        maxPlayers: 9,
+        maxPlayers: 8,
     },
     {
         id: "omaha",
         name: "Omaha",
         description: "4 hole cards, use exactly 2",
-        maxPlayers: 9,
+        maxPlayers: 8,
     },
     {
         id: "seven-card-stud",

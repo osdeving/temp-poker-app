@@ -26,17 +26,16 @@ export function PokerTableBase({
     currentBet,
     className = "",
 }: PokerTableBaseProps) {
-    // Posições dos jogadores (bem organizadas ao redor da mesa)
+    // Posições dos jogadores para mesa de 8 lugares (layout padrão de poker)
     const tablePositions = [
-        { x: 50, y: 5 }, // Top center
-        { x: 80, y: 15 }, // Top right
-        { x: 95, y: 45 }, // Right center
-        { x: 80, y: 75 }, // Bottom right
-        { x: 50, y: 85 }, // Bottom center
-        { x: 20, y: 75 }, // Bottom left
-        { x: 5, y: 45 }, // Left center
-        { x: 20, y: 15 }, // Top left
-        { x: 50, y: 25 }, // Center-top (para 9º jogador)
+        { x: 50, y: 8 }, // 1. Top center
+        { x: 78, y: 18 }, // 2. Top right
+        { x: 92, y: 50 }, // 3. Right center
+        { x: 78, y: 82 }, // 4. Bottom right
+        { x: 50, y: 92 }, // 5. Bottom center
+        { x: 22, y: 82 }, // 6. Bottom left
+        { x: 8, y: 50 }, // 7. Left center
+        { x: 22, y: 18 }, // 8. Top left
     ];
 
     const getPlayerAtPosition = (positionIndex: number) => {

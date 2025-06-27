@@ -19,8 +19,8 @@ export function PlayingCard({
 }: PlayingCardProps) {
     const sizeClasses = {
         sm: "w-10 h-14 text-xs",
-        md: "w-14 h-20 text-sm", 
-        lg: "w-18 h-26 text-lg",
+        md: "w-14 h-20 text-sm",
+        lg: "w-20 h-28 text-lg", // Usando classes Tailwind padrão
     };
 
     const getSuitColor = (suit: string) => {
@@ -41,20 +41,23 @@ export function PlayingCard({
         return (
             <div
                 className={`
-            ${sizeClasses[size]}
-            ${className}
-            playing-card-hidden
-            flex items-center justify-center
-            relative
-            overflow-hidden
-        `}
-                style={style}
+                    ${sizeClasses[size]}
+                    ${className}
+                    playing-card-hidden
+                    flex items-center justify-center
+                    relative
+                    overflow-hidden
+                    bg-gradient-to-br from-blue-500 to-blue-700
+                    border-2 border-blue-800
+                    shadow-lg
+                `}
+                style={{ ...style, opacity: 1 }}
             >
                 {/* Card back pattern */}
                 <div className="absolute inset-0 opacity-80">
                     <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700"></div>
-                    <div className="absolute inset-1 border border-blue-300 rounded opacity-60"></div>
-                    <div className="absolute inset-2 border border-blue-300 rounded opacity-40"></div>
+                    <div className="absolute inset-1 border border-blue-300 opacity-60"></div>
+                    <div className="absolute inset-2 border border-blue-300 opacity-40"></div>
                 </div>
                 <div className="relative text-white font-bold text-lg">🂠</div>
             </div>
@@ -64,47 +67,68 @@ export function PlayingCard({
     return (
         <div
             className={`
-            ${sizeClasses[size]}
-            ${className}
-            playing-card
-            bg-white
-            rounded-md
-            border-2 border-gray-800
-            shadow-lg
-            flex flex-col items-center justify-between
-            relative
-            p-1
-        `}
-            style={style}
+                ${sizeClasses[size]}
+                ${className}
+                playing-card-white
+                border-2 border-gray-800
+                shadow-lg
+                relative
+                overflow-hidden
+            `}
+            style={{
+                ...style,
+                backgroundColor: "#ffffff",
+                opacity: 1,
+            }}
         >
-            {/* Top left corner */}
+            {/* Fundo branco absoluto - primeira camada */}
             <div
-                className={`flex flex-col items-center text-xs font-bold ${getSuitColor(
-                    card.suit
-                )}`}
-            >
-                <span className="leading-none">{card.rank}</span>
-                <span className="leading-none">{getSuitSymbol(card.suit)}</span>
-            </div>
+                className="absolute inset-0 z-0"
+                style={{
+                    backgroundColor: "#ffffff",
+                    background: "#ffffff",
+                }}
+            />
 
-            {/* Center symbol */}
-            <div className={`text-xl font-bold ${getSuitColor(card.suit)}`}>
-                {getSuitSymbol(card.suit)}
-            </div>
-
-            {/* Bottom right corner (upside down) - apenas para cartas médias e grandes */}
-            {size !== "sm" && (
+            {/* Conteúdo da carta - sempre acima do fundo */}
+            <div className="relative z-10 w-full h-full flex flex-col justify-between p-1">
+                {/* Canto superior esquerdo */}
                 <div
-                    className={`flex flex-col items-center text-xs font-bold transform rotate-180 ${getSuitColor(
+                    className={`flex flex-col items-start text-xs font-bold ${getSuitColor(
                         card.suit
                     )}`}
                 >
-                    <span className="leading-none">{card.rank}</span>
-                    <span className="leading-none">
+                    <div className="leading-none">{card.rank}</div>
+                    <div className="leading-none">
                         {getSuitSymbol(card.suit)}
-                    </span>
+                    </div>
                 </div>
-            )}
+
+                {/* Símbolo central */}
+                <div
+                    className={`absolute inset-0 flex items-center justify-center text-xl font-bold ${getSuitColor(
+                        card.suit
+                    )}`}
+                >
+                    {getSuitSymbol(card.suit)}
+                </div>
+
+                {/* Canto inferior direito (rotacionado) - apenas para cartas médias e grandes */}
+                {size !== "sm" && (
+                    <div
+                        className={`self-end flex flex-col items-end text-xs font-bold ${getSuitColor(
+                            card.suit
+                        )}`}
+                    >
+                        <div className="leading-none transform rotate-180">
+                            {getSuitSymbol(card.suit)}
+                        </div>
+                        <div className="leading-none transform rotate-180">
+                            {card.rank}
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

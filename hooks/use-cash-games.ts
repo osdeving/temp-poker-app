@@ -56,7 +56,7 @@ export function useCashGames() {
                 bigBlind: gameData.bigBlind || 2,
                 minBuyIn: gameData.minBuyIn || 40,
                 maxBuyIn: gameData.maxBuyIn || 200,
-                maxPlayers: gameData.maxPlayers || 6,
+                maxPlayers: gameData.maxPlayers || 8,
                 currentPlayers: 0,
                 players: [],
                 isPrivate: gameData.isPrivate || false,

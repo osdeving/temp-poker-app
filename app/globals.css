@@ -892,11 +892,11 @@
 @keyframes player-glow {
     from {
         opacity: 0.3;
-        transform: scale(0.95);
+        transform: scale(1);
     }
     to {
-        opacity: 0.8;
-        transform: scale(1.1);
+        opacity: 0.7;
+        transform: scale(1.05);
     }
 }
 
@@ -943,11 +943,6 @@
     }
 }
 
-.community-card {
-    animation: card-deal 0.5s ease-out forwards;
-    transform-origin: center;
-}
-
 /* Player spotlight animation */
 @keyframes player-glow {
     from {
@@ -958,4 +953,24 @@
         opacity: 0.7;
         transform: scale(1.05);
     }
+}
+
+/* Força fundo branco nas cartas reveladas */
+.playing-card-white {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.playing-card-white * {
+    opacity: inherit !important;
+}
+
+/* Classes customizadas para cartas grandes caso o Tailwind não as tenha */
+.w-18 {
+    width: 4.5rem; /* 72px */
+}
+
+.h-26 {
+    height: 6.5rem; /* 104px */
 }
