@@ -10,7 +10,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { GlassCard, NeonButton, NeonInput, NeonText } from "@/components/ui/glass";
+import {
+    GlassCard,
+    NeonButton,
+    NeonInput,
+    NeonText,
+} from "@/components/ui/glass";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -373,10 +378,7 @@ export default function CashGamesPage() {
 
                 {/* Lobby Stats */}
                 <SlideIn className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <GlassCard
-                        variant="diamond"
-                        className="p-4 text-center"
-                    >
+                    <GlassCard variant="diamond" className="p-4 text-center">
                         <div className="text-sm text-gray-400">
                             Active Tables
                         </div>
@@ -387,10 +389,7 @@ export default function CashGamesPage() {
                         </div>
                     </GlassCard>
 
-                    <GlassCard
-                        variant="emerald"
-                        className="p-4 text-center"
-                    >
+                    <GlassCard variant="emerald" className="p-4 text-center">
                         <div className="text-sm text-gray-400">
                             Players Online
                         </div>
@@ -401,10 +400,7 @@ export default function CashGamesPage() {
                         </div>
                     </GlassCard>
 
-                    <GlassCard
-                        variant="crystal"
-                        className="p-4 text-center"
-                    >
+                    <GlassCard variant="crystal" className="p-4 text-center">
                         <div className="text-sm text-gray-400">
                             Available Tables
                         </div>

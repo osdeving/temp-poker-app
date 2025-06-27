@@ -425,15 +425,16 @@
 .text-neon-cyan {
     color: #00ffff;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
-    .text-neon-green {
-        color: #00ff00;
-        text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
-    }
+}
 
-    .poker-card {
-        background: rgba(30, 41, 59, 0.8) !important;
-        border: 1px solid rgba(255, 20, 147, 0.3) !important;
-    }
+.text-neon-green {
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+.text-neon-cyan .poker-card {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border: 1px solid rgba(255, 20, 147, 0.3) !important;
 }
 
 /* Navigation glass effect */
