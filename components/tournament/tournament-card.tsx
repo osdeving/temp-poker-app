@@ -1,16 +1,9 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
 import { HoverGlow } from "@/components/ui/animations";
-import { NeonText, GlassCard, NeonButton } from "@/components/ui/neon";
+import { Button } from "@/components/ui/button";
+import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { GlassCard, NeonButton, NeonText } from "@/components/ui/neon";
 import { StatusBadge } from "@/components/ui/status";
 import { formatChips, Tournament } from "@/lib/tournament";
 import { Calendar, DollarSign, Trophy, Users } from "lucide-react";
@@ -57,19 +50,24 @@ export default function TournamentCard({
     };
 
     return (
-        <HoverGlow>
-            <GlassCard className="h-full">
+        <HoverGlow color="pink">
+            <GlassCard className="h-full border-pink-500/30 hover:border-cyan-400/50">
                 <CardHeader>
                     <div className="flex justify-between items-start">
                         <div>
-                            <NeonText color="pink" className="text-xl font-bold">
+                            <NeonText
+                                color="pink"
+                                className="text-xl font-bold"
+                            >
                                 {tournament.name}
                             </NeonText>
                             <CardDescription className="mt-1 text-gray-300">
                                 {tournament.description}
                             </CardDescription>
                         </div>
-                        <StatusBadge status={getStatusVariant(tournament.status)}>
+                        <StatusBadge
+                            status={getStatusVariant(tournament.status)}
+                        >
                             {tournament.status}
                         </StatusBadge>
                     </div>
@@ -80,7 +78,10 @@ export default function TournamentCard({
                             <DollarSign className="h-4 w-4 text-green-400" />
                             <span className="text-white">
                                 Buy-in:{" "}
-                                <NeonText color="green" className="font-semibold">
+                                <NeonText
+                                    color="green"
+                                    className="font-semibold"
+                                >
                                     ${tournament.buyIn}
                                 </NeonText>
                             </span>
@@ -103,7 +104,10 @@ export default function TournamentCard({
                         <div className="flex items-center gap-2">
                             <Users className="h-4 w-4 text-purple-400" />
                             <span className="text-white">
-                                <NeonText color="cyan" className="font-semibold">
+                                <NeonText
+                                    color="cyan"
+                                    className="font-semibold"
+                                >
                                     {tournament.registeredPlayers.length}
                                 </NeonText>
                                 /
@@ -132,8 +136,8 @@ export default function TournamentCard({
                                         size="sm"
                                         onClick={() => onJoin?.(tournament.id)}
                                         disabled={
-                                            tournament.registeredPlayers.length >=
-                                            tournament.maxPlayers
+                                            tournament.registeredPlayers
+                                                .length >= tournament.maxPlayers
                                         }
                                         className="flex-1"
                                     >

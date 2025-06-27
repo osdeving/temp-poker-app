@@ -1,15 +1,11 @@
 "use client";
 
+import { FadeIn } from "@/components/ui/animations";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { GlassCard, NeonText } from "@/components/ui/neon";
 import {
     Select,
     SelectContent,
@@ -18,8 +14,6 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { FadeIn } from "@/components/ui/animations";
-import { NeonText, GlassCard, NeonButton, NeonInput } from "@/components/ui/neon";
 import { BlindLevel, defaultBlindStructure } from "@/lib/tournament";
 import { CalendarDays, DollarSign, Plus, Trash2, Users } from "lucide-react";
 import { useState } from "react";
@@ -103,7 +97,8 @@ export default function CreateTournamentForm({
                             Tournament Details
                         </NeonText>
                         <CardDescription className="text-gray-300">
-                            Configure your tournament settings and blind structure
+                            Configure your tournament settings and blind
+                            structure
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -257,11 +252,15 @@ export default function CreateTournamentForm({
                     <CardHeader>
                         <div className="flex justify-between items-center">
                             <div>
-                                <NeonText color="cyan" className="text-xl font-bold">
+                                <NeonText
+                                    color="cyan"
+                                    className="text-xl font-bold"
+                                >
                                     Blind Structure
                                 </NeonText>
                                 <CardDescription className="text-gray-300">
-                                    Configure the blind levels for your tournament
+                                    Configure the blind levels for your
+                                    tournament
                                 </CardDescription>
                             </div>
                             <button
@@ -274,101 +273,104 @@ export default function CreateTournamentForm({
                             </button>
                         </div>
                     </CardHeader>
-                <CardContent>
-                    <div className="space-y-4 max-h-80 overflow-y-auto">
-                        {blindLevels.map((level, index) => (
-                            <div
-                                key={index}
-                                className="flex items-center gap-2 p-4 border border-pink-500/20 rounded-lg bg-gray-800/30 hover:border-pink-400/40 transition-colors"
-                            >
-                                <div className="flex-1 grid grid-cols-4 gap-2">
-                                    <div>
-                                        <Label className="text-xs text-gray-300 font-medium">
-                                            Level
-                                        </Label>
-                                        <Input
-                                            type="number"
-                                            value={level.level}
-                                            onChange={(e) =>
-                                                updateBlindLevel(
-                                                    index,
-                                                    "level",
-                                                    Number(e.target.value)
-                                                )
-                                            }
-                                            min="1"
-                                            className="bg-gray-700/50 border-gray-600/50 text-white text-sm focus:border-cyan-400"
-                                        />
+                    <CardContent>
+                        <div className="space-y-4 max-h-80 overflow-y-auto">
+                            {blindLevels.map((level, index) => (
+                                <div
+                                    key={index}
+                                    className="flex items-center gap-2 p-4 border border-pink-500/20 rounded-lg bg-gray-800/30 hover:border-pink-400/40 transition-colors"
+                                >
+                                    <div className="flex-1 grid grid-cols-4 gap-2">
+                                        <div>
+                                            <Label className="text-xs text-gray-300 font-medium">
+                                                Level
+                                            </Label>
+                                            <Input
+                                                type="number"
+                                                value={level.level}
+                                                onChange={(e) =>
+                                                    updateBlindLevel(
+                                                        index,
+                                                        "level",
+                                                        Number(e.target.value)
+                                                    )
+                                                }
+                                                min="1"
+                                                className="bg-gray-700/50 border-gray-600/50 text-white text-sm focus:border-cyan-400"
+                                            />
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs text-gray-300 font-medium">
+                                                Small Blind
+                                            </Label>
+                                            <Input
+                                                type="number"
+                                                value={level.smallBlind}
+                                                onChange={(e) =>
+                                                    updateBlindLevel(
+                                                        index,
+                                                        "smallBlind",
+                                                        Number(e.target.value)
+                                                    )
+                                                }
+                                                min="1"
+                                                className="bg-gray-700/50 border-gray-600/50 text-white text-sm focus:border-green-400"
+                                            />
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs text-gray-300 font-medium">
+                                                Big Blind
+                                            </Label>
+                                            <Input
+                                                type="number"
+                                                value={level.bigBlind}
+                                                onChange={(e) =>
+                                                    updateBlindLevel(
+                                                        index,
+                                                        "bigBlind",
+                                                        Number(e.target.value)
+                                                    )
+                                                }
+                                                min="1"
+                                                className="bg-gray-700/50 border-gray-600/50 text-white text-sm focus:border-green-400"
+                                            />
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs text-gray-300 font-medium">
+                                                Duration (min)
+                                            </Label>
+                                            <Input
+                                                type="number"
+                                                value={level.duration}
+                                                onChange={(e) =>
+                                                    updateBlindLevel(
+                                                        index,
+                                                        "duration",
+                                                        Number(e.target.value)
+                                                    )
+                                                }
+                                                min="1"
+                                                className="bg-gray-700/50 border-gray-600/50 text-white text-sm focus:border-purple-400"
+                                            />
+                                        </div>
                                     </div>
-                                    <div>
-                                        <Label className="text-xs text-gray-300 font-medium">
-                                            Small Blind
-                                        </Label>
-                                        <Input
-                                            type="number"
-                                            value={level.smallBlind}
-                                            onChange={(e) =>
-                                                updateBlindLevel(
-                                                    index,
-                                                    "smallBlind",
-                                                    Number(e.target.value)
-                                                )
+                                    {blindLevels.length > 1 && (
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() =>
+                                                removeBlindLevel(index)
                                             }
-                                            min="1"
-                                            className="bg-gray-700/50 border-gray-600/50 text-white text-sm focus:border-green-400"
-                                        />
-                                    </div>
-                                    <div>
-                                        <Label className="text-xs text-gray-300 font-medium">
-                                            Big Blind
-                                        </Label>
-                                        <Input
-                                            type="number"
-                                            value={level.bigBlind}
-                                            onChange={(e) =>
-                                                updateBlindLevel(
-                                                    index,
-                                                    "bigBlind",
-                                                    Number(e.target.value)
-                                                )
-                                            }
-                                            min="1"
-                                            className="bg-gray-700/50 border-gray-600/50 text-white text-sm focus:border-green-400"
-                                        />
-                                    </div>
-                                    <div>
-                                        <Label className="text-xs text-gray-300 font-medium">
-                                            Duration (min)
-                                        </Label>
-                                        <Input
-                                            type="number"
-                                            value={level.duration}
-                                            onChange={(e) =>
-                                                updateBlindLevel(
-                                                    index,
-                                                    "duration",
-                                                    Number(e.target.value)
-                                                )
-                                            }
-                                            min="1"
-                                            className="bg-gray-700/50 border-gray-600/50 text-white text-sm focus:border-purple-400"
-                                        />
-                                    </div>
+                                            className="border-red-500/50 text-red-400 hover:bg-red-500/20 hover:text-red-300 hover:border-red-400"
+                                        >
+                                            <Trash2 className="h-4 w-4" />
+                                        </Button>
+                                    )}
                                 </div>
-                                {blindLevels.length > 1 && (
-                                    <Button
-                                        type="button"
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => removeBlindLevel(index)}
-                                        className="border-red-500/50 text-red-400 hover:bg-red-500/20 hover:text-red-300 hover:border-red-400"
-                                    >
-                                        <Trash2 className="h-4 w-4" />
-                                    </Button>
-                                )}
-                            </div>
-                        ))}
-                    </div>                    </CardContent>
+                            ))}
+                        </div>{" "}
+                    </CardContent>
                 </GlassCard>
 
                 <button

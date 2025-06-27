@@ -1,15 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
 import { FadeIn } from "@/components/ui/animations";
-import { NeonText, NeonCard, NeonButton } from "@/components/ui/neon";
+import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { NeonButton, NeonCard, NeonText } from "@/components/ui/neon";
 import { useAuth } from "@/hooks/use-auth";
 import { Chrome, Facebook, Github, Loader2 } from "lucide-react";
 import { useState } from "react";
@@ -48,7 +41,10 @@ export default function LoginForm() {
             <FadeIn>
                 <NeonCard className="w-full max-w-md mx-4">
                     <CardHeader className="text-center">
-                        <NeonText color="pink" className="text-4xl font-bold mb-2">
+                        <NeonText
+                            color="pink"
+                            className="text-4xl font-bold mb-2"
+                        >
                             🃏 PokerPro
                         </NeonText>
                         <CardDescription className="text-gray-300">

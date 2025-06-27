@@ -40,16 +40,18 @@ export function NeonCard({ children, className, hover = true }: NeonCardProps) {
     return (
         <div
             className={cn(
-                // Base styles
+                // Base styles - matching original neon-card
                 "bg-gradient-to-br from-pink-500/10 to-cyan-500/10",
                 "border border-pink-500/30",
                 "backdrop-blur-[10px]",
                 "transition-all duration-300",
+                "rounded-lg",
 
-                // Hover effects
+                // Hover effects - matching original glow-pink
                 hover && [
                     "hover:border-cyan-500/50",
-                    "hover:shadow-[0_0_20px_rgba(255,20,147,0.3)]",
+                    "hover:shadow-[0_0_20px_rgba(255,20,147,0.5),0_0_40px_rgba(255,20,147,0.3)]",
+                    "hover:transform hover:-translate-y-1",
                 ],
 
                 className
@@ -82,21 +84,29 @@ export function NeonButton({
             "bg-gradient-to-r from-pink-500 to-cyan-500",
             "shadow-[0_0_20px_rgba(255,20,147,0.5)]",
             "hover:shadow-[0_0_30px_rgba(255,20,147,0.8),0_0_60px_rgba(0,255,255,0.4)]",
+            "hover:transform hover:-translate-y-0.5",
+            "text-black font-bold",
         ],
         secondary: [
             "bg-gradient-to-r from-purple-500 to-blue-500",
             "shadow-[0_0_20px_rgba(147,51,234,0.5)]",
             "hover:shadow-[0_0_30px_rgba(147,51,234,0.8)]",
+            "hover:transform hover:-translate-y-0.5",
+            "text-white font-semibold",
         ],
         danger: [
             "bg-gradient-to-r from-red-500 to-orange-500",
             "shadow-[0_0_20px_rgba(239,68,68,0.5)]",
             "hover:shadow-[0_0_30px_rgba(239,68,68,0.8)]",
+            "hover:transform hover:-translate-y-0.5",
+            "text-white font-bold",
         ],
         success: [
             "bg-gradient-to-r from-green-500 to-emerald-500",
             "shadow-[0_0_20px_rgba(34,197,94,0.5)]",
             "hover:shadow-[0_0_30px_rgba(34,197,94,0.8)]",
+            "hover:transform hover:-translate-y-0.5",
+            "text-black font-bold",
         ],
     };
 
@@ -143,9 +153,17 @@ export function GlassCard({ children, className }: GlassCardProps) {
     return (
         <div
             className={cn(
-                "bg-white/10 backdrop-blur-[20px]",
-                "border border-white/20",
+                // Glass morphism effect
+                "bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50",
+                "border border-pink-500/30",
+                "backdrop-blur-[15px]",
                 "rounded-lg",
+                "transition-all duration-300",
+
+                // Hover effects similar to poker-card
+                "hover:border-cyan-400/50",
+                "hover:shadow-[0_0_20px_rgba(255,20,147,0.3)]",
+
                 className
             )}
         >

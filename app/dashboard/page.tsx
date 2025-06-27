@@ -3,18 +3,17 @@
 import Navbar from "@/components/layout/navbar";
 import CreateTournamentForm from "@/components/tournament/create-tournament-form";
 import TournamentCard from "@/components/tournament/tournament-card";
+import { FadeIn, SlideIn } from "@/components/ui/animations";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
     Dialog,
     DialogContent,
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
+import { GlassCard, NeonText } from "@/components/ui/neon";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FadeIn, SlideIn } from "@/components/ui/animations";
-import { NeonText, GlassCard } from "@/components/ui/neon";
-import { StatusBadge } from "@/components/ui/status";
 import { useAuth } from "@/hooks/use-auth";
 import { useTournaments } from "@/hooks/use-tournaments";
 import { Calendar, DollarSign, Trophy, Users } from "lucide-react";
@@ -114,7 +113,10 @@ export default function Dashboard() {
                 <FadeIn>
                     <div className="mb-8">
                         <div className="flex justify-between items-center mb-2">
-                            <NeonText color="cyan" className="text-4xl font-bold">
+                            <NeonText
+                                color="cyan"
+                                className="text-4xl font-bold"
+                            >
                                 Welcome back, {auth.user.name}! 🎲
                             </NeonText>
                             {/* DEBUG: Temporary button to test mock tournaments */}

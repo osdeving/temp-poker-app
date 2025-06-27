@@ -169,16 +169,29 @@ export function HoverGlow({
     className,
 }: HoverGlowProps) {
     const glowClasses = {
-        cyan: "hover:shadow-[0_0_20px_rgba(0,255,255,0.5),0_0_40px_rgba(0,255,255,0.3)]",
-        pink: "hover:shadow-[0_0_20px_rgba(255,20,147,0.5),0_0_40px_rgba(255,20,147,0.3)]",
-        green: "hover:shadow-[0_0_20px_rgba(0,255,0,0.5),0_0_40px_rgba(0,255,0,0.3)]",
-        red: "hover:shadow-[0_0_20px_rgba(255,0,0,0.5),0_0_40px_rgba(255,0,0,0.3)]",
+        cyan: [
+            "hover:shadow-[0_0_20px_rgba(0,255,255,0.5),0_0_40px_rgba(0,255,255,0.3)]",
+            "hover:border-cyan-400/50",
+        ],
+        pink: [
+            "hover:shadow-[0_0_20px_rgba(255,20,147,0.5),0_0_40px_rgba(255,20,147,0.3)]",
+            "hover:border-pink-400/50",
+        ],
+        green: [
+            "hover:shadow-[0_0_20px_rgba(0,255,0,0.5),0_0_40px_rgba(0,255,0,0.3)]",
+            "hover:border-green-400/50",
+        ],
+        red: [
+            "hover:shadow-[0_0_20px_rgba(255,0,0,0.5),0_0_40px_rgba(255,0,0,0.3)]",
+            "hover:border-red-400/50",
+        ],
     };
 
     return (
         <div
             className={cn(
                 "transition-all duration-300",
+                "hover:transform hover:-translate-y-1",
                 glowClasses[color],
                 className
             )}
