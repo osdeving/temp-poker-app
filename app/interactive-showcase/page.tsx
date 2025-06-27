@@ -7,10 +7,27 @@ import type {
     NeonColor,
 } from "@/components/ui/glass";
 import {
+    CrystalCard,
+    CyberpunkNeonCard,
+    DigitalRainCard,
+    DimensionalPortalCard,
+    DNAHelixCard,
+    FloatingCard,
     GlassCard,
+    glassConfig,
+    GlitchCard,
+    GradientShiftCard,
+    HolographicCard,
+    LiquidCard,
+    MagneticCard,
+    MatrixCodeCard,
     NeonButton,
     NeonText,
-    glassConfig,
+    NeuralNetworkCard,
+    ParticleField,
+    QuantumCard,
+    RippleCard,
+    SpaceWarpCard,
 } from "@/components/ui/glass";
 import { Label } from "@/components/ui/label";
 import {
@@ -495,6 +512,321 @@ export default function InteractiveShowcase() {
                                         </GlassCard>
                                     )
                                 )}
+                            </div>
+                        </div>
+
+                        {/* Creative Components Grid */}
+                        <div className="space-y-4">
+                            <h3 className="text-xl font-semibold text-white">
+                                Creative Components
+                            </h3>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <HolographicCard
+                                    intensity="medium"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="purple"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Holographic Card
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Rainbow holographic border with shifting
+                                        colors
+                                    </p>
+                                </HolographicCard>
+
+                                <FloatingCard
+                                    floatHeight="medium"
+                                    shadowIntensity="dramatic"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="blue"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Floating Card
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Levitating card with dynamic shadows
+                                    </p>
+                                </FloatingCard>
+
+                                <RippleCard
+                                    rippleColor="cyan"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="cyan"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Ripple Card
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Click or hover for ripple effects
+                                    </p>
+                                </RippleCard>
+
+                                <GlitchCard
+                                    glitchIntensity="medium"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="red"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Glitch Card
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Hover for digital glitch effects
+                                    </p>
+                                </GlitchCard>
+
+                                <LiquidCard
+                                    liquidColor="green"
+                                    flowSpeed="medium"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="green"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Liquid Card
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Flowing liquid animations
+                                    </p>
+                                </LiquidCard>
+
+                                <MagneticCard
+                                    magnetStrength="medium"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="orange"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Magnetic Card
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Follows your mouse movement
+                                    </p>
+                                </MagneticCard>
+
+                                <CrystalCard
+                                    variant="prism"
+                                    fractal={true}
+                                    depth="medium"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="cyan"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Crystal Card
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Multi-faceted crystal with fractal
+                                        patterns
+                                    </p>
+                                </CrystalCard>
+
+                                <NeuralNetworkCard
+                                    nodes={15}
+                                    connections="medium"
+                                    theme="cyber"
+                                    pulse={true}
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="cyan"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Neural Network
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Dynamic neural network visualization
+                                    </p>
+                                </NeuralNetworkCard>
+
+                                <DigitalRainCard
+                                    intensity="medium"
+                                    color="green"
+                                    speed="medium"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="green"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Digital Rain
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Matrix-style digital rain effect
+                                    </p>
+                                </DigitalRainCard>
+
+                                <QuantumCard
+                                    entangled={true}
+                                    superposition={true}
+                                    waveFunction="complex"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="purple"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Quantum Card
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Quantum physics inspired effects
+                                    </p>
+                                </QuantumCard>
+
+                                <DNAHelixCard
+                                    strands={2}
+                                    rotation="clockwise"
+                                    baseColor="bio"
+                                    helixSpeed="medium"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="green"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        DNA Helix
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Rotating DNA double helix animation
+                                    </p>
+                                </DNAHelixCard>
+
+                                <MatrixCodeCard
+                                    codeLanguage="javascript"
+                                    scrollSpeed="medium"
+                                    theme="green"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="green"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Matrix Code
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Scrolling code with matrix-style effects
+                                    </p>
+                                </MatrixCodeCard>
+
+                                <CyberpunkNeonCard
+                                    neonColors={["pink", "cyan"]}
+                                    scanlines={true}
+                                    glitch={true}
+                                    cityscape={true}
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="pink"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Cyberpunk Neon
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Futuristic cyberpunk aesthetic
+                                    </p>
+                                </CyberpunkNeonCard>
+
+                                <SpaceWarpCard
+                                    warpIntensity="medium"
+                                    starField={true}
+                                    warpDirection="radial"
+                                    warpSpeed="medium"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="blue"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Space Warp
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Warping space with star field effect
+                                    </p>
+                                </SpaceWarpCard>
+
+                                <DimensionalPortalCard
+                                    portalSize="medium"
+                                    dimensions={4}
+                                    energyColor="multicolor"
+                                    rotationSpeed="medium"
+                                    particleCount="medium"
+                                    className="p-6 text-center"
+                                >
+                                    <NeonText
+                                        color="purple"
+                                        size="lg"
+                                        className="font-bold mb-2"
+                                    >
+                                        Dimensional Portal
+                                    </NeonText>
+                                    <p className="text-gray-300 text-sm">
+                                        Interdimensional portal with energy
+                                        particles
+                                    </p>
+                                </DimensionalPortalCard>
+                            </div>
+                        </div>
+
+                        {/* Effects Components */}
+                        <div className="space-y-4">
+                            <h3 className="text-xl font-semibold text-white">
+                                Effect Components
+                            </h3>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <ParticleField
+                                    particleCount={30}
+                                    particleColor="pink"
+                                    speed="medium"
+                                    className="h-40 rounded-xl border border-pink-500/30"
+                                >
+                                    <GlassCard className="h-full flex items-center justify-center">
+                                        <NeonText
+                                            color="pink"
+                                            size="lg"
+                                            className="font-bold"
+                                        >
+                                            Particle Field
+                                        </NeonText>
+                                    </GlassCard>
+                                </ParticleField>
+
+                                <GradientShiftCard
+                                    shiftSpeed={2000}
+                                    className="p-6 text-center h-40 flex items-center justify-center"
+                                >
+                                    <NeonText
+                                        color="purple"
+                                        size="lg"
+                                        className="font-bold"
+                                    >
+                                        Gradient Shift Card
+                                    </NeonText>
+                                </GradientShiftCard>
                             </div>
                         </div>
                     </div>

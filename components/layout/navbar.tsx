@@ -81,11 +81,11 @@ export default function Navbar({ onCreateTournament }: NavbarProps) {
                     </HoverGlow>
 
                     {/* Interactive Showcase Button */}
-                    <HoverGlow color="purple">
+                    <HoverGlow color="cyan">
                         <Button
                             variant="ghost"
                             onClick={() => router.push("/interactive-showcase")}
-                            className="flex items-center gap-1 sm:gap-2 text-purple-400 p-1 sm:p-2 md:p-3 text-xs sm:text-sm md:text-base"
+                            className="flex items-center gap-1 sm:gap-2 text-cyan-400 p-1 sm:p-2 md:p-3 text-xs sm:text-sm md:text-base"
                             size="sm"
                         >
                             <Settings className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
