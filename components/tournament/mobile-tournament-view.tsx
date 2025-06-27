@@ -13,8 +13,10 @@ import {
     Clock,
     Settings,
     Trophy,
+    Users,
 } from "lucide-react";
 import { useState } from "react";
+import PokerGame from "../poker/poker-game";
 import TournamentClock from "./tournament-clock";
 import TournamentControls from "./tournament-controls";
 import TournamentRanking from "./tournament-ranking";
@@ -116,7 +118,13 @@ export default function MobileTournamentView({
                 onValueChange={setActiveTab}
                 className="w-full"
             >
-                <TabsList className="grid w-full grid-cols-4">
+                <TabsList
+                    className={`grid w-full ${
+                        tournament.status === "running"
+                            ? "grid-cols-5"
+                            : "grid-cols-4"
+                    }`}
+                >
                     <TabsTrigger
                         value="clock"
                         className="flex items-center gap-1"
@@ -124,6 +132,15 @@ export default function MobileTournamentView({
                         <Clock className="h-4 w-4" />
                         <span className="hidden sm:inline">Clock</span>
                     </TabsTrigger>
+                    {tournament.status === "running" && (
+                        <TabsTrigger
+                            value="table"
+                            className="flex items-center gap-1"
+                        >
+                            <Users className="h-4 w-4" />
+                            <span className="hidden sm:inline">Table</span>
+                        </TabsTrigger>
+                    )}
                     <TabsTrigger
                         value="ranking"
                         className="flex items-center gap-1"
@@ -159,6 +176,16 @@ export default function MobileTournamentView({
                         />
                     </TabsContent>
 
+                    {tournament.status === "running" && (
+                        <TabsContent value="table" className="space-y-4">
+                            <PokerGame
+                                tournament={tournament}
+                                isDirector={isDirector}
+                                onUpdateChips={onUpdateChips}
+                            />
+                        </TabsContent>
+                    )}
+
                     <TabsContent value="ranking" className="space-y-4">
                         <TournamentRanking
                             tournament={tournament}
@@ -190,7 +217,9 @@ export default function MobileTournamentView({
                     variant="outline"
                     className="neon-card border-neon-cyan/50 bg-gray-900/95 backdrop-blur-sm text-neon-cyan hover:bg-neon-cyan/20 hover:glow-cyan"
                     onClick={() => {
-                        const tabs = ["clock", "ranking", "stats"];
+                        const tabs = ["clock"];
+                        if (tournament.status === "running") tabs.push("table");
+                        tabs.push("ranking", "stats");
                         if (isDirector) tabs.push("controls");
                         const currentIndex = tabs.indexOf(activeTab);
                         const prevIndex =
@@ -207,7 +236,9 @@ export default function MobileTournamentView({
                     variant="outline"
                     className="neon-card border-neon-cyan/50 bg-gray-900/95 backdrop-blur-sm text-neon-cyan hover:bg-neon-cyan/20 hover:glow-cyan"
                     onClick={() => {
-                        const tabs = ["clock", "ranking", "stats"];
+                        const tabs = ["clock"];
+                        if (tournament.status === "running") tabs.push("table");
+                        tabs.push("ranking", "stats");
                         if (isDirector) tabs.push("controls");
                         const currentIndex = tabs.indexOf(activeTab);
                         const nextIndex =

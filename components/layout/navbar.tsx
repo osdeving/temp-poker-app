@@ -10,7 +10,16 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/use-auth";
-import { LogOut, Plus, Settings, Trophy, User } from "lucide-react";
+import {
+    Gamepad2,
+    LogOut,
+    Plus,
+    Settings,
+    Trophy,
+    User,
+    Users,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface NavbarProps {
     onCreateTournament?: () => void;
@@ -18,6 +27,7 @@ interface NavbarProps {
 
 export default function Navbar({ onCreateTournament }: NavbarProps) {
     const { auth, logout } = useAuth();
+    const router = useRouter();
 
     if (!auth.user) return null;
 
@@ -32,15 +42,29 @@ export default function Navbar({ onCreateTournament }: NavbarProps) {
                         </span>
                     </h1>
 
-                    {/* Tournament Button - sempre visível */}
+                    {/* Tournament Button */}
                     <Button
                         variant="ghost"
+                        onClick={() => router.push("/dashboard")}
                         className="flex items-center gap-1 sm:gap-2 text-neon-cyan hover:glow-cyan p-1 sm:p-2 md:p-3 text-xs sm:text-sm md:text-base"
                         size="sm"
                     >
                         <Trophy className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
                         <span className="hidden xs:inline sm:inline text-xs sm:text-sm md:text-base">
                             Tournaments
+                        </span>
+                    </Button>
+
+                    {/* Cash Games Button */}
+                    <Button
+                        variant="ghost"
+                        onClick={() => router.push("/cash-games")}
+                        className="flex items-center gap-1 sm:gap-2 text-neon-green hover:glow-green p-1 sm:p-2 md:p-3 text-xs sm:text-sm md:text-base"
+                        size="sm"
+                    >
+                        <Gamepad2 className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
+                        <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
+                            Cash Games
                         </span>
                     </Button>
                 </div>
@@ -94,6 +118,13 @@ export default function Navbar({ onCreateTournament }: NavbarProps) {
                                 </div>
                             </div>
                             <DropdownMenuSeparator className="bg-gray-700" />
+                            <DropdownMenuItem
+                                onClick={() => router.push("/demo-login")}
+                                className="text-white hover:bg-gray-800/50 focus:bg-gray-800/50 text-sm"
+                            >
+                                <Users className="mr-2 h-4 w-4 text-blue-400" />
+                                <span>Demo Login</span>
+                            </DropdownMenuItem>
                             <DropdownMenuItem className="text-white hover:bg-gray-800/50 focus:bg-gray-800/50 text-sm">
                                 <User className="mr-2 h-4 w-4 text-neon-cyan" />
                                 <span>Profile</span>

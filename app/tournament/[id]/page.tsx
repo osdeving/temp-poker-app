@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/layout/navbar";
+import PokerGame from "@/components/poker/poker-game";
 import MobileTournamentView from "@/components/tournament/mobile-tournament-view";
 import TournamentClock from "@/components/tournament/tournament-clock";
 import TournamentControls from "@/components/tournament/tournament-controls";
@@ -296,236 +297,259 @@ export default function TournamentPage() {
                 />
 
                 {/* Desktop View */}
-                <div className="hidden md:grid grid-cols-1 xl:grid-cols-4 gap-6">
-                    {/* Tournament Clock */}
-                    <div className="xl:col-span-2">
-                        <TournamentClock
-                            tournament={tournament}
-                            onUpdateClock={handleUpdateClock}
-                            onUpdateStatus={handleUpdateStatus}
-                            isDirector={isDirector}
-                        />
-                    </div>
-
-                    {/* Tournament Ranking */}
-                    <div className="xl:col-span-1">
-                        <TournamentRanking
-                            tournament={tournament}
-                            onEliminatePlayer={handleEliminatePlayer}
-                            onUpdateChips={handleUpdateChips}
-                            isDirector={isDirector}
-                        />
-                    </div>
-
-                    {/* Tournament Stats and Info */}
-                    <div className="xl:col-span-1 space-y-6">
-                        <TournamentStats tournament={tournament} />
-
-                        {isDirector && (
-                            <TournamentControls
+                <div className="hidden md:block space-y-6">
+                    {/* Poker Table - Only when tournament is running */}
+                    {tournament.status === "running" && (
+                        <div className="w-full">
+                            <PokerGame
                                 tournament={tournament}
                                 isDirector={isDirector}
+                                onUpdateChips={handleUpdateChips}
                             />
-                        )}
+                        </div>
+                    )}
 
-                        <Card className="neon-card bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50 border-pink-500/30 hover:border-cyan-400/50">
-                            <CardHeader>
-                                <CardTitle className="text-neon-cyan">
-                                    Tournament Info
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent className="space-y-4">
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="h-4 w-4 text-neon-cyan" />
-                                    <div>
-                                        <div className="font-medium text-white">
-                                            Start Time
-                                        </div>
-                                        <div className="text-sm text-gray-400">
-                                            {formatDate(tournament.startTime)}
-                                        </div>
-                                    </div>
-                                </div>
+                    {/* Tournament Info Grid */}
+                    <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
+                        {/* Tournament Clock */}
+                        <div className="xl:col-span-2">
+                            <TournamentClock
+                                tournament={tournament}
+                                onUpdateClock={handleUpdateClock}
+                                onUpdateStatus={handleUpdateStatus}
+                                isDirector={isDirector}
+                            />
+                        </div>
 
-                                <div className="flex items-center gap-2">
-                                    <DollarSign className="h-4 w-4 text-neon-green" />
-                                    <div>
-                                        <div className="font-medium text-white">
-                                            Buy-in
-                                        </div>
-                                        <div className="text-sm text-neon-green font-semibold">
-                                            ${tournament.buyIn}
-                                        </div>
-                                    </div>
-                                </div>
+                        {/* Tournament Ranking */}
+                        <div className="xl:col-span-1">
+                            <TournamentRanking
+                                tournament={tournament}
+                                onEliminatePlayer={handleEliminatePlayer}
+                                onUpdateChips={handleUpdateChips}
+                                isDirector={isDirector}
+                            />
+                        </div>
 
-                                <div className="flex items-center gap-2">
-                                    <Trophy className="h-4 w-4 text-yellow-400" />
-                                    <div>
-                                        <div className="font-medium text-white">
-                                            Prize Pool
-                                        </div>
-                                        <div className="text-sm text-yellow-400 font-semibold">
-                                            $
-                                            {tournament.prizePool.toLocaleString()}
-                                        </div>
-                                    </div>
-                                </div>
+                        {/* Tournament Stats and Info */}
+                        <div className="xl:col-span-1 space-y-6">
+                            <TournamentStats tournament={tournament} />
 
-                                <div className="flex items-center gap-2">
-                                    <Users className="h-4 w-4 text-purple-400" />
-                                    <div>
-                                        <div className="font-medium text-white">
-                                            Players
-                                        </div>
-                                        <div className="text-sm text-gray-400">
-                                            <span className="text-neon-cyan font-semibold">
-                                                {
-                                                    tournament.registeredPlayers
-                                                        .length
-                                                }
-                                            </span>{" "}
-                                            /{" "}
-                                            <span className="text-gray-500">
-                                                {tournament.maxPlayers}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
+                            {isDirector && (
+                                <TournamentControls
+                                    tournament={tournament}
+                                    isDirector={isDirector}
+                                />
+                            )}
 
-                        <Card className="neon-card bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50 border-pink-500/30 hover:border-cyan-400/50">
-                            <CardHeader>
-                                <div className="flex justify-between items-center">
-                                    <CardTitle className="text-neon-pink">
-                                        Registered Players
+                            <Card className="neon-card bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50 border-pink-500/30 hover:border-cyan-400/50">
+                                <CardHeader>
+                                    <CardTitle className="text-neon-cyan">
+                                        Tournament Info
                                     </CardTitle>
-                                    {isDirector &&
-                                        tournament.status === "upcoming" && (
-                                            <Dialog
-                                                open={showAddPlayer}
-                                                onOpenChange={setShowAddPlayer}
-                                            >
-                                                <DialogTrigger asChild>
-                                                    <Button
-                                                        variant="outline"
-                                                        size="sm"
-                                                        className="border-green-500/50 text-green-400 hover:bg-green-500/20 hover:text-green-300 hover:border-green-400"
-                                                    >
-                                                        <Plus className="h-4 w-4 mr-2" />
-                                                        Add Player
-                                                    </Button>
-                                                </DialogTrigger>
-                                                <DialogContent className="neon-card bg-gradient-to-br from-gray-900/95 via-black/95 to-gray-900/95 border-pink-500/30">
-                                                    <DialogHeader>
-                                                        <DialogTitle className="text-neon-cyan">
-                                                            Add Player to
-                                                            Tournament
-                                                        </DialogTitle>
-                                                    </DialogHeader>
-                                                    <div className="space-y-4">
-                                                        <Input
-                                                            placeholder="Player name"
-                                                            value={
-                                                                newPlayerName
-                                                            }
-                                                            onChange={(e) =>
-                                                                setNewPlayerName(
-                                                                    e.target
-                                                                        .value
-                                                                )
-                                                            }
-                                                            onKeyPress={(e) =>
-                                                                e.key ===
-                                                                    "Enter" &&
-                                                                handleAddPlayer()
-                                                            }
-                                                            className="bg-gray-800/50 border-cyan-500/30 text-white placeholder:text-gray-400"
-                                                        />
-                                                        <div className="flex gap-2">
-                                                            <Button
-                                                                onClick={
-                                                                    handleAddPlayer
+                                </CardHeader>
+                                <CardContent className="space-y-4">
+                                    <div className="flex items-center gap-2">
+                                        <Calendar className="h-4 w-4 text-neon-cyan" />
+                                        <div>
+                                            <div className="font-medium text-white">
+                                                Start Time
+                                            </div>
+                                            <div className="text-sm text-gray-400">
+                                                {formatDate(
+                                                    tournament.startTime
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                        <DollarSign className="h-4 w-4 text-neon-green" />
+                                        <div>
+                                            <div className="font-medium text-white">
+                                                Buy-in
+                                            </div>
+                                            <div className="text-sm text-neon-green font-semibold">
+                                                ${tournament.buyIn}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                        <Trophy className="h-4 w-4 text-yellow-400" />
+                                        <div>
+                                            <div className="font-medium text-white">
+                                                Prize Pool
+                                            </div>
+                                            <div className="text-sm text-yellow-400 font-semibold">
+                                                $
+                                                {tournament.prizePool.toLocaleString()}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                        <Users className="h-4 w-4 text-purple-400" />
+                                        <div>
+                                            <div className="font-medium text-white">
+                                                Players
+                                            </div>
+                                            <div className="text-sm text-gray-400">
+                                                <span className="text-neon-cyan font-semibold">
+                                                    {
+                                                        tournament
+                                                            .registeredPlayers
+                                                            .length
+                                                    }
+                                                </span>{" "}
+                                                /{" "}
+                                                <span className="text-gray-500">
+                                                    {tournament.maxPlayers}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="neon-card bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50 border-pink-500/30 hover:border-cyan-400/50">
+                                <CardHeader>
+                                    <div className="flex justify-between items-center">
+                                        <CardTitle className="text-neon-pink">
+                                            Registered Players
+                                        </CardTitle>
+                                        {isDirector &&
+                                            tournament.status ===
+                                                "upcoming" && (
+                                                <Dialog
+                                                    open={showAddPlayer}
+                                                    onOpenChange={
+                                                        setShowAddPlayer
+                                                    }
+                                                >
+                                                    <DialogTrigger asChild>
+                                                        <Button
+                                                            variant="outline"
+                                                            size="sm"
+                                                            className="border-green-500/50 text-green-400 hover:bg-green-500/20 hover:text-green-300 hover:border-green-400"
+                                                        >
+                                                            <Plus className="h-4 w-4 mr-2" />
+                                                            Add Player
+                                                        </Button>
+                                                    </DialogTrigger>
+                                                    <DialogContent className="neon-card bg-gradient-to-br from-gray-900/95 via-black/95 to-gray-900/95 border-pink-500/30">
+                                                        <DialogHeader>
+                                                            <DialogTitle className="text-neon-cyan">
+                                                                Add Player to
+                                                                Tournament
+                                                            </DialogTitle>
+                                                        </DialogHeader>
+                                                        <div className="space-y-4">
+                                                            <Input
+                                                                placeholder="Player name"
+                                                                value={
+                                                                    newPlayerName
                                                                 }
-                                                                disabled={
-                                                                    !newPlayerName.trim()
-                                                                }
-                                                                className="neon-button bg-gradient-to-r from-green-500 to-cyan-500 text-black font-semibold hover:glow-green disabled:opacity-50"
-                                                            >
-                                                                Add Player
-                                                            </Button>
-                                                            <Button
-                                                                variant="outline"
-                                                                onClick={() =>
-                                                                    setShowAddPlayer(
-                                                                        false
+                                                                onChange={(e) =>
+                                                                    setNewPlayerName(
+                                                                        e.target
+                                                                            .value
                                                                     )
                                                                 }
-                                                                className="border-red-500/50 text-red-400 hover:bg-red-500/20 hover:text-red-300"
-                                                            >
-                                                                Cancel
-                                                            </Button>
+                                                                onKeyPress={(
+                                                                    e
+                                                                ) =>
+                                                                    e.key ===
+                                                                        "Enter" &&
+                                                                    handleAddPlayer()
+                                                                }
+                                                                className="bg-gray-800/50 border-cyan-500/30 text-white placeholder:text-gray-400"
+                                                            />
+                                                            <div className="flex gap-2">
+                                                                <Button
+                                                                    onClick={
+                                                                        handleAddPlayer
+                                                                    }
+                                                                    disabled={
+                                                                        !newPlayerName.trim()
+                                                                    }
+                                                                    className="neon-button bg-gradient-to-r from-green-500 to-cyan-500 text-black font-semibold hover:glow-green disabled:opacity-50"
+                                                                >
+                                                                    Add Player
+                                                                </Button>
+                                                                <Button
+                                                                    variant="outline"
+                                                                    onClick={() =>
+                                                                        setShowAddPlayer(
+                                                                            false
+                                                                        )
+                                                                    }
+                                                                    className="border-red-500/50 text-red-400 hover:bg-red-500/20 hover:text-red-300"
+                                                                >
+                                                                    Cancel
+                                                                </Button>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </DialogContent>
-                                            </Dialog>
-                                        )}
-                                </div>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-2 max-h-60 overflow-y-auto">
-                                    {tournament.registeredPlayers.length ===
-                                    0 ? (
-                                        <p className="text-sm text-gray-400">
-                                            No players registered yet
-                                        </p>
-                                    ) : (
-                                        tournament.registeredPlayers.map(
-                                            (playerId, index) => {
-                                                const playerNames =
-                                                    (tournament as any)
-                                                        .playerNames || {};
-                                                const playerName =
-                                                    playerNames[playerId] ||
-                                                    `Player ${index + 1}`;
-                                                const isCurrentUser =
-                                                    playerId === auth.user?.id;
-                                                const isManualPlayer =
-                                                    playerId.startsWith(
-                                                        "manual-"
-                                                    );
+                                                    </DialogContent>
+                                                </Dialog>
+                                            )}
+                                    </div>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="space-y-2 max-h-60 overflow-y-auto">
+                                        {tournament.registeredPlayers.length ===
+                                        0 ? (
+                                            <p className="text-sm text-gray-400">
+                                                No players registered yet
+                                            </p>
+                                        ) : (
+                                            tournament.registeredPlayers.map(
+                                                (playerId, index) => {
+                                                    const playerNames =
+                                                        (tournament as any)
+                                                            .playerNames || {};
+                                                    const playerName =
+                                                        playerNames[playerId] ||
+                                                        `Player ${index + 1}`;
+                                                    const isCurrentUser =
+                                                        playerId ===
+                                                        auth.user?.id;
+                                                    const isManualPlayer =
+                                                        playerId.startsWith(
+                                                            "manual-"
+                                                        );
 
-                                                return (
-                                                    <div
-                                                        key={playerId}
-                                                        className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-cyan-500/20 hover:border-cyan-400/40 flex items-center justify-between p-3 rounded-lg transition-all duration-200"
-                                                    >
-                                                        <span className="text-sm font-medium text-white">
-                                                            {isCurrentUser
-                                                                ? "You"
-                                                                : playerName}
-                                                        </span>
-                                                        <div className="flex gap-2">
-                                                            {isCurrentUser && (
-                                                                <Badge className="bg-gradient-to-r from-green-500 to-cyan-500 text-black text-xs font-semibold">
-                                                                    You
-                                                                </Badge>
-                                                            )}
-                                                            {isManualPlayer && (
-                                                                <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-semibold">
-                                                                    Manual
-                                                                </Badge>
-                                                            )}
+                                                    return (
+                                                        <div
+                                                            key={playerId}
+                                                            className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-cyan-500/20 hover:border-cyan-400/40 flex items-center justify-between p-3 rounded-lg transition-all duration-200"
+                                                        >
+                                                            <span className="text-sm font-medium text-white">
+                                                                {isCurrentUser
+                                                                    ? "You"
+                                                                    : playerName}
+                                                            </span>
+                                                            <div className="flex gap-2">
+                                                                {isCurrentUser && (
+                                                                    <Badge className="bg-gradient-to-r from-green-500 to-cyan-500 text-black text-xs font-semibold">
+                                                                        You
+                                                                    </Badge>
+                                                                )}
+                                                                {isManualPlayer && (
+                                                                    <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-semibold">
+                                                                        Manual
+                                                                    </Badge>
+                                                                )}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                );
-                                            }
-                                        )
-                                    )}
-                                </div>
-                            </CardContent>
-                        </Card>
+                                                    );
+                                                }
+                                            )
+                                        )}
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
                     </div>
                 </div>
             </div>
