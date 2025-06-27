@@ -49,7 +49,7 @@ export default function CashGamesPage() {
     const [buyInAmount, setBuyInAmount] = useState(100);
 
     // Form states for creating a game
-    const [gameName, setGameName] = useState("");
+    const [gameName, setGameName] = useState("Mesa de Poker");
     const [gameType, setGameType] = useState("texas-holdem");
     const [smallBlind, setSmallBlind] = useState(
         defaultCashGameSettings.smallBlind
@@ -74,7 +74,6 @@ export default function CashGamesPage() {
     }
 
     const lobby = getLobby();
-
     const handleCreateGame = () => {
         if (!gameName.trim() || !auth.user) return;
 
@@ -96,7 +95,6 @@ export default function CashGamesPage() {
         setShowCreateGame(false);
         router.push(`/cash-game/${newGame.id}`);
     };
-
     const handleJoinGame = (gameId: string) => {
         if (!auth.user) return;
 

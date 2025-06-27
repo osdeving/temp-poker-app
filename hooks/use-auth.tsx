@@ -39,6 +39,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 isLoading: false,
                 error: null,
             });
+        } else {
+            // Create a default user for demo purposes
+            const defaultUser = {
+                id: "demo-user-1",
+                name: "Demo Player",
+                email: "demo@poker.com",
+                avatar: "👤",
+                provider: "google" as const,
+            };
+            localStorage.setItem("poker-user", JSON.stringify(defaultUser));
+            setAuth({
+                user: defaultUser,
+                isLoading: false,
+                error: null,
+            });
         }
     }, []);
 

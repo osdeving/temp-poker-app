@@ -45,15 +45,15 @@ export function EnhancedPokerTable({
             className={`relative w-full aspect-[4/3] max-w-5xl mx-auto ${className}`}
         >
             {/* Mesa de poker (formato oval) - Maior para acomodar melhor */}
-            <div className="absolute inset-16 poker-table-enhanced bg-gradient-to-br from-green-800 to-green-900 rounded-full border-8 border-yellow-600 shadow-2xl">
+            <div className="absolute inset-16 poker-table-enhanced poker-felt rounded-full shadow-2xl">
                 {/* Felt texture */}
-                <div className="absolute inset-4 bg-green-700 rounded-full opacity-50"></div>
-                <div className="absolute inset-6 border-2 border-yellow-500 rounded-full opacity-30"></div>
+                <div className="absolute inset-4 bg-green-700 rounded-full opacity-30"></div>
+                <div className="absolute inset-6 border-2 border-yellow-500 rounded-full opacity-40"></div>
 
                 {/* Área central com pot e cartas comunitárias */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
                     {/* Pot no centro */}
-                    <div className="mb-4">
+                    <div className="mb-6">
                         <div className="pot-enhanced bg-gradient-to-r from-yellow-600 to-yellow-400 text-black px-6 py-3 rounded-full shadow-lg relative">
                             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-300 rounded-full blur-sm opacity-70"></div>
                             <div className="relative z-10 text-center">
@@ -66,13 +66,13 @@ export function EnhancedPokerTable({
                     </div>
 
                     {/* Cartas comunitárias no centro */}
-                    <div className="flex justify-center gap-1 mb-2">
+                    <div className="community-cards-container">
                         {Array.from({ length: 5 }).map((_, index) => {
                             const card = communityCards[index];
                             return (
-                                <div key={index} className="w-10 h-14">
+                                <div key={index} className="w-12 h-16">
                                     {card ? (
-                                        <div className="community-card text-xs font-bold flex flex-col items-center justify-between p-1 h-full">
+                                        <div className="community-card text-sm font-bold flex flex-col items-center justify-between p-2 h-full">
                                             <span
                                                 className={
                                                     card.suit === "♥" ||
@@ -84,7 +84,7 @@ export function EnhancedPokerTable({
                                                 {card.rank}
                                             </span>
                                             <span
-                                                className={`text-sm ${
+                                                className={`text-lg ${
                                                     card.suit === "♥" ||
                                                     card.suit === "♦"
                                                         ? "text-red-600"
@@ -94,7 +94,7 @@ export function EnhancedPokerTable({
                                                 {card.suit}
                                             </span>
                                             <span
-                                                className={`transform rotate-180 ${
+                                                className={`transform rotate-180 text-xs ${
                                                     card.suit === "♥" ||
                                                     card.suit === "♦"
                                                         ? "text-red-600"
@@ -105,8 +105,8 @@ export function EnhancedPokerTable({
                                             </span>
                                         </div>
                                     ) : (
-                                        <div className="w-full h-full border-2 border-dashed border-gray-500 rounded bg-gray-700/20 flex items-center justify-center">
-                                            <span className="text-gray-500 text-xs">
+                                        <div className="w-full h-full border-2 border-dashed border-gray-400 rounded-lg bg-gray-100/20 flex items-center justify-center">
+                                            <span className="text-gray-400 text-xs">
                                                 ?
                                             </span>
                                         </div>
@@ -118,7 +118,7 @@ export function EnhancedPokerTable({
 
                     {/* Aposta atual */}
                     {currentBet > 0 && (
-                        <div className="bg-pink-500/20 text-pink-300 px-3 py-1 rounded text-xs border border-pink-500/50">
+                        <div className="bg-pink-500/20 text-pink-300 px-3 py-1 rounded text-xs border border-pink-500/50 mt-4">
                             Aposta: ${currentBet}
                         </div>
                     )}
@@ -136,15 +136,12 @@ export function EnhancedPokerTable({
                 return (
                     <div
                         key={player.id}
-                        className={`absolute transform -translate-x-1/2 -translate-y-1/2 ${
-                            isActive ? "z-20" : "z-10"
-                        }`}
+                        className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
                         style={{
                             left: `${pos.x}%`,
                             top: `${pos.y}%`,
                         }}
                     >
-                        {/* Player Card */}
                         <div
                             className={`
                             bg-gradient-to-br from-gray-800 to-gray-900

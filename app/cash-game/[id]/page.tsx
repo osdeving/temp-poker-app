@@ -16,7 +16,7 @@ export default function CashGamePage() {
     const params = useParams();
     const router = useRouter();
     const { auth } = useAuth();
-    const { cashGames, leaveCashGame } = useCashGames();
+    const { cashGames, leaveCashGame, joinCashGame, addBot } = useCashGames();
     const [game, setGame] = useState<CashGame | null>(null);
 
     useEffect(() => {
@@ -71,6 +71,39 @@ export default function CashGamePage() {
         chips: player.chipCount,
         avatar: "👤", // Default avatar since CashGamePlayer doesn't have avatar
     }));
+
+    const handleAddBot = () => {
+        if (!game || !auth.user) return;
+
+        // Use the addBot function from the hook
+        const success = addBot(game.id);
+
+        if (success) {
+            // Refresh game data
+            const gameId = Array.isArray(params.id) ? params.id[0] : params.id;
+            const updatedGame = cashGames.find((g) => g.id === gameId);
+            setGame(updatedGame || null);
+        }
+    };
+
+    const handleJoinGame = () => {
+        if (!auth.user || !game) return;
+
+        const buyInAmount = game.minBuyIn * 2; // Default buy-in
+        const success = joinCashGame(
+            game.id,
+            auth.user.id,
+            auth.user.name,
+            buyInAmount
+        );
+
+        if (success) {
+            // Refresh game data
+            const gameId = Array.isArray(params.id) ? params.id[0] : params.id;
+            const updatedGame = cashGames.find((g) => g.id === gameId);
+            setGame(updatedGame || null);
+        }
+    };
 
     const handleGameEnd = (winner: any) => {
         console.log("Winner:", winner);
@@ -184,10 +217,7 @@ export default function CashGamePage() {
                             </p>
                             <Button
                                 className="neon-button"
-                                onClick={() => {
-                                    // Implementar lógica de join
-                                    console.log("Join game");
-                                }}
+                                onClick={handleJoinGame}
                             >
                                 <Users className="mr-2 h-4 w-4" />
                                 Sentar na Mesa
@@ -197,13 +227,34 @@ export default function CashGamePage() {
                 )}
 
                 {/* Advanced Poker Game Engine */}
-                {enginePlayers.length >= 2 && (
+                {enginePlayers.length >= 1 ? (
                     <AdvancedPokerGame
                         players={enginePlayers}
                         smallBlind={game.smallBlind}
                         bigBlind={game.bigBlind}
                         onGameEnd={handleGameEnd}
                     />
+                ) : (
+                    <Card className="neon-card">
+                        <CardContent className="text-center py-8">
+                            <h3 className="text-lg font-semibold mb-4">
+                                Mesa Vazia
+                            </h3>
+                            <p className="text-gray-400 mb-4">
+                                Adicione pelo menos 1 jogador ou bot para
+                                começar.
+                            </p>
+                            <Button
+                                onClick={handleAddBot}
+                                className="neon-button"
+                                disabled={
+                                    game.players.length >= game.maxPlayers
+                                }
+                            >
+                                🤖 Adicionar Bot
+                            </Button>
+                        </CardContent>
+                    </Card>
                 )}
 
                 {/* Game Controls */}
@@ -214,9 +265,7 @@ export default function CashGamePage() {
                     <CardContent>
                         <div className="flex gap-2 flex-wrap">
                             <Button
-                                onClick={() => {
-                                    console.log("Add bot to game");
-                                }}
+                                onClick={handleAddBot}
                                 variant="outline"
                                 className="border-neon-purple text-neon-purple hover:bg-neon-purple/20"
                                 disabled={

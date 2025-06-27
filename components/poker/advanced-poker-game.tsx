@@ -12,7 +12,6 @@ import {
 } from "@/lib/poker-engine";
 import { useEffect, useState } from "react";
 import { EnhancedPokerTable } from "./enhanced-poker-table";
-import { ActionButtons } from "./poker-table-visual";
 
 interface AdvancedPokerGameProps {
     players: { id: string; name: string; chips: number; avatar?: string }[];
@@ -168,23 +167,65 @@ export default function AdvancedPokerGame({
                         </CardHeader>
                         <CardContent className="space-y-4 pt-6">
                             {/* Action Buttons Melhorados */}
-                            <ActionButtons
-                                availableActions={availableActions}
-                                onAction={(action, amount) =>
-                                    handlePlayerAction({
-                                        type: action as any,
-                                        amount,
-                                        playerId: currentPlayer.id,
-                                    })
-                                }
-                                currentBet={
-                                    gameState.currentBet -
-                                    currentPlayer.currentBet
-                                }
-                                playerChips={currentPlayer.chips}
-                                bigBlind={bigBlind}
-                                className="mb-4"
-                            />
+                            <div className="flex flex-wrap gap-2 justify-center mb-4">
+                                {availableActions.includes("fold") && (
+                                    <Button
+                                        onClick={() =>
+                                            handlePlayerAction({
+                                                type: "fold",
+                                                playerId: currentPlayer.id,
+                                            })
+                                        }
+                                        variant="destructive"
+                                        className="px-6 py-2"
+                                    >
+                                        Fold
+                                    </Button>
+                                )}
+                                {availableActions.includes("call") && (
+                                    <Button
+                                        onClick={() =>
+                                            handlePlayerAction({
+                                                type: "call",
+                                                playerId: currentPlayer.id,
+                                            })
+                                        }
+                                        variant="outline"
+                                        className="px-6 py-2 border-green-500 text-green-400 hover:bg-green-500/20"
+                                    >
+                                        Call $
+                                        {gameState.currentBet -
+                                            currentPlayer.currentBet}
+                                    </Button>
+                                )}
+                                {availableActions.includes("check") && (
+                                    <Button
+                                        onClick={() =>
+                                            handlePlayerAction({
+                                                type: "check",
+                                                playerId: currentPlayer.id,
+                                            })
+                                        }
+                                        variant="outline"
+                                        className="px-6 py-2 border-blue-500 text-blue-400 hover:bg-blue-500/20"
+                                    >
+                                        Check
+                                    </Button>
+                                )}
+                                {currentPlayer.chips > 0 && (
+                                    <Button
+                                        onClick={() =>
+                                            handlePlayerAction({
+                                                type: "all-in",
+                                                playerId: currentPlayer.id,
+                                            })
+                                        }
+                                        className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2"
+                                    >
+                                        All-in
+                                    </Button>
+                                )}
+                            </div>
 
                             {/* Raise Slider */}
                             {availableActions.includes("raise") && (
@@ -264,13 +305,26 @@ export default function AdvancedPokerGame({
                         {engine && (
                             <Button
                                 onClick={() => {
+                                    console.log("Add Bot clicked");
+                                    console.log("Engine:", engine);
+                                    console.log(
+                                        "Current players:",
+                                        gameState.players.length
+                                    );
+
                                     const success = engine.addBot(
                                         `Bot-${Date.now()}`,
                                         2000
                                     );
+                                    console.log("Add bot result:", success);
                                     if (success) {
+                                        const newState = engine.getGameState();
+                                        console.log(
+                                            "New game state:",
+                                            newState
+                                        );
                                         setGameState({
-                                            ...engine.getGameState(),
+                                            ...newState,
                                         });
                                     }
                                 }}
