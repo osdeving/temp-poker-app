@@ -1,5 +1,6 @@
 "use client";
 
+import { HoverGlow } from "@/components/ui/animations";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,8 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { NeonText, NeonButton, GlassCard } from "@/components/ui/neon";
-import { HoverGlow } from "@/components/ui/animations";
+import { NeonButton, NeonText } from "@/components/ui/neon";
 import { useAuth } from "@/hooks/use-auth";
 import {
     Gamepad2,
@@ -39,7 +39,10 @@ export default function Navbar({ onCreateTournament }: NavbarProps) {
                 <div className="flex items-center gap-1 sm:gap-3 md:gap-6 flex-shrink-0 min-w-0">
                     <h1 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold flex items-center gap-1 flex-shrink-0">
                         🃏
-                        <NeonText color="pink" className="inline text-xs sm:text-base md:text-lg lg:text-xl">
+                        <NeonText
+                            color="pink"
+                            className="inline text-xs sm:text-base md:text-lg lg:text-xl"
+                        >
                             PokerPro
                         </NeonText>
                     </h1>

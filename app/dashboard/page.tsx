@@ -12,6 +12,9 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { FadeIn, SlideIn } from "@/components/ui/animations";
+import { NeonText, GlassCard } from "@/components/ui/neon";
+import { StatusBadge } from "@/components/ui/status";
 import { useAuth } from "@/hooks/use-auth";
 import { useTournaments } from "@/hooks/use-tournaments";
 import { Calendar, DollarSign, Trophy, Users } from "lucide-react";
@@ -108,85 +111,79 @@ export default function Dashboard() {
             <Navbar onCreateTournament={() => setShowCreateForm(true)} />
 
             <div className="container mx-auto px-4 py-8">
-                <div className="mb-8">
-                    <div className="flex justify-between items-center mb-2">
-                        <h1 className="text-4xl font-bold text-neon-cyan">
-                            Welcome back, {auth.user.name}! 🎲
-                        </h1>
-                        {/* DEBUG: Temporary button to test mock tournaments */}
-                        <Button
-                            onClick={handleClearStorage}
-                            variant="destructive"
-                            size="sm"
-                            className="glow-red hidden"
-                        >
-                            🗑️ Clear Storage (Debug)
-                        </Button>
+                <FadeIn>
+                    <div className="mb-8">
+                        <div className="flex justify-between items-center mb-2">
+                            <NeonText color="cyan" className="text-4xl font-bold">
+                                Welcome back, {auth.user.name}! 🎲
+                            </NeonText>
+                            {/* DEBUG: Temporary button to test mock tournaments */}
+                            <Button
+                                onClick={handleClearStorage}
+                                variant="destructive"
+                                size="sm"
+                                className="hidden"
+                            >
+                                🗑️ Clear Storage (Debug)
+                            </Button>
+                        </div>
+                        <p className="text-gray-300 text-lg">
+                            Manage your tournaments and join exciting poker
+                            competitions.
+                        </p>
                     </div>
-                    <p className="text-gray-300 text-lg">
-                        Manage your tournaments and join exciting poker
-                        competitions.
-                    </p>
-                </div>
+                </FadeIn>
 
                 {/* Stats Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                    <Card className="poker-card glow-pink">
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-gray-300">
+                <SlideIn className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <GlassCard className="p-6">
+                        <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <h3 className="text-sm font-medium text-gray-300">
                                 Total Tournaments
-                            </CardTitle>
-                            <Trophy className="h-4 w-4 text-neon-pink" />
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold text-neon-pink">
-                                {stats.totalTournaments}
-                            </div>
-                        </CardContent>
-                    </Card>
+                            </h3>
+                            <Trophy className="h-4 w-4 text-pink-400" />
+                        </div>
+                        <div className="text-2xl font-bold text-pink-400">
+                            {stats.totalTournaments}
+                        </div>
+                    </GlassCard>
 
-                    <Card className="poker-card glow-cyan">
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-gray-300">
+                    <GlassCard className="p-6">
+                        <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <h3 className="text-sm font-medium text-gray-300">
                                 My Tournaments
-                            </CardTitle>
-                            <Users className="h-4 w-4 text-neon-cyan" />
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold text-neon-cyan">
-                                {stats.myTournaments}
-                            </div>
-                        </CardContent>
-                    </Card>
+                            </h3>
+                            <Users className="h-4 w-4 text-cyan-400" />
+                        </div>
+                        <div className="text-2xl font-bold text-cyan-400">
+                            {stats.myTournaments}
+                        </div>
+                    </GlassCard>
 
-                    <Card className="poker-card">
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">
+                    <GlassCard className="p-6">
+                        <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <h3 className="text-sm font-medium text-gray-300">
                                 Running Now
-                            </CardTitle>
-                            <Calendar className="h-4 w-4 text-blue-600" />
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold text-blue-600">
-                                {stats.runningTournaments}
-                            </div>
-                        </CardContent>
-                    </Card>
+                            </h3>
+                            <Calendar className="h-4 w-4 text-blue-400" />
+                        </div>
+                        <div className="text-2xl font-bold text-blue-400">
+                            {stats.runningTournaments}
+                        </div>
+                    </GlassCard>
 
-                    <Card className="poker-card">
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">
+                    <GlassCard className="p-6">
+                        <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <h3 className="text-sm font-medium text-gray-300">
                                 Total Prize Pool
-                            </CardTitle>
-                            <DollarSign className="h-4 w-4 text-green-600" />
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold text-green-600">
-                                ${stats.totalPrizePool.toLocaleString()}
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>
+                            </h3>
+                            <DollarSign className="h-4 w-4 text-green-400" />
+                        </div>
+                        <div className="text-2xl font-bold text-green-400">
+                            ${stats.totalPrizePool.toLocaleString()}
+                        </div>
+                    </GlassCard>
+                </SlideIn>
 
                 {/* Tournament Tabs */}
                 <Tabs defaultValue="all" className="space-y-4">

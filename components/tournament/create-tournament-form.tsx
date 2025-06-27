@@ -18,6 +18,8 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { FadeIn } from "@/components/ui/animations";
+import { NeonText, GlassCard, NeonButton, NeonInput } from "@/components/ui/neon";
 import { BlindLevel, defaultBlindStructure } from "@/lib/tournament";
 import { CalendarDays, DollarSign, Plus, Trash2, Users } from "lucide-react";
 import { useState } from "react";
@@ -93,109 +95,111 @@ export default function CreateTournamentForm({
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6">
-            <Card className="neon-card bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50 border-pink-500/30">
-                <CardHeader>
-                    <CardTitle className="text-neon-pink">
-                        Tournament Details
-                    </CardTitle>
-                    <CardDescription className="text-gray-300">
-                        Configure your tournament settings and blind structure
-                    </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <FadeIn>
+            <form onSubmit={handleSubmit} className="space-y-6">
+                <GlassCard>
+                    <CardHeader>
+                        <NeonText color="pink" className="text-xl font-bold">
+                            Tournament Details
+                        </NeonText>
+                        <CardDescription className="text-gray-300">
+                            Configure your tournament settings and blind structure
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label
+                                    htmlFor="name"
+                                    className="text-white font-medium"
+                                >
+                                    Tournament Name
+                                </Label>
+                                <Input
+                                    id="name"
+                                    value={formData.name}
+                                    onChange={(e) =>
+                                        setFormData((prev) => ({
+                                            ...prev,
+                                            name: e.target.value,
+                                        }))
+                                    }
+                                    placeholder="Sunday Night Tournament"
+                                    required
+                                    className="bg-black/30 border border-cyan-500/30 text-white placeholder:text-gray-400 focus:border-cyan-500/80 focus:shadow-[0_0_10px_rgba(0,255,255,0.5)] focus:outline-none"
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label
+                                    htmlFor="buyIn"
+                                    className="flex items-center gap-2 text-white font-medium"
+                                >
+                                    <DollarSign className="h-4 w-4 text-green-400" />
+                                    Buy-in Amount
+                                </Label>
+                                <Input
+                                    id="buyIn"
+                                    type="number"
+                                    value={formData.buyIn}
+                                    onChange={(e) =>
+                                        setFormData((prev) => ({
+                                            ...prev,
+                                            buyIn: Number(e.target.value),
+                                        }))
+                                    }
+                                    min="1"
+                                    required
+                                    className="bg-black/30 border border-cyan-500/30 text-white focus:border-cyan-500/80 focus:shadow-[0_0_10px_rgba(0,255,255,0.5)] focus:outline-none"
+                                />
+                            </div>
+                        </div>
+
                         <div className="space-y-2">
                             <Label
-                                htmlFor="name"
+                                htmlFor="description"
                                 className="text-white font-medium"
                             >
-                                Tournament Name
+                                Description
                             </Label>
-                            <Input
-                                id="name"
-                                value={formData.name}
+                            <Textarea
+                                id="description"
+                                value={formData.description}
                                 onChange={(e) =>
                                     setFormData((prev) => ({
                                         ...prev,
-                                        name: e.target.value,
+                                        description: e.target.value,
                                     }))
                                 }
-                                placeholder="Sunday Night Tournament"
-                                required
+                                placeholder="Describe your tournament..."
+                                rows={3}
                                 className="bg-gray-800/50 border-cyan-500/30 text-white placeholder:text-gray-400 focus:border-cyan-400 focus:ring-cyan-400"
                             />
                         </div>
 
-                        <div className="space-y-2">
-                            <Label
-                                htmlFor="buyIn"
-                                className="flex items-center gap-2 text-white font-medium"
-                            >
-                                <DollarSign className="h-4 w-4 text-neon-green" />
-                                Buy-in Amount
-                            </Label>
-                            <Input
-                                id="buyIn"
-                                type="number"
-                                value={formData.buyIn}
-                                onChange={(e) =>
-                                    setFormData((prev) => ({
-                                        ...prev,
-                                        buyIn: Number(e.target.value),
-                                    }))
-                                }
-                                min="1"
-                                required
-                                className="bg-gray-800/50 border-cyan-500/30 text-white focus:border-cyan-400 focus:ring-cyan-400"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label
-                            htmlFor="description"
-                            className="text-white font-medium"
-                        >
-                            Description
-                        </Label>
-                        <Textarea
-                            id="description"
-                            value={formData.description}
-                            onChange={(e) =>
-                                setFormData((prev) => ({
-                                    ...prev,
-                                    description: e.target.value,
-                                }))
-                            }
-                            placeholder="Describe your tournament..."
-                            rows={3}
-                            className="bg-gray-800/50 border-cyan-500/30 text-white placeholder:text-gray-400 focus:border-cyan-400 focus:ring-cyan-400"
-                        />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <Label
-                                htmlFor="startTime"
-                                className="flex items-center gap-2 text-white font-medium"
-                            >
-                                <CalendarDays className="h-4 w-4 text-neon-cyan" />
-                                Start Time
-                            </Label>
-                            <Input
-                                id="startTime"
-                                type="datetime-local"
-                                value={formData.startTime}
-                                onChange={(e) =>
-                                    setFormData((prev) => ({
-                                        ...prev,
-                                        startTime: e.target.value,
-                                    }))
-                                }
-                                required
-                                className="bg-gray-800/50 border-cyan-500/30 text-white focus:border-cyan-400 focus:ring-cyan-400"
-                            />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label
+                                    htmlFor="startTime"
+                                    className="flex items-center gap-2 text-white font-medium"
+                                >
+                                    <CalendarDays className="h-4 w-4 text-cyan-400" />
+                                    Start Time
+                                </Label>
+                                <Input
+                                    id="startTime"
+                                    type="datetime-local"
+                                    value={formData.startTime}
+                                    onChange={(e) =>
+                                        setFormData((prev) => ({
+                                            ...prev,
+                                            startTime: e.target.value,
+                                        }))
+                                    }
+                                    required
+                                    className="bg-black/30 border border-cyan-500/30 text-white focus:border-cyan-500/80 focus:shadow-[0_0_10px_rgba(0,255,255,0.5)] focus:outline-none"
+                                />
+                            </div>
                         </div>
 
                         <div className="space-y-2">
@@ -246,32 +250,30 @@ export default function CreateTournamentForm({
                                 </SelectContent>
                             </Select>
                         </div>
-                    </div>
-                </CardContent>
-            </Card>
+                    </CardContent>
+                </GlassCard>
 
-            <Card className="neon-card bg-gradient-to-br from-gray-900/50 via-black/50 to-gray-900/50 border-cyan-500/30">
-                <CardHeader>
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <CardTitle className="text-neon-cyan">
-                                Blind Structure
-                            </CardTitle>
-                            <CardDescription className="text-gray-300">
-                                Configure the blind levels for your tournament
-                            </CardDescription>
+                <GlassCard>
+                    <CardHeader>
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <NeonText color="cyan" className="text-xl font-bold">
+                                    Blind Structure
+                                </NeonText>
+                                <CardDescription className="text-gray-300">
+                                    Configure the blind levels for your tournament
+                                </CardDescription>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={addBlindLevel}
+                                className="bg-gradient-to-r from-green-500/80 to-cyan-500/80 text-black font-bold px-4 py-2 rounded-lg text-sm hover:shadow-[0_0_10px_rgba(0,255,255,0.5)] transition-all duration-300"
+                            >
+                                <Plus className="h-4 w-4 mr-2 inline" />
+                                Add Level
+                            </button>
                         </div>
-                        <Button
-                            type="button"
-                            onClick={addBlindLevel}
-                            size="sm"
-                            className="neon-button bg-gradient-to-r from-green-500 to-cyan-500 text-black font-semibold hover:glow-green"
-                        >
-                            <Plus className="h-4 w-4 mr-2" />
-                            Add Level
-                        </Button>
-                    </div>
-                </CardHeader>
+                    </CardHeader>
                 <CardContent>
                     <div className="space-y-4 max-h-80 overflow-y-auto">
                         {blindLevels.map((level, index) => (
@@ -366,17 +368,16 @@ export default function CreateTournamentForm({
                                 )}
                             </div>
                         ))}
-                    </div>
-                </CardContent>
-            </Card>
+                    </div>                    </CardContent>
+                </GlassCard>
 
-            <Button
-                type="submit"
-                className="w-full neon-button bg-gradient-to-r from-pink-500 to-cyan-500 text-black font-bold text-lg hover:glow-pink"
-                size="lg"
-            >
-                Create Tournament
-            </Button>
-        </form>
+                <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-pink-500/80 to-cyan-500/80 text-black font-bold text-lg py-4 rounded-lg hover:shadow-[0_0_15px_rgba(255,20,147,0.8)] transition-all duration-300"
+                >
+                    Create Tournament
+                </button>
+            </form>
+        </FadeIn>
     );
 }
