@@ -1,0 +1,398 @@
+"use client";
+
+import Navbar from "@/components/layout/navbar";
+import AdvancedPokerGame from "@/components/poker/advanced-poker-game";
+import { HoverGlow } from "@/components/ui/animations";
+import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
+                {/* Table full message Premium */}
+                {!isInGame && game.players.length >= game.maxPlayers && (
+                    <UltraGlassCard variant="crystal" className="mb-8">
+                        <div className="text-center py-6">
+                            <NeonText color="red" className="text-lg font-semibold mb-4">
+                                🚫 Mesa Lotada
+                            </NeonText>
+                            <p className="text-gray-400">
+                                Esta mesa está cheia ({game.players.length}/
+                                {game.maxPlayers} jogadores). Aguarde alguém
+                                sair ou tente outra mesa.
+                            </p>
+                        </div>
+                    </UltraGlassCard>
+                )}h } from "@/hooks/use-auth";
+import { useCashGames } from "@/hooks/use-cash-games";
+import { CashGame } from "@/lib/cash-game";
+import { ArrowLeft, Users } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+export default function CashGamePage() {
+    const params = useParams();
+    const router = useRouter();
+    const { auth } = useAuth();
+    const { cashGames, leaveCashGame, joinCashGame, addBot } = useCashGames();
+    const [game, setGame] = useState<CashGame | null>(null);
+
+    useEffect(() => {
+        if (!auth.user && !auth.isLoading) {
+            router.push("/");
+            return;
+        }
+
+        const gameId = Array.isArray(params.id) ? params.id[0] : params.id;
+        const foundGame = cashGames.find((g) => g.id === gameId);
+        setGame(foundGame || null);
+    }, [cashGames, params.id, auth.user, auth.isLoading, router]);
+
+    if (auth.isLoading || !auth.user) {
+        return <div>Loading...</div>;
+    }
+
+    if (!game) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+                <Navbar />
+                <div className="container mx-auto px-4 py-8">
+                    <HoverGlow>
+                        <UltraGlassCard
+                            variant="crystal"
+                            className="max-w-md mx-auto"
+                        >
+                            <div className="text-center py-8">
+                                <NeonText className="text-lg font-semibold mb-2">
+                                    Game Not Found
+                                </NeonText>
+                                <p className="text-gray-400 mb-4">
+                                    The cash game you're looking for doesn't
+                                    exist or has ended.
+                                </p>
+                                <NeonButton
+                                    variant="primary"
+                                    onClick={() => router.push("/cash-games")}
+                                >
+                                    Back to Lobby
+                                </NeonButton>
+                            </div>
+                        </UltraGlassCard>
+                    </HoverGlow>
+                </div>
+            </div>
+        );
+    }
+
+    const currentPlayer = game.players.find((p) => p.id === auth.user!.id);
+    const isInGame = !!currentPlayer;
+
+    // Convert players to poker engine format
+    const enginePlayers = game.players.map((player) => ({
+        id: player.id,
+        name: player.name,
+        chips: player.chipCount,
+        avatar: "👤", // Default avatar since CashGamePlayer doesn't have avatar
+    }));
+
+    const handleAddBot = () => {
+        if (!game || !auth.user) return;
+
+        // Use the addBot function from the hook
+        const success = addBot(game.id);
+
+        if (success) {
+            // Refresh game data
+            const gameId = Array.isArray(params.id) ? params.id[0] : params.id;
+            const updatedGame = cashGames.find((g) => g.id === gameId);
+            setGame(updatedGame || null);
+        }
+    };
+
+    const handleJoinGame = () => {
+        if (!auth.user || !game) return;
+
+        // Check if already in game
+        if (isInGame) {
+            alert("Você já está sentado nesta mesa!");
+            return;
+        }
+
+        const buyInAmount = game.minBuyIn * 2; // Default buy-in
+        const success = joinCashGame(
+            game.id,
+            auth.user.id,
+            auth.user.name,
+            buyInAmount
+        );
+
+        if (success) {
+            // Refresh game data
+            const gameId = Array.isArray(params.id) ? params.id[0] : params.id;
+            const updatedGame = cashGames.find((g) => g.id === gameId);
+            setGame(updatedGame || null);
+        } else {
+            alert(
+                "Não foi possível entrar na mesa. Verifique se há vagas disponíveis."
+            );
+        }
+    };
+
+    const handleGameEnd = (winner: any) => {
+        console.log("Winner:", winner);
+        // Implementar lógica para fim de jogo
+    };
+
+    const handleLeaveGame = () => {
+        if (!auth.user) return;
+
+        const success = leaveCashGame(game.id, auth.user.id);
+        if (success) {
+            router.push("/cash-games");
+        }
+    };
+
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+            <Navbar />
+            <div className="container mx-auto px-4 py-8">
+                {/* Header Premium */}
+                <div className="mb-8">
+                    <NeonButton
+                        variant="secondary"
+                        onClick={() => router.push("/cash-games")}
+                        className="mb-4"
+                    >
+                        <ArrowLeft className="h-4 w-4 mr-2" />
+                        Voltar ao Lobby
+                    </NeonButton>
+
+                    <GlowPulse>
+                        <UltraGlassCard variant="emerald" className="mb-6">
+                            <div className="flex justify-between items-center mb-4">
+                                <NeonText className="text-2xl font-bold">
+                                    🃏 {game.name}
+                                </NeonText>
+                                <div className="flex gap-2">
+                                    <div className="bg-gradient-to-r from-green-500 to-emerald-500 px-3 py-1 rounded-full text-black font-bold text-sm">
+                                        {game.type.replace("-", " ").toUpperCase()}
+                                    </div>
+                                    <div className="bg-gradient-to-r from-cyan-500 to-blue-500 px-3 py-1 rounded-full text-white font-bold text-sm">
+                                        <Users className="h-3 w-3 inline mr-1" />
+                                        {game.players.length}/{game.maxPlayers}
+                                    </div>
+                                    <div className={`px-3 py-1 rounded-full font-bold text-sm ${
+                                        game.status === "active"
+                                            ? "bg-gradient-to-r from-green-500 to-emerald-500 text-black"
+                                            : game.status === "waiting"
+                                            ? "bg-gradient-to-r from-yellow-500 to-amber-500 text-black"
+                                            : "bg-gradient-to-r from-red-500 to-pink-500 text-white"
+                                    }`}>
+                                        {game.status === "active"
+                                            ? "🟢 Em Jogo"
+                                            : game.status === "waiting"
+                                            ? "🟡 Aguardando"
+                                            : "🔴 Finalizado"}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div className="text-center">
+                                    <div className="text-gray-400 mb-1">Small Blind</div>
+                                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 text-black font-bold py-1 px-3 rounded-lg">
+                                        ${game.smallBlind}
+                                    </div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-gray-400 mb-1">Big Blind</div>
+                                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 text-black font-bold py-1 px-3 rounded-lg">
+                                        ${game.bigBlind}
+                                    </div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-gray-400 mb-1">Min Buy-in</div>
+                                    <div className="bg-gradient-to-r from-blue-400 to-cyan-500 text-black font-bold py-1 px-3 rounded-lg">
+                                        ${game.minBuyIn}
+                                    </div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-gray-400 mb-1">Max Buy-in</div>
+                                    <div className="bg-gradient-to-r from-purple-400 to-pink-500 text-black font-bold py-1 px-3 rounded-lg">
+                                        ${game.maxBuyIn}
+                                    </div>
+                                </div>
+                            </div>
+                        </UltraGlassCard>
+                    </GlowPulse>
+                </div>
+
+                {/* Game Actions Premium */}
+                {!isInGame && game.players.length < game.maxPlayers && (
+                    <HoverGlow>
+                        <UltraGlassCard variant="crystal" className="mb-8">
+                            <div className="text-center py-6">
+                                <NeonText className="text-lg font-semibold mb-4">
+                                    🎰 Entrar na Mesa
+                                </NeonText>
+                                <p className="text-gray-400 mb-4">
+                                    Você precisa estar sentado na mesa para jogar.
+                                </p>
+                                <div className="bg-gradient-to-r from-yellow-400 to-amber-500 rounded-lg px-4 py-2 mb-4 inline-block">
+                                    <div className="text-black font-bold">
+                                        💰 Buy-in: ${game.minBuyIn * 2}
+                                    </div>
+                                </div>
+                                <NeonButton
+                                    variant="success"
+                                    onClick={handleJoinGame}
+                                    size="lg"
+                                >
+                                    <Users className="mr-2 h-4 w-4" />
+                                    Sentar na Mesa
+                                </NeonButton>
+                            </div>
+                        </UltraGlassCard>
+                    </HoverGlow>
+                )}
+
+                {/* Already in game message Premium */}
+                {isInGame && (
+                    <GlowPulse>
+                        <UltraGlassCard variant="emerald" className="mb-8">
+                            <div className="text-center py-6">
+                                <NeonText color="green" className="text-lg font-semibold mb-4">
+                                    ✅ Você está na mesa!
+                                </NeonText>
+                                <p className="text-gray-400 mb-4">
+                                    Você está sentado na posição{" "}
+                                    <span className="text-cyan-400 font-bold">
+                                        {currentPlayer?.seatPosition}
+                                    </span>{" "}
+                                    com{" "}
+                                    <span className="text-green-400 font-bold">
+                                        ${currentPlayer?.chipCount.toLocaleString()}
+                                    </span>{" "}
+                                    em fichas.
+                                </p>
+                                <NeonButton
+                                    variant="danger"
+                                    onClick={handleLeaveGame}
+                                >
+                                    Deixar a Mesa
+                                </NeonButton>
+                            </div>
+                        </UltraGlassCard>
+                    </GlowPulse>
+                )}
+
+                {/* Table full message */}
+                {!isInGame && game.players.length >= game.maxPlayers && (
+                    <Card className="neon-card mb-8">
+                        <CardContent className="text-center py-6">
+                            <h3 className="text-lg font-semibold mb-4 text-red-400">
+                                Mesa Lotada
+                            </h3>
+                            <p className="text-gray-400 mb-4">
+                                Esta mesa está cheia ({game.players.length}/
+                                {game.maxPlayers} jogadores). Aguarde alguém
+                                sair ou escolha outra mesa.
+                            </p>
+                        </CardContent>
+                    </Card>
+                )}
+
+                {/* Advanced Poker Game Engine */}
+                {enginePlayers.length >= 1 ? (
+                    <AdvancedPokerGame
+                        players={enginePlayers}
+                        smallBlind={game.smallBlind}
+                        bigBlind={game.bigBlind}
+                        onGameEnd={handleGameEnd}
+                    />
+                ) : (
+                    <Card className="neon-card">
+                        <CardContent className="text-center py-8">
+                            <h3 className="text-lg font-semibold mb-4">
+                                Mesa Vazia
+                            </h3>
+                            <p className="text-gray-400 mb-4">
+                                Adicione pelo menos 1 jogador ou bot para
+                                começar.
+                            </p>
+                            <Button
+                                onClick={handleAddBot}
+                                className="neon-button"
+                                disabled={
+                                    game.players.length >= game.maxPlayers
+                                }
+                            >
+                                🤖 Adicionar Bot
+                            </Button>
+                        </CardContent>
+                    </Card>
+                )}
+
+                {/* Game Controls */}
+                <Card className="neon-card mt-8">
+                    <CardHeader>
+                        <CardTitle>Controles da Mesa</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex gap-2 flex-wrap">
+                            <Button
+                                onClick={handleAddBot}
+                                variant="outline"
+                                className="border-neon-purple text-neon-purple hover:bg-neon-purple/20"
+                                disabled={
+                                    game.players.length >= game.maxPlayers
+                                }
+                            >
+                                🤖 Adicionar Bot
+                            </Button>
+
+                            {isInGame && (
+                                <Button
+                                    onClick={handleLeaveGame}
+                                    variant="destructive"
+                                >
+                                    Sair da Mesa
+                                </Button>
+                            )}
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Player List */}
+                <Card className="neon-card mt-8">
+                    <CardHeader>
+                        <CardTitle>Jogadores na Mesa</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {game.players.map((player) => (
+                                <div
+                                    key={player.id}
+                                    className="flex items-center gap-3 p-3 bg-gray-800/50 rounded-lg"
+                                >
+                                    <div className="text-2xl">👤</div>
+                                    <div>
+                                        <div className="font-semibold text-white">
+                                            {player.name}
+                                            {player.id === auth.user!.id && (
+                                                <Badge className="ml-2 bg-neon-cyan/20 text-neon-cyan text-xs">
+                                                    Você
+                                                </Badge>
+                                            )}
+                                        </div>
+                                        <div className="text-neon-green text-sm">
+                                            ${player.chipCount.toLocaleString()}
+                                        </div>
+                                        <div className="text-gray-400 text-xs">
+                                            Assento {player.seatPosition}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+        </div>
+    );
+}

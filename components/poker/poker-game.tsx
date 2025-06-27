@@ -1,10 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { FadeIn, HoverGlow, SlideIn } from "@/components/ui/animations";
+import { Badge } from "@/components/ui/badge";
+import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
 import { Tournament } from "@/lib/tournament";
 import { useState } from "react";
-import PokerTable from "./poker-table";
+import PokerTable from "./poker-table-premium";
 
 interface PokerGameProps {
     tournament: Tournament;
@@ -57,38 +58,41 @@ export default function PokerGame({
         "7♣",
         "6♠",
         "5♥",
+        "4♦",
+        "3♣",
+        "2♠",
     ];
 
     const handlePlayerAction = (action: string, amount?: number) => {
-        console.log(
-            `Player action: ${action}`,
-            amount ? `Amount: ${amount}` : ""
-        );
+        console.log(`Player action: ${action}`, amount);
+        // Implementar lógica das ações dos jogadores
 
-        // Avançar para próximo jogador
-        setActivePlayerIndex((prev) => (prev + 1) % players.length);
+        // Avançar para o próximo jogador
+        const nextPlayerIndex = (activePlayerIndex + 1) % players.length;
+        setActivePlayerIndex(nextPlayerIndex);
 
-        // Simular lógica básica
-        if (action === "raise" && amount) {
-            setCurrentBet(amount);
-            setPot((prev) => prev + amount);
-        } else if (action === "call") {
-            setPot((prev) => prev + currentBet);
+        // Atualizar chips se necessário
+        if (action === "fold" || action === "call" || action === "raise") {
+            // Implementar lógica de apostas
         }
     };
 
-    const nextStreet = () => {
-        const states: Array<
-            "preflop" | "flop" | "turn" | "river" | "showdown"
-        > = ["preflop", "flop", "turn", "river", "showdown"];
-        const currentIndex = states.indexOf(gameState);
+    const nextPhase = () => {
+        const phases = [
+            "preflop",
+            "flop",
+            "turn",
+            "river",
+            "showdown",
+        ] as const;
+        const currentIndex = phases.indexOf(gameState);
 
-        if (currentIndex < states.length - 1) {
-            const nextState = states[currentIndex + 1];
-            setGameState(nextState);
+        if (currentIndex < phases.length - 1) {
+            const nextPhase = phases[currentIndex + 1];
+            setGameState(nextPhase);
 
-            // Adicionar cartas comunitárias
-            switch (nextState) {
+            // Adicionar cartas comunitárias baseado na fase
+            switch (nextPhase) {
                 case "flop":
                     setCommunityCards(sampleCards.slice(0, 3));
                     break;
@@ -97,6 +101,9 @@ export default function PokerGame({
                     break;
                 case "river":
                     setCommunityCards(sampleCards.slice(0, 5));
+                    break;
+                case "showdown":
+                    // Revelar cartas dos jogadores
                     break;
             }
 
@@ -116,149 +123,135 @@ export default function PokerGame({
 
     if (activePlayers.length < 2) {
         return (
-            <Card className="neon-card">
-                <CardContent className="text-center py-8">
-                    <h3 className="text-lg font-semibold mb-2">
-                        Aguardando Jogadores
-                    </h3>
-                    <p className="text-muted-foreground">
+            <FadeIn>
+                <UltraGlassCard variant="crystal" className="text-center py-12">
+                    <NeonText className="text-2xl font-bold mb-4">
+                        🎮 Aguardando Jogadores
+                    </NeonText>
+                    <p className="text-gray-300 text-lg">
                         É necessário pelo menos 2 jogadores para começar uma
                         mesa.
                     </p>
-                </CardContent>
-            </Card>
+                </UltraGlassCard>
+            </FadeIn>
         );
     }
 
     return (
-        <div className="space-y-6">
+        <SlideIn className="space-y-6">
             {/* Informações da Mesa */}
-            <Card className="neon-card">
-                <CardHeader>
-                    <CardTitle className="flex justify-between items-center">
-                        <span>Mesa Principal - {tournament.name}</span>
-                        <div className="flex gap-2">
-                            <span className="text-sm text-neon-cyan">
-                                Fase: {gameState.toUpperCase()}
-                            </span>
-                            <span className="text-sm text-neon-green">
-                                Blinds: $
+            <UltraGlassCard variant="diamond" className="p-6">
+                <div className="flex justify-between items-center">
+                    <NeonText className="text-2xl font-bold">
+                        🎯 Mesa Principal - {tournament.name}
+                    </NeonText>
+                    <div className="flex gap-6 text-sm">
+                        <div className="text-center">
+                            <Badge className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold">
+                                {gameState.toUpperCase()}
+                            </Badge>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-neon-green font-bold text-lg">
+                                $
                                 {tournament.blindLevels[tournament.currentLevel]
                                     ?.smallBlind || 25}
-                                /$
+                                / $
                                 {tournament.blindLevels[tournament.currentLevel]
                                     ?.bigBlind || 50}
-                            </span>
+                            </div>
+                            <div className="text-gray-400 text-xs">BLINDS</div>
                         </div>
-                    </CardTitle>
-                </CardHeader>
-            </Card>
+                        <div className="text-center">
+                            <div className="text-neon-yellow font-bold text-lg">
+                                ${pot.toLocaleString()}
+                            </div>
+                            <div className="text-gray-400 text-xs">POT</div>
+                        </div>
+                    </div>
+                </div>
+            </UltraGlassCard>
 
             {/* Mesa de Poker */}
-            <PokerTable
-                tournament={tournament}
-                players={players}
-                communityCards={communityCards}
-                pot={pot}
-                currentBet={currentBet}
-                isPlayerTurn={true} // Por enquanto sempre true para demonstração
-                onPlayerAction={handlePlayerAction}
-            />
+            <HoverGlow>
+                <PokerTable
+                    tournament={tournament}
+                    players={players}
+                    communityCards={communityCards}
+                    pot={pot}
+                    currentBet={currentBet}
+                    isPlayerTurn={true}
+                    onPlayerAction={handlePlayerAction}
+                />
+            </HoverGlow>
 
             {/* Controles do Diretor */}
             {isDirector && (
-                <Card className="neon-card">
-                    <CardHeader>
-                        <CardTitle>Controles do Diretor</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="flex gap-2 flex-wrap">
-                            <Button
-                                onClick={nextStreet}
-                                className="neon-button"
-                                disabled={gameState === "showdown"}
-                            >
-                                Próxima Fase (
-                                {gameState === "preflop"
-                                    ? "Flop"
-                                    : gameState === "flop"
-                                    ? "Turn"
-                                    : gameState === "turn"
-                                    ? "River"
-                                    : gameState === "river"
-                                    ? "Showdown"
-                                    : "Fim"}
-                                )
-                            </Button>
-                            <Button
-                                onClick={newHand}
-                                variant="outline"
-                                className="border-neon-cyan text-neon-cyan hover:bg-neon-cyan/20"
-                            >
-                                Nova Mão
-                            </Button>
-                            <Button
-                                onClick={() => {
-                                    // Simular cartas reveladas para demonstração
-                                    const updatedPlayers = players.map((p) => ({
-                                        ...p,
-                                        cards: [
-                                            sampleCards[
-                                                Math.floor(
-                                                    Math.random() *
-                                                        sampleCards.length
-                                                )
-                                            ],
-                                            sampleCards[
-                                                Math.floor(
-                                                    Math.random() *
-                                                        sampleCards.length
-                                                )
-                                            ],
-                                        ],
-                                    }));
-                                }}
-                                variant="outline"
-                                size="sm"
-                            >
-                                Revelar Cartas (Debug)
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
+                <UltraGlassCard variant="emerald" className="p-6">
+                    <NeonText className="text-xl font-bold mb-4">
+                        🎛️ Controles do Diretor
+                    </NeonText>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <NeonButton
+                            variant="primary"
+                            onClick={nextPhase}
+                            disabled={gameState === "showdown"}
+                            className="w-full"
+                        >
+                            Próxima Fase
+                        </NeonButton>
+                        <NeonButton
+                            variant="secondary"
+                            onClick={newHand}
+                            className="w-full"
+                        >
+                            Nova Mão
+                        </NeonButton>
+                        <NeonButton
+                            variant="success"
+                            onClick={() => setPot(pot + 100)}
+                            className="w-full"
+                        >
+                            +$100 Pot
+                        </NeonButton>
+                        <NeonButton
+                            variant="danger"
+                            onClick={() => setPot(Math.max(0, pot - 100))}
+                            className="w-full"
+                        >
+                            -$100 Pot
+                        </NeonButton>
+                    </div>
+                </UltraGlassCard>
             )}
 
-            {/* Informações da Mão */}
+            {/* Estatísticas da Mesa */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Card className="neon-card">
-                    <CardContent className="p-4 text-center">
-                        <div className="text-sm text-gray-400">
-                            Jogadores Ativos
-                        </div>
-                        <div className="text-2xl font-bold text-neon-cyan">
-                            {activePlayers.length}
-                        </div>
-                    </CardContent>
-                </Card>
-                <Card className="neon-card">
-                    <CardContent className="p-4 text-center">
-                        <div className="text-sm text-gray-400">Pot Total</div>
-                        <div className="text-2xl font-bold text-neon-green">
-                            ${pot.toLocaleString()}
-                        </div>
-                    </CardContent>
-                </Card>
-                <Card className="neon-card">
-                    <CardContent className="p-4 text-center">
-                        <div className="text-sm text-gray-400">Big Blind</div>
-                        <div className="text-2xl font-bold text-neon-pink">
-                            $
-                            {tournament.blindLevels[tournament.currentLevel]
-                                ?.bigBlind || 50}
-                        </div>
-                    </CardContent>
-                </Card>
+                <UltraGlassCard variant="sapphire" className="p-4 text-center">
+                    <NeonText className="text-lg font-bold text-neon-cyan">
+                        {players.length}
+                    </NeonText>
+                    <div className="text-gray-400 text-sm">
+                        Jogadores na Mesa
+                    </div>
+                </UltraGlassCard>
+
+                <UltraGlassCard variant="crystal" className="p-4 text-center">
+                    <NeonText className="text-lg font-bold text-neon-green">
+                        {communityCards.length}/5
+                    </NeonText>
+                    <div className="text-gray-400 text-sm">
+                        Cartas Comunitárias
+                    </div>
+                </UltraGlassCard>
+
+                <UltraGlassCard variant="diamond" className="p-4 text-center">
+                    <NeonText className="text-lg font-bold text-neon-pink">
+                        ${currentBet}
+                    </NeonText>
+                    <div className="text-gray-400 text-sm">Aposta Atual</div>
+                </UltraGlassCard>
             </div>
-        </div>
+        </SlideIn>
     );
 }

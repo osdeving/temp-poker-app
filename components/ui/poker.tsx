@@ -75,21 +75,29 @@ export function PokerCard({
             <div
                 className={cn(
                     sizeClasses[size],
-                    "bg-gradient-to-br from-blue-500 to-blue-700",
-                    "border-2 border-blue-800 rounded-lg",
-                    "shadow-lg relative overflow-hidden",
+                    "bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800",
+                    "border-2 border-blue-400 rounded-lg",
+                    "shadow-[0_0_15px_rgba(59,130,246,0.5)] relative overflow-hidden",
                     "flex items-center justify-center",
+                    "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:to-transparent before:rounded-lg",
                     animate && "animate-[card-deal_0.5s_ease-out_forwards]",
+                    "hover:shadow-[0_0_25px_rgba(59,130,246,0.7)] transition-all duration-300",
                     className
                 )}
             >
-                {/* Card back pattern */}
-                <div className="absolute inset-0 opacity-80">
-                    <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700" />
-                    <div className="absolute inset-1 border border-blue-300 opacity-60 rounded" />
-                    <div className="absolute inset-2 border border-blue-300 opacity-40 rounded" />
+                {/* Premium card back pattern */}
+                <div className="absolute inset-0 opacity-90">
+                    <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-800 rounded-lg" />
+                    <div className="absolute inset-1 border border-blue-300/60 rounded opacity-80" />
+                    <div className="absolute inset-2 border border-blue-300/40 rounded opacity-60" />
+                    <div className="absolute inset-3 bg-gradient-to-br from-blue-400/20 to-transparent rounded" />
                 </div>
-                <div className="relative text-white font-bold text-lg">🂠</div>
+                <div className="relative text-white font-bold text-lg drop-shadow-lg">
+                    🂠
+                </div>
+
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 animate-[shimmer_2s_ease-in-out_infinite]"></div>
             </div>
         );
     }
@@ -98,10 +106,14 @@ export function PokerCard({
         <div
             className={cn(
                 sizeClasses[size],
-                "bg-white border-2 border-gray-800 rounded-lg",
-                "shadow-lg relative p-1",
+                "bg-gradient-to-br from-white via-gray-50 to-gray-100",
+                "border-2 border-gray-800 rounded-lg",
+                "shadow-[0_0_15px_rgba(0,0,0,0.3)] relative p-1",
                 "flex flex-col justify-between",
+                "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/30 before:to-transparent before:rounded-lg before:pointer-events-none",
                 animate && "animate-[card-deal_0.5s_ease-out_forwards]",
+                "hover:shadow-[0_0_25px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300",
+                "backdrop-blur-sm",
                 className
             )}
         >
@@ -162,12 +174,23 @@ export function PokerChip({
     className,
 }: PokerChipProps) {
     const getChipColor = (val: number) => {
-        if (val >= 1000) return "bg-black border-white text-white";
-        if (val >= 500) return "bg-purple-600 border-purple-300 text-white";
-        if (val >= 100) return "bg-green-600 border-green-300 text-white";
-        if (val >= 25) return "bg-blue-600 border-blue-300 text-white";
-        if (val >= 5) return "bg-red-600 border-red-300 text-white";
-        return "bg-white border-gray-600 text-black";
+        if (val >= 100000)
+            return "bg-gradient-to-br from-yellow-400 via-yellow-500 to-amber-600 border-yellow-300 text-black shadow-[0_0_15px_rgba(255,215,0,0.6)]";
+        if (val >= 50000)
+            return "bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 border-purple-300 text-white shadow-[0_0_15px_rgba(147,51,234,0.6)]";
+        if (val >= 10000)
+            return "bg-gradient-to-br from-orange-500 via-orange-600 to-red-600 border-orange-300 text-white shadow-[0_0_15px_rgba(249,115,22,0.6)]";
+        if (val >= 1000)
+            return "bg-gradient-to-br from-gray-800 via-gray-900 to-black border-gray-400 text-white shadow-[0_0_15px_rgba(75,85,99,0.6)]";
+        if (val >= 500)
+            return "bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 border-purple-300 text-white shadow-[0_0_15px_rgba(147,51,234,0.6)]";
+        if (val >= 100)
+            return "bg-gradient-to-br from-green-600 via-green-700 to-green-800 border-green-300 text-white shadow-[0_0_15px_rgba(34,197,94,0.6)]";
+        if (val >= 25)
+            return "bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 border-blue-300 text-white shadow-[0_0_15px_rgba(59,130,246,0.6)]";
+        if (val >= 5)
+            return "bg-gradient-to-br from-red-600 via-red-700 to-red-800 border-red-300 text-white shadow-[0_0_15px_rgba(239,68,68,0.6)]";
+        return "bg-gradient-to-br from-gray-100 via-white to-gray-200 border-gray-600 text-black shadow-[0_0_10px_rgba(0,0,0,0.3)]";
     };
 
     const sizeClasses = {
@@ -177,12 +200,10 @@ export function PokerChip({
     };
 
     const formatValue = (val: number) => {
-        if (val >= 1000) return "1K";
-        if (val >= 500) return "500";
-        if (val >= 100) return "100";
-        if (val >= 25) return "25";
-        if (val >= 5) return "5";
-        return "1";
+        if (val >= 100000) return `${(val / 1000).toFixed(0)}K`;
+        if (val >= 10000) return `${(val / 1000).toFixed(0)}K`;
+        if (val >= 1000) return `${(val / 1000).toFixed(1)}K`;
+        return val.toString();
     };
 
     return (
@@ -194,19 +215,34 @@ export function PokerChip({
                         sizeClasses[size],
                         getChipColor(value),
                         "rounded-full border-2 flex items-center justify-center",
-                        "font-bold shadow-lg absolute",
+                        "font-bold absolute",
                         "before:absolute before:inset-0.5 before:rounded-full",
                         "before:border before:border-white/20",
-                        animated && "animate-pulse",
+                        "after:absolute after:inset-0 after:rounded-full",
+                        "after:bg-gradient-to-t after:from-black/20 after:to-white/20",
+                        "relative overflow-hidden",
+                        animated &&
+                            "animate-[chip-stack_0.3s_ease-out_forwards]",
+                        "hover:scale-110 transition-all duration-200",
                         className
                     )}
                     style={{
                         bottom: `${index * 2}px`,
                         left: 0,
                         zIndex: index + 1,
+                        animationDelay: `${index * 100}ms`,
                     }}
                 >
-                    {formatValue(value)}
+                    {/* Chip shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent rounded-full"></div>
+
+                    {/* Chip value */}
+                    <span className="relative z-10 font-black text-shadow">
+                        {formatValue(value)}
+                    </span>
+
+                    {/* Holographic shimmer */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 animate-[shimmer_3s_ease-in-out_infinite] rounded-full"></div>
                 </div>
             ))}
         </div>

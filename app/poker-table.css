@@ -1,0 +1,159 @@
+/* Premium Poker Table Animations */
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) skewX(-12deg);
+    }
+    100% {
+        transform: translateX(200%) skewX(-12deg);
+    }
+}
+
+@keyframes metal-shine {
+    0%,
+    100% {
+        transform: translateX(-100%) skewX(-12deg);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(100%) skewX(-12deg);
+        opacity: 1;
+    }
+}
+
+@keyframes card-deal {
+    0% {
+        transform: translateY(-100px) rotateY(180deg);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-20px) rotateY(90deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(0) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes pot-glow {
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes chip-stack {
+    0% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-5px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Poker Table Premium Base */
+.poker-table-premium {
+    position: relative;
+    background: radial-gradient(ellipse at center, #1a4d3a 0%, #0f2922 100%);
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3),
+        0 0 50px rgba(0, 255, 255, 0.2), 0 0 100px rgba(255, 20, 147, 0.1);
+}
+
+.poker-table-premium::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: conic-gradient(
+        from 0deg,
+        rgba(0, 255, 255, 0.3),
+        rgba(255, 20, 147, 0.3),
+        rgba(0, 255, 255, 0.3)
+    );
+    mask: linear-gradient(white, white) content-box,
+        linear-gradient(white, white);
+    mask-composite: xor;
+    padding: 4px;
+}
+
+/* Neon Input Styles */
+.neon-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(0, 255, 255, 0.5);
+    border-radius: 8px;
+    color: white;
+    padding: 8px 12px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3),
+        inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.neon-input:focus {
+    border-color: rgba(0, 255, 255, 1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6),
+        inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.neon-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Glass Reflection Effect */
+.glass-mirror {
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-mirror::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.6s ease;
+}
+
+.glass-mirror:hover::before {
+    left: 100%;
+}
+
+.glass-reflection {
+    position: relative;
+}
+
+.glass-reflection::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 100%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+}
