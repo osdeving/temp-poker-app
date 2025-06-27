@@ -44,12 +44,8 @@ export function EnhancedPokerTable({
         <div
             className={`relative w-full aspect-[4/3] max-w-5xl mx-auto ${className}`}
         >
-            {/* Mesa de poker (formato oval) - Maior para acomodar melhor */}
+            {/* Mesa de poker (formato oval) - Verde com felt realista */}
             <div className="absolute inset-16 poker-table-enhanced poker-felt rounded-full shadow-2xl">
-                {/* Felt texture */}
-                <div className="absolute inset-4 bg-green-700 rounded-full opacity-30"></div>
-                <div className="absolute inset-6 border-2 border-yellow-500 rounded-full opacity-40"></div>
-
                 {/* Área central com pot e cartas comunitárias */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
                     {/* Pot no centro */}

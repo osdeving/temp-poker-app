@@ -27,6 +27,7 @@ import { cashGameTypes, defaultCashGameSettings } from "@/lib/cash-game";
 import {
     Clock,
     DollarSign,
+    Eye,
     Gamepad2,
     Lock,
     Play,
@@ -476,6 +477,14 @@ export default function CashGamesPage() {
                                                 min={game.minBuyIn}
                                                 max={game.maxBuyIn}
                                             />
+                                            <Button
+                                                variant="outline"
+                                                onClick={() => router.push(`/cash-game/${game.id}`)}
+                                                className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/20"
+                                            >
+                                                <Eye className="h-4 w-4 mr-1" />
+                                                Ver
+                                            </Button>
                                             <Button
                                                 onClick={() =>
                                                     handleJoinGame(game.id)

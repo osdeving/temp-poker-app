@@ -89,6 +89,12 @@ export default function CashGamePage() {
     const handleJoinGame = () => {
         if (!auth.user || !game) return;
 
+        // Check if already in game
+        if (isInGame) {
+            alert("Você já está sentado nesta mesa!");
+            return;
+        }
+
         const buyInAmount = game.minBuyIn * 2; // Default buy-in
         const success = joinCashGame(
             game.id,
@@ -102,6 +108,8 @@ export default function CashGamePage() {
             const gameId = Array.isArray(params.id) ? params.id[0] : params.id;
             const updatedGame = cashGames.find((g) => g.id === gameId);
             setGame(updatedGame || null);
+        } else {
+            alert("Não foi possível entrar na mesa. Verifique se há vagas disponíveis.");
         }
     };
 
@@ -206,7 +214,7 @@ export default function CashGamePage() {
                 </div>
 
                 {/* Game Actions */}
-                {!isInGame && game.status === "waiting" && (
+                {!isInGame && game.players.length < game.maxPlayers && (
                     <Card className="neon-card mb-8">
                         <CardContent className="text-center py-6">
                             <h3 className="text-lg font-semibold mb-4">
@@ -214,6 +222,7 @@ export default function CashGamePage() {
                             </h3>
                             <p className="text-gray-400 mb-4">
                                 Você precisa estar sentado na mesa para jogar.
+                                Buy-in: ${game.minBuyIn * 2}
                             </p>
                             <Button
                                 className="neon-button"
@@ -222,6 +231,42 @@ export default function CashGamePage() {
                                 <Users className="mr-2 h-4 w-4" />
                                 Sentar na Mesa
                             </Button>
+                        </CardContent>
+                    </Card>
+                )}
+
+                {/* Already in game message */}
+                {isInGame && (
+                    <Card className="neon-card mb-8">
+                        <CardContent className="text-center py-6">
+                            <h3 className="text-lg font-semibold mb-4 text-green-400">
+                                ✅ Você está na mesa!
+                            </h3>
+                            <p className="text-gray-400 mb-4">
+                                Você está sentado na posição {currentPlayer?.seatPosition} com ${currentPlayer?.chipCount.toLocaleString()} em fichas.
+                            </p>
+                            <Button
+                                variant="outline"
+                                onClick={handleLeaveGame}
+                                className="border-red-500 text-red-400 hover:bg-red-500/20"
+                            >
+                                Sair da Mesa
+                            </Button>
+                        </CardContent>
+                    </Card>
+                )}
+
+                {/* Table full message */}
+                {!isInGame && game.players.length >= game.maxPlayers && (
+                    <Card className="neon-card mb-8">
+                        <CardContent className="text-center py-6">
+                            <h3 className="text-lg font-semibold mb-4 text-red-400">
+                                Mesa Lotada
+                            </h3>
+                            <p className="text-gray-400 mb-4">
+                                Esta mesa está cheia ({game.players.length}/{game.maxPlayers} jogadores). 
+                                Aguarde alguém sair ou escolha outra mesa.
+                            </p>
                         </CardContent>
                     </Card>
                 )}

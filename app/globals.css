@@ -967,28 +967,28 @@
     position: relative;
     background: linear-gradient(
         135deg,
-        #1a4d3a 0%,
-        #0f3025 50%,
-        #0a241b 100%
+        #0d4429 0%,
+        #15803d 50%,
+        #166534 100%
     ) !important;
-    border: 8px solid #d4af37 !important;
-    box-shadow: inset 0 0 20px rgba(26, 77, 58, 0.8),
-        0 8px 25px rgba(0, 0, 0, 0.5), 0 0 40px rgba(26, 77, 58, 0.3) !important;
+    border: 8px solid #d97706 !important;
+    box-shadow: inset 0 0 30px rgba(5, 150, 105, 0.5),
+        0 10px 30px rgba(0, 0, 0, 0.7), 0 0 50px rgba(5, 150, 105, 0.3) !important;
 }
 
 .poker-table-enhanced::before {
     content: "";
     position: absolute;
-    inset: 4px;
+    inset: 6px;
     background: radial-gradient(
         ellipse at center,
-        rgba(34, 197, 94, 0.3) 0%,
-        rgba(21, 128, 61, 0.2) 50%,
-        rgba(5, 46, 22, 0.1) 100%
-    );
+        rgba(5, 150, 105, 0.4) 0%,
+        rgba(6, 78, 59, 0.3) 50%,
+        rgba(20, 83, 45, 0.2) 100%
+    ) !important;
     border-radius: inherit;
     pointer-events: none;
-    border: 2px solid rgba(212, 175, 55, 0.3);
+    border: 3px solid rgba(217, 119, 6, 0.4) !important;
 }
 
 /* Melhorias no pot */
@@ -1040,11 +1040,14 @@
     align-items: center;
     gap: 8px;
     margin: 0 auto;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    border: 2px solid rgba(212, 175, 55, 0.4);
-    backdrop-filter: blur(5px);
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.6) !important;
+    border-radius: 16px !important;
+    border: 3px solid rgba(217, 119, 6, 0.6) !important;
+    backdrop-filter: blur(8px) !important;
+    min-height: 80px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4),
+        inset 0 2px 4px rgba(217, 119, 6, 0.3) !important;
 }
 
 .community-card {
@@ -1065,13 +1068,42 @@
 .poker-felt {
     background: radial-gradient(
             circle at 25% 25%,
-            rgba(34, 197, 94, 0.1) 0%,
+            rgba(5, 150, 105, 0.4) 0%,
             transparent 50%
         ),
         radial-gradient(
             circle at 75% 75%,
-            rgba(21, 128, 61, 0.1) 0%,
+            rgba(6, 78, 59, 0.4) 0%,
             transparent 50%
         ),
-        linear-gradient(135deg, #1a4d3a 0%, #0f3025 50%, #0a241b 100%);
+        linear-gradient(135deg, #0d4429 0%, #15803d 50%, #166534 100%) !important;
+}
+
+/* Força mesa verde - alta prioridade */
+.poker-table-enhanced.poker-felt {
+    background: #15803d !important;
+    border: 6px solid #f59e0b !important;
+}
+
+/* Garantir que o container das cartas seja visível */
+.community-cards-container {
+    position: relative !important;
+    z-index: 10 !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 2px solid #f59e0b !important;
+}
+
+/* Mesa feltro verde intenso */
+.poker-table-enhanced {
+    background-color: #15803d !important;
+    background-image: radial-gradient(
+            circle at 30% 30%,
+            rgba(22, 101, 52, 0.8) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 70% 70%,
+            rgba(5, 150, 105, 0.6) 0%,
+            transparent 50%
+        ) !important;
 }
