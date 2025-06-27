@@ -45,23 +45,23 @@ export function NeonCard({ children, className, hover = true }: NeonCardProps) {
                 "bg-gradient-to-br from-pink-500/25 to-cyan-500/25",
                 "bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.15),transparent_50%)]",
                 "border border-pink-500/50",
-                "backdrop-blur-[30px]",
+                "backdrop-blur-[6px]",
                 "transition-all duration-500 ease-out",
                 "rounded-xl",
 
                 // Enhanced glass reflection effects
                 "relative overflow-hidden",
-                "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:via-transparent before:to-white/10 before:opacity-60",
-                "after:absolute after:top-0 after:left-0 after:w-full after:h-[3px] after:bg-gradient-to-r after:from-transparent after:via-white/40 after:to-transparent",
+                "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/15 before:via-transparent before:to-white/8 before:opacity-50",
+                "after:absolute after:top-0 after:left-0 after:w-full after:h-[3px] after:bg-gradient-to-r after:from-transparent after:via-white/30 after:to-transparent",
 
-                // Enhanced hover effects with holographic touch
+                // Enhanced hover effects with subtle touch
                 hover && [
                     "hover:border-cyan-400/70",
-                    "hover:bg-gradient-to-br hover:from-pink-500/35 hover:to-cyan-500/35",
-                    "hover:shadow-[0_0_30px_rgba(255,20,147,0.6),0_0_60px_rgba(255,20,147,0.4),0_0_90px_rgba(0,255,255,0.3)]",
-                    "hover:transform hover:-translate-y-2 hover:scale-[1.02]",
-                    "hover:before:opacity-80",
-                    "hover:backdrop-blur-[35px]",
+                    "hover:bg-gradient-to-br hover:from-pink-500/30 hover:to-cyan-500/30",
+                    "hover:shadow-[0_0_25px_rgba(255,20,147,0.4),0_0_50px_rgba(255,20,147,0.3),0_0_75px_rgba(0,255,255,0.2)]",
+                    "hover:transform hover:-translate-y-1 hover:scale-[1.01]",
+                    "hover:before:opacity-60",
+                    "hover:backdrop-blur-[8px]",
                 ],
 
                 className
@@ -169,22 +169,22 @@ export function GlassCard({ children, className }: GlassCardProps) {
                 "bg-gradient-to-br from-gray-800/70 via-gray-900/50 to-black/70",
                 "bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.15),transparent_60%)]",
                 "border border-white/30",
-                "backdrop-blur-[30px]",
+                "backdrop-blur-[4px]",
                 "rounded-xl",
                 "transition-all duration-500 ease-out",
 
                 // Advanced glass reflection and shine effects
                 "relative overflow-hidden",
-                "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:via-white/8 before:to-transparent before:opacity-70",
-                "after:absolute after:top-0 after:left-0 after:w-full after:h-[3px] after:bg-gradient-to-r after:from-transparent after:via-white/50 after:to-transparent",
+                "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/15 before:via-white/6 before:to-transparent before:opacity-50",
+                "after:absolute after:top-0 after:left-0 after:w-full after:h-[3px] after:bg-gradient-to-r after:from-transparent after:via-white/35 after:to-transparent",
 
-                // Enhanced hover effects with holographic elements
+                // Enhanced hover effects with subtle holographic elements
                 "hover:border-cyan-400/70",
-                "hover:bg-gradient-to-br hover:from-gray-700/80 hover:via-gray-800/60 hover:to-black/80",
-                "hover:shadow-[0_0_30px_rgba(255,20,147,0.4),0_0_60px_rgba(0,255,255,0.3),0_0_90px_rgba(255,255,255,0.1)]",
-                "hover:before:opacity-90",
-                "hover:transform hover:-translate-y-1 hover:scale-[1.01]",
-                "hover:backdrop-blur-[35px]",
+                "hover:bg-gradient-to-br hover:from-gray-700/75 hover:via-gray-800/55 hover:to-black/75",
+                "hover:shadow-[0_0_25px_rgba(255,20,147,0.3),0_0_50px_rgba(0,255,255,0.2),0_0_75px_rgba(255,255,255,0.1)]",
+                "hover:before:opacity-70",
+                "hover:transform hover:-translate-y-1 hover:scale-[1.005]",
+                "hover:backdrop-blur-[6px]",
 
                 className
             )}
@@ -241,25 +241,25 @@ export function MirrorCard({
 }: MirrorCardProps) {
     const intensityStyles = {
         light: {
-            bg: "bg-gradient-to-br from-white/15 to-gray-800/25",
-            blur: "backdrop-blur-[20px]",
-            reflection: "before:from-white/15 before:to-transparent",
-            shine: "after:via-white/25",
-            glow: "hover:shadow-[0_0_25px_rgba(255,255,255,0.1)]",
+            bg: "bg-gradient-to-br from-white/10 to-gray-800/20",
+            blur: "backdrop-blur-[3px]",
+            reflection: "before:from-white/12 before:to-transparent",
+            shine: "after:via-white/20",
+            glow: "hover:shadow-[0_0_15px_rgba(255,255,255,0.08)]",
         },
         medium: {
-            bg: "bg-gradient-to-br from-white/20 to-gray-700/35",
-            blur: "backdrop-blur-[25px]",
-            reflection: "before:from-white/25 before:to-transparent",
-            shine: "after:via-white/40",
-            glow: "hover:shadow-[0_0_40px_rgba(255,255,255,0.15),0_0_80px_rgba(255,20,147,0.25)]",
+            bg: "bg-gradient-to-br from-white/15 to-gray-700/25",
+            blur: "backdrop-blur-[4px]",
+            reflection: "before:from-white/18 before:to-transparent",
+            shine: "after:via-white/25",
+            glow: "hover:shadow-[0_0_25px_rgba(255,255,255,0.12),0_0_50px_rgba(255,20,147,0.15)]",
         },
         heavy: {
-            bg: "bg-gradient-to-br from-white/30 to-gray-600/45",
-            blur: "backdrop-blur-[35px]",
-            reflection: "before:from-white/35 before:to-transparent",
-            shine: "after:via-white/50",
-            glow: "hover:shadow-[0_0_50px_rgba(255,255,255,0.2),0_0_100px_rgba(255,20,147,0.3),0_0_150px_rgba(0,255,255,0.2)]",
+            bg: "bg-gradient-to-br from-white/20 to-gray-600/30",
+            blur: "backdrop-blur-[6px]",
+            reflection: "before:from-white/25 before:to-transparent",
+            shine: "after:via-white/35",
+            glow: "hover:shadow-[0_0_35px_rgba(255,255,255,0.15),0_0_70px_rgba(255,20,147,0.2),0_0_105px_rgba(0,255,255,0.15)]",
         },
     };
 
@@ -281,12 +281,12 @@ export function MirrorCard({
                 `before:absolute before:inset-0 before:bg-gradient-to-br ${styles.reflection} before:opacity-80`,
                 `after:absolute after:top-0 after:left-0 after:w-full after:h-[4px] after:bg-gradient-to-r after:from-transparent ${styles.shine} after:to-transparent`,
 
-                // Ultra-enhanced hover effects with 3D transformation
-                "hover:border-white/50",
-                "hover:transform hover:-translate-y-3 hover:scale-[1.03] hover:rotate-[0.5deg]",
+                // Enhanced hover effects with subtle 3D transformation
+                "hover:border-white/40",
+                "hover:transform hover:-translate-y-1 hover:scale-[1.01]",
                 styles.glow,
-                "hover:before:opacity-95",
-                "hover:backdrop-blur-[40px]",
+                "hover:before:opacity-75",
+                "hover:backdrop-blur-[8px]",
 
                 // Subtle entrance animation
                 "animate-[fadeIn_0.8s_ease-out]",
@@ -351,21 +351,21 @@ export function UltraGlassCard({
                 variantStyles.bg,
                 "border-2",
                 variantStyles.border,
-                "backdrop-blur-[40px]",
+                "backdrop-blur-[6px]",
                 "rounded-2xl",
                 "transition-all duration-700 ease-out",
 
-                // Advanced reflection system
+                // Advanced reflection system (mais sutil)
                 "relative overflow-hidden",
-                "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/30 before:via-white/10 before:to-transparent before:opacity-75",
-                `after:absolute after:top-0 after:left-0 after:w-full after:h-[5px] after:bg-gradient-to-r after:from-transparent ${variantStyles.highlight} after:to-transparent`,
+                "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:via-white/8 before:to-transparent before:opacity-60",
+                `after:absolute after:top-0 after:left-0 after:w-full after:h-[4px] after:bg-gradient-to-r after:from-transparent ${variantStyles.highlight} after:to-transparent`,
 
-                // Ultra-enhanced hover with 3D depth
-                "hover:border-opacity-80",
-                "hover:transform hover:-translate-y-4 hover:scale-[1.04] hover:rotate-[1deg]",
+                // Enhanced hover with subtle 3D depth
+                "hover:border-opacity-70",
+                "hover:transform hover:-translate-y-2 hover:scale-[1.02]",
                 variantStyles.glow,
-                "hover:before:opacity-90",
-                "hover:backdrop-blur-[45px]",
+                "hover:before:opacity-75",
+                "hover:backdrop-blur-[8px]",
 
                 // Entrance animation
                 "animate-[fadeIn_1s_ease-out]",
@@ -391,7 +391,7 @@ export function HolographicCard({ children, className }: HolographicCardProps) {
                 "holographic glass-reflection",
                 "bg-gradient-to-br from-pink-500/20 via-purple-500/15 to-cyan-500/20",
                 "border-2 border-transparent",
-                "backdrop-blur-[35px]",
+                "backdrop-blur-[8px]",
                 "rounded-2xl",
                 "transition-all duration-500 ease-out",
 
