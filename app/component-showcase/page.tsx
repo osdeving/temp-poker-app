@@ -9,10 +9,13 @@ import {
 } from "@/components/ui/animations";
 import {
     GlassCard,
+    HolographicCard,
+    MirrorCard,
     NeonButton,
     NeonCard,
     NeonInput,
     NeonText,
+    UltraGlassCard,
 } from "@/components/ui/neon";
 import { PokerCard, PokerChip, PotContainer } from "@/components/ui/poker";
 import {
@@ -220,6 +223,104 @@ export default function ComponentShowcasePage() {
                             </RankingItem>
                         </div>
                     </NeonCard>
+                </SlideIn>
+
+                {/* Mirror Glass Effects Section */}
+                <SlideIn direction="down" delay={150}>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <MirrorCard intensity="light" className="p-6">
+                            <h3 className="text-lg font-bold text-white mb-2">
+                                <NeonText color="cyan">Light Mirror</NeonText>
+                            </h3>
+                            <p className="text-gray-300 text-sm">
+                                Subtle glass effect with light reflection
+                            </p>
+                        </MirrorCard>
+
+                        <MirrorCard intensity="medium" className="p-6">
+                            <h3 className="text-lg font-bold text-white mb-2">
+                                <NeonText color="pink">Medium Mirror</NeonText>
+                            </h3>
+                            <p className="text-gray-300 text-sm">
+                                Balanced glass effect with mirror shine
+                            </p>
+                        </MirrorCard>
+
+                        <MirrorCard intensity="heavy" className="p-6">
+                            <h3 className="text-lg font-bold text-white mb-2">
+                                <NeonText color="green">Heavy Mirror</NeonText>
+                            </h3>
+                            <p className="text-gray-300 text-sm">
+                                Intense glass effect with maximum reflection
+                            </p>
+                        </MirrorCard>
+                    </div>
+                </SlideIn>
+
+                {/* Ultra Premium Glass Effects */}
+                <SlideIn direction="up">
+                    <NeonCard className="p-6">
+                        <h2 className="text-2xl font-bold mb-4">
+                            <NeonText color="cyan">
+                                Ultra Premium Glass Effects
+                            </NeonText>
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <UltraGlassCard variant="crystal" className="p-6">
+                                <h3 className="text-lg font-bold text-white mb-2">
+                                    <NeonText color="cyan">Crystal</NeonText>
+                                </h3>
+                                <p className="text-gray-300 text-sm">
+                                    Pure crystal clarity with white reflections
+                                </p>
+                            </UltraGlassCard>
+
+                            <UltraGlassCard variant="diamond" className="p-6">
+                                <h3 className="text-lg font-bold text-white mb-2">
+                                    <NeonText color="cyan">Diamond</NeonText>
+                                </h3>
+                                <p className="text-gray-300 text-sm">
+                                    Blue diamond with cyan sparkle
+                                </p>
+                            </UltraGlassCard>
+
+                            <UltraGlassCard variant="sapphire" className="p-6">
+                                <h3 className="text-lg font-bold text-white mb-2">
+                                    <NeonText color="cyan">Sapphire</NeonText>
+                                </h3>
+                                <p className="text-gray-300 text-sm">
+                                    Deep blue sapphire with royal glow
+                                </p>
+                            </UltraGlassCard>
+
+                            <UltraGlassCard variant="emerald" className="p-6">
+                                <h3 className="text-lg font-bold text-white mb-2">
+                                    <NeonText color="green">Emerald</NeonText>
+                                </h3>
+                                <p className="text-gray-300 text-sm">
+                                    Rich emerald with nature's glow
+                                </p>
+                            </UltraGlassCard>
+                        </div>
+                    </NeonCard>
+                </SlideIn>
+
+                {/* Holographic Effects */}
+                <SlideIn direction="right">
+                    <HolographicCard className="p-8">
+                        <h2 className="text-2xl font-bold mb-4 text-center">
+                            <NeonText color="pink">Holographic Card</NeonText>
+                        </h2>
+                        <p className="text-gray-300 text-center mb-4">
+                            Experience the future with color-shifting
+                            holographic effects
+                        </p>
+                        <div className="flex justify-center">
+                            <NeonButton variant="primary">
+                                Interact with Holo
+                            </NeonButton>
+                        </div>
+                    </HolographicCard>
                 </SlideIn>
             </div>
         </div>
