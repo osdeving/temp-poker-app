@@ -150,25 +150,7 @@
     }
 }
 
-/* Poker-specific neon styles */
-.poker-card {
-    background: linear-gradient(
-        135deg,
-        rgba(30, 30, 30, 0.9),
-        rgba(60, 60, 60, 0.9)
-    );
-    border: 1px solid rgba(255, 20, 147, 0.3);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-}
-
-.poker-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(0, 255, 255, 0.5);
-    box-shadow: 0 0 20px rgba(255, 20, 147, 0.3), 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
+/* Tournament status styles */
 .tournament-status-upcoming {
     background: linear-gradient(
         45deg,
@@ -418,16 +400,6 @@
     animation: elimination-flash 0.5s ease-in-out;
 }
 
-/* Card Enhancements */
-.poker-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.poker-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
 /* Button Enhancements */
 .tournament-btn {
     transition: all 0.2s ease;
@@ -539,10 +511,6 @@
         line-height: 1.2;
     }
 
-    .poker-card {
-        margin-bottom: 1rem;
-    }
-
     .player-list-item {
         padding: 0.75rem;
         margin-bottom: 0.5rem;
@@ -556,11 +524,6 @@
 
 /* Touch Optimizations */
 @media (hover: none) and (pointer: coarse) {
-    .poker-card:hover {
-        transform: none;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
     .player-list-item:hover {
         transform: none;
     }
@@ -838,30 +801,6 @@
             transparent 1px
         );
     background-size: 8px 8px;
-}
-
-.poker-table-felt {
-    background: radial-gradient(
-        ellipse at center,
-        #065f46 0%,
-        #064e3b 50%,
-        #022c22 100%
-    );
-    position: relative;
-}
-
-.poker-table-felt::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 2px,
-        rgba(255, 255, 255, 0.02) 2px,
-        rgba(255, 255, 255, 0.02) 4px
-    );
-    border-radius: inherit;
 }
 
 .poker-chip {
