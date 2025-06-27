@@ -18,9 +18,9 @@ export function PlayingCard({
     style,
 }: PlayingCardProps) {
     const sizeClasses = {
-        sm: "w-8 h-12 text-xs",
-        md: "w-12 h-16 text-sm",
-        lg: "w-16 h-24 text-lg",
+        sm: "w-10 h-14 text-xs",
+        md: "w-14 h-20 text-sm", 
+        lg: "w-18 h-26 text-lg",
     };
 
     const getSuitColor = (suit: string) => {
@@ -67,6 +67,10 @@ export function PlayingCard({
             ${sizeClasses[size]}
             ${className}
             playing-card
+            bg-white
+            rounded-md
+            border-2 border-gray-800
+            shadow-lg
             flex flex-col items-center justify-between
             relative
             p-1
@@ -88,56 +92,19 @@ export function PlayingCard({
                 {getSuitSymbol(card.suit)}
             </div>
 
-            {/* Bottom right corner (upside down) */}
-            <div
-                className={`flex flex-col items-center text-xs font-bold transform rotate-180 ${getSuitColor(
-                    card.suit
-                )}`}
-            >
-                <span className="leading-none">{card.rank}</span>
-                <span className="leading-none">{getSuitSymbol(card.suit)}</span>
-            </div>
-        </div>
-    );
-}
-
-interface CommunityCardsProps {
-    cards: CardType[];
-    maxCards?: number;
-}
-
-export function CommunityCards({ cards, maxCards = 5 }: CommunityCardsProps) {
-    const emptySlots = Array.from(
-        { length: maxCards - cards.length },
-        (_, i) => i
-    );
-
-    return (
-        <div className="flex justify-center gap-2 mb-6">
-            {/* Cartas reveladas */}
-            {cards.map((card, index) => (
-                <PlayingCard
-                    key={index}
-                    card={card}
-                    size="lg"
-                    className="animate-in slide-in-from-top duration-500"
-                    style={
-                        {
-                            animationDelay: `${index * 100}ms`,
-                        } as React.CSSProperties
-                    }
-                />
-            ))}
-
-            {/* Slots vazios */}
-            {emptySlots.map((_, index) => (
+            {/* Bottom right corner (upside down) - apenas para cartas médias e grandes */}
+            {size !== "sm" && (
                 <div
-                    key={`empty-${index}`}
-                    className="w-16 h-24 border-2 border-dashed border-gray-600 rounded-lg bg-gray-800/30 flex items-center justify-center"
+                    className={`flex flex-col items-center text-xs font-bold transform rotate-180 ${getSuitColor(
+                        card.suit
+                    )}`}
                 >
-                    <span className="text-gray-500 text-2xl">?</span>
+                    <span className="leading-none">{card.rank}</span>
+                    <span className="leading-none">
+                        {getSuitSymbol(card.suit)}
+                    </span>
                 </div>
-            ))}
+            )}
         </div>
     );
 }

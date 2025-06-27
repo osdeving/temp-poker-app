@@ -479,7 +479,11 @@ export default function CashGamesPage() {
                                             />
                                             <Button
                                                 variant="outline"
-                                                onClick={() => router.push(`/cash-game/${game.id}`)}
+                                                onClick={() =>
+                                                    router.push(
+                                                        `/cash-game/${game.id}`
+                                                    )
+                                                }
                                                 className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/20"
                                             >
                                                 <Eye className="h-4 w-4 mr-1" />

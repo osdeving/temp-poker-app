@@ -109,7 +109,9 @@ export default function CashGamePage() {
             const updatedGame = cashGames.find((g) => g.id === gameId);
             setGame(updatedGame || null);
         } else {
-            alert("Não foi possível entrar na mesa. Verifique se há vagas disponíveis.");
+            alert(
+                "Não foi possível entrar na mesa. Verifique se há vagas disponíveis."
+            );
         }
     };
 
@@ -243,7 +245,10 @@ export default function CashGamePage() {
                                 ✅ Você está na mesa!
                             </h3>
                             <p className="text-gray-400 mb-4">
-                                Você está sentado na posição {currentPlayer?.seatPosition} com ${currentPlayer?.chipCount.toLocaleString()} em fichas.
+                                Você está sentado na posição{" "}
+                                {currentPlayer?.seatPosition} com $
+                                {currentPlayer?.chipCount.toLocaleString()} em
+                                fichas.
                             </p>
                             <Button
                                 variant="outline"
@@ -264,8 +269,9 @@ export default function CashGamePage() {
                                 Mesa Lotada
                             </h3>
                             <p className="text-gray-400 mb-4">
-                                Esta mesa está cheia ({game.players.length}/{game.maxPlayers} jogadores). 
-                                Aguarde alguém sair ou escolha outra mesa.
+                                Esta mesa está cheia ({game.players.length}/
+                                {game.maxPlayers} jogadores). Aguarde alguém
+                                sair ou escolha outra mesa.
                             </p>
                         </CardContent>
                     </Card>
