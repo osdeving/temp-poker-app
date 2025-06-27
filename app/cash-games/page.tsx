@@ -3,7 +3,6 @@
 import Navbar from "@/components/layout/navbar";
 import { FadeIn, SlideIn } from "@/components/ui/animations";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
@@ -156,7 +155,7 @@ export default function CashGamesPage() {
                             >
                                 <DialogTrigger asChild>
                                     <NeonButton>
-                                        <Plus className="h-4 w-4 mr-2" />
+                                        <Plus className="h-4 w-4" />
                                         Create Table
                                     </NeonButton>
                                 </DialogTrigger>
@@ -533,18 +532,17 @@ export default function CashGamesPage() {
                                     </div>
 
                                     <div className="flex gap-2">
-                                        <Button
-                                            variant="outline"
+                                        <NeonButton
+                                            variant="secondary"
                                             onClick={() =>
                                                 router.push(
                                                     `/cash-game/${game.id}`
                                                 )
                                             }
-                                            className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/20"
                                         >
-                                            <Eye className="h-4 w-4 mr-1" />
+                                            <Eye className="h-4 w-4" />
                                             Ver
-                                        </Button>
+                                        </NeonButton>
                                         <NeonButton
                                             onClick={() =>
                                                 handleJoinGame(game.id)
@@ -554,7 +552,7 @@ export default function CashGamesPage() {
                                                 game.maxPlayers
                                             }
                                         >
-                                            <Play className="h-4 w-4 mr-1" />
+                                            <Play className="h-4 w-4" />
                                             Join
                                         </NeonButton>
                                     </div>

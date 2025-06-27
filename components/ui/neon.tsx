@@ -135,6 +135,7 @@ export function NeonButton({
                 "border-none rounded-lg font-medium text-white",
                 "transition-all duration-300 ease-in-out",
                 "hover:-translate-y-0.5",
+                "flex items-center justify-center gap-2",
 
                 // Variant styles
                 variants[variant],
