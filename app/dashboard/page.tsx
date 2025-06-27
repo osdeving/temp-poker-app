@@ -12,7 +12,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
-import { GlassCard, NeonText } from "@/components/ui/neon";
+import { NeonText, UltraGlassCard } from "@/components/ui/neon";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/use-auth";
 import { useTournaments } from "@/hooks/use-tournaments";
@@ -138,7 +138,7 @@ export default function Dashboard() {
 
                 {/* Stats Cards */}
                 <SlideIn className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                    <GlassCard className="p-6">
+                    <UltraGlassCard variant="crystal" className="p-6">
                         <div className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 className="text-sm font-medium text-gray-300">
                                 Total Tournaments
@@ -148,9 +148,9 @@ export default function Dashboard() {
                         <div className="text-2xl font-bold text-pink-400">
                             {stats.totalTournaments}
                         </div>
-                    </GlassCard>
+                    </UltraGlassCard>
 
-                    <GlassCard className="p-6">
+                    <UltraGlassCard variant="diamond" className="p-6">
                         <div className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 className="text-sm font-medium text-gray-300">
                                 My Tournaments
@@ -160,9 +160,9 @@ export default function Dashboard() {
                         <div className="text-2xl font-bold text-cyan-400">
                             {stats.myTournaments}
                         </div>
-                    </GlassCard>
+                    </UltraGlassCard>
 
-                    <GlassCard className="p-6">
+                    <UltraGlassCard variant="sapphire" className="p-6">
                         <div className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 className="text-sm font-medium text-gray-300">
                                 Running Now
@@ -172,9 +172,9 @@ export default function Dashboard() {
                         <div className="text-2xl font-bold text-blue-400">
                             {stats.runningTournaments}
                         </div>
-                    </GlassCard>
+                    </UltraGlassCard>
 
-                    <GlassCard className="p-6">
+                    <UltraGlassCard variant="emerald" className="p-6">
                         <div className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <h3 className="text-sm font-medium text-gray-300">
                                 Total Prize Pool
@@ -184,7 +184,7 @@ export default function Dashboard() {
                         <div className="text-2xl font-bold text-green-400">
                             ${stats.totalPrizePool.toLocaleString()}
                         </div>
-                    </GlassCard>
+                    </UltraGlassCard>
                 </SlideIn>
 
                 {/* Tournament Tabs */}

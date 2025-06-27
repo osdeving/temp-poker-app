@@ -3,7 +3,7 @@
 import { HoverGlow } from "@/components/ui/animations";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
-import { GlassCard, NeonButton, NeonText } from "@/components/ui/neon";
+import { NeonButton, NeonText, UltraGlassCard } from "@/components/ui/neon";
 import { StatusBadge } from "@/components/ui/status";
 import { formatChips, Tournament } from "@/lib/tournament";
 import { Calendar, DollarSign, Trophy, Users } from "lucide-react";
@@ -49,9 +49,27 @@ export default function TournamentCard({
         }).format(date);
     };
 
+    const getGlassVariant = (status: Tournament["status"]) => {
+        switch (status) {
+            case "upcoming":
+                return "crystal" as const;
+            case "running":
+                return "emerald" as const;
+            case "paused":
+                return "sapphire" as const;
+            case "finished":
+                return "diamond" as const;
+            default:
+                return "crystal" as const;
+        }
+    };
+
     return (
         <HoverGlow color="pink">
-            <GlassCard className="h-full border-pink-500/30 hover:border-cyan-400/50">
+            <UltraGlassCard 
+                variant={getGlassVariant(tournament.status)} 
+                className="h-full border-pink-500/30 hover:border-cyan-400/50"
+            >
                 <CardHeader>
                     <div className="flex justify-between items-start">
                         <div>
@@ -159,7 +177,7 @@ export default function TournamentCard({
                         </Button>
                     </div>
                 </CardContent>
-            </GlassCard>
+            </UltraGlassCard>
         </HoverGlow>
     );
 }
