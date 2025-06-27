@@ -38,7 +38,7 @@ export default function Navbar({ onCreateTournament }: NavbarProps) {
             <div className="w-full max-w-screen-2xl mx-auto px-2 sm:px-4 lg:px-6 h-12 sm:h-14 md:h-16 flex items-center justify-between relative">
                 {/* Glass reflection overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 pointer-events-none"></div>
-                
+
                 <div className="flex items-center gap-1 sm:gap-3 md:gap-6 flex-shrink-0 min-w-0 relative z-10">
                     <h1 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold flex items-center gap-1 flex-shrink-0">
                         🃏

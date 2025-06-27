@@ -66,8 +66,8 @@ export default function TournamentCard({
 
     return (
         <HoverGlow color="pink">
-            <UltraGlassCard 
-                variant={getGlassVariant(tournament.status)} 
+            <UltraGlassCard
+                variant={getGlassVariant(tournament.status)}
                 className="h-full border-pink-500/30 hover:border-cyan-400/50"
             >
                 <CardHeader>

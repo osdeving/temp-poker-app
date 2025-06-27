@@ -19,6 +19,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
+                {/* Automatic mirror background effects */}
+                <div className="mirror-body-overlay"></div>
+                <div className="dynamic-mirror-bg fixed inset-0 pointer-events-none z-[1]"></div>
                 <AuthProvider>
                     {children}
                     <Toaster />
