@@ -4,6 +4,42 @@
 
 ---
 
+## 🆘 **Deploy Troubleshooting**
+
+> **⚠️ Problemas Comuns:** Se você está enfrentando falhas de deploy, consulte nossa seção de troubleshooting específica.
+
+### 🔧 **Problemas Mais Frequentes**
+
+| Problema | Sintoma | Solução Rápida |
+|----------|---------|----------------|
+| **Conflitos de Dependências** | `ERESOLVE could not resolve` | [Ver Vercel Fix Guide](../deployment/vercel-fix-guide.md) |
+| **React Version Mismatch** | `peer react@">=16.8.0"` | Downgrade para React 18.3.1 |
+| **Build Memory Error** | `heap out of memory` | Aumentar Node memory limit |
+| **TypeScript Errors** | `Type checking failed` | Verificar tipos e dependencies |
+
+### 📋 **Quick Fix Checklist**
+
+```bash
+# 1. Limpeza completa
+rm -rf .next node_modules package-lock.json
+
+# 2. Reinstalação
+npm install
+
+# 3. Teste local
+npm run build
+
+# 4. Se ainda falhar, consulte:
+# docs/deployment/vercel-fix-guide.md
+```
+
+### 🔗 **Links Úteis para Debug**
+- [📖 Vercel Fix Guide Completo](../deployment/vercel-fix-guide.md)
+- [🛠️ Next.js Deploy Troubleshooting](https://nextjs.org/docs/deployment#troubleshooting)
+- [📊 Vercel Build Logs](https://vercel.com/docs/deployments/troubleshoot)
+
+---
+
 ## 🎯 **Visão Geral**
 
 Este guia cobre todas as etapas para colocar sua aplicação premium em produção:

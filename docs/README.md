@@ -59,14 +59,15 @@
 | [🚀 **Deployment Guide**](./architecture/deployment-guide.md) | Deploy profissional em produção | ⭐⭐⭐⭐⭐ | 55 min |lign="center">
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.3.4-black?style=for-the-badge&logo=next.js)
-![React](https://img.shields.io/badge/React-19.1.0-61DAFB?style=for-the-badge&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.2.2-3178C6?style=for-the-badge&logo=typescript)
-![Tailwind](https://img.shields.io/badge/Tailwind-3.3.3-06B6D4?style=for-the-badge&logo=tailwindcss)
+![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-3178C6?style=for-the-badge&logo=typescript)
+![Tailwind](https://img.shields.io/badge/Tailwind-3.4.17-06B6D4?style=for-the-badge&logo=tailwindcss)
 
 **Um curso completo sobre desenvolvimento de UI premium com Next.js 15**
 
 [![Documentação Criada](https://img.shields.io/badge/Docs-100%25_Complete-success?style=flat-square)](.)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=flat-square)](#)
+[![Deploy](https://img.shields.io/badge/Deploy-Fixed_&_Ready-blue?style=flat-square)](./deployment/vercel-fix-guide.md)
 [![Performance](https://img.shields.io/badge/Performance-Optimized-orange?style=flat-square)](./architecture/performance.md)
 
 </div>
