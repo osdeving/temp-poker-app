@@ -10,12 +10,12 @@
 
 ### 🔧 **Problemas Mais Frequentes**
 
-| Problema | Sintoma | Solução Rápida |
-|----------|---------|----------------|
+| Problema                      | Sintoma                      | Solução Rápida                                            |
+| ----------------------------- | ---------------------------- | --------------------------------------------------------- |
 | **Conflitos de Dependências** | `ERESOLVE could not resolve` | [Ver Vercel Fix Guide](../deployment/vercel-fix-guide.md) |
-| **React Version Mismatch** | `peer react@">=16.8.0"` | Downgrade para React 18.3.1 |
-| **Build Memory Error** | `heap out of memory` | Aumentar Node memory limit |
-| **TypeScript Errors** | `Type checking failed` | Verificar tipos e dependencies |
+| **React Version Mismatch**    | `peer react@">=16.8.0"`      | Downgrade para React 18.3.1                               |
+| **Build Memory Error**        | `heap out of memory`         | Aumentar Node memory limit                                |
+| **TypeScript Errors**         | `Type checking failed`       | Verificar tipos e dependencies                            |
 
 ### 📋 **Quick Fix Checklist**
 
@@ -34,9 +34,10 @@ npm run build
 ```
 
 ### 🔗 **Links Úteis para Debug**
-- [📖 Vercel Fix Guide Completo](../deployment/vercel-fix-guide.md)
-- [🛠️ Next.js Deploy Troubleshooting](https://nextjs.org/docs/deployment#troubleshooting)
-- [📊 Vercel Build Logs](https://vercel.com/docs/deployments/troubleshoot)
+
+-   [📖 Vercel Fix Guide Completo](../deployment/vercel-fix-guide.md)
+-   [🛠️ Next.js Deploy Troubleshooting](https://nextjs.org/docs/deployment#troubleshooting)
+-   [📊 Vercel Build Logs](https://vercel.com/docs/deployments/troubleshoot)
 
 ---
 
